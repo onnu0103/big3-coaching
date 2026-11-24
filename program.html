@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4ヶ月プログラム｜挑戦できる自分をつくる16週間</title>
+<meta name="description" content="理学療法士がつくった、週6日・8種目の16週間プログラム。MAXを入れると、毎日の重さが自動で出ます。記録もスマホで。">
+<meta name="theme-color" content="#1F2A44">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --wash: #F3F6FA;
+    --grid: #E9EFF6;
+    --rule: #CDD6E1;
+    --ink: #1F2A44;
+    --ink-2: #56607A;
+    --redpen: #D62F3C;
+    --redpen-tint: #FFF4F4;
+    --line: #00873C;
+    --line-hover: #006F31;
+    --focus: #2B6CB0;
+    --font: "BIZ UDPGothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif;
+    --pen: "Klee One", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+    --tabs-h: 60px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+    padding-bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom) + 24px);
+  }
+  button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+  a { color: inherit; }
+  h1, h2, h3 { margin: 0; line-height: 1.4; }
+  .num { font-variant-numeric: tabular-nums; }
+  .pen { font-family: var(--pen); font-weight: 600; color: var(--redpen); }
+
+  /* 上の帯 */
+  .top {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--ink); color: #fff;
+    padding: calc(8px + env(safe-area-inset-top)) 16px 8px;
+  }
+  .top-in { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .top .title { flex: 1; min-width: 0; font-size: 15px; font-weight: 700; line-height: 1.3; }
+  .top .title small { display: block; font-size: 11.5px; font-weight: 400; opacity: .8; }
+  .top .today-btn {
+    border: 1px solid rgba(255,255,255,.55); background: transparent; color: #fff;
+    border-radius: 999px; padding: 6px 14px; font-size: 13px; min-height: 36px;
+  }
+  .top .today-btn[hidden] { display: none; }
+
+  main { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+  .page { background: var(--paper); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); margin: 0 -16px; padding: 20px 16px 28px; min-height: 60vh; }
+
+  /* 日の見出し */
+  .phase { margin: 0 0 6px; font-size: 13px; color: var(--ink-2); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .phase .light { color: var(--redpen); border: 1px solid var(--redpen); border-radius: 4px; padding: 0 6px; font-size: 12px; }
+  .dayline { display: flex; align-items: center; gap: 8px; }
+  .dayline h1 { flex: 1; font-size: 24px; }
+  .dayline h1 .wk { font-size: 15px; color: var(--ink-2); font-weight: 400; margin-right: 8px; }
+  .arrow { width: 44px; height: 44px; border: 1px solid var(--rule); border-radius: 50%; background: var(--paper); font-size: 18px; line-height: 1; }
+  .arrow:disabled { opacity: .3; cursor: default; }
+  .date { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); }
+  .strip { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0 0; padding: 0; }
+  .strip button {
+    width: 100%; min-height: 44px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
+    font-size: 14px; position: relative; padding: 4px 0;
+  }
+  .strip .is-cur button { border: 2px solid var(--ink); font-weight: 700; }
+  .strip .is-done button { background: var(--wash); }
+  .strip .is-done button::after { content: "済"; position: absolute; right: 3px; top: 1px; font-size: 10px; color: var(--redpen); font-family: var(--pen); }
+  .strip .is-today button { box-shadow: inset 0 -3px 0 var(--redpen); }
+
+  /* はじめに */
+  .start { border: 2px solid var(--ink); border-radius: 12px; padding: 16px; margin: 0 0 20px; background: var(--paper); }
+  .start h2 { font-size: 18px; margin-bottom: 6px; }
+  .start p { margin: 0 0 10px; font-size: 14.5px; }
+  .start .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .start input[type=date] { border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; min-height: 44px; background: var(--paper); }
+
+  /* 体調 */
+  .check { margin: 20px 0 0; padding: 14px 0 4px; border-top: 2px solid var(--ink); }
+  .check h2, .ex h2, .memo h2, .sec h2 { font-size: 18px; }
+  .check .row { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  .check .lab { width: 5.5em; font-size: 14px; color: var(--ink-2); }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; border-left: 1px solid var(--rule); background: var(--paper); min-width: 44px; min-height: 40px; font-size: 15px; }
+  .seg button:first-child { border-left: 0; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .field { display: inline-flex; align-items: baseline; gap: 4px; }
+  .field input { width: 4em; border: 0; border-bottom: 1.5px solid var(--ink-2); background: transparent; text-align: right; padding: 4px 2px; font-size: 17px; }
+  .advice { margin: 12px 0 0; padding: 10px 12px; background: var(--redpen-tint); border-left: 3px solid var(--redpen); font-size: 15px; line-height: 1.6; }
+  .advice small { display: block; font-family: var(--font); font-weight: 400; color: var(--ink-2); font-size: 12px; margin-bottom: 2px; }
+
+  /* 種目 */
+  .ex { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .ex h2 small { font-size: 13px; font-weight: 400; color: var(--ink-2); margin-left: 6px; }
+  .presc { margin: 2px 0 0; font-size: 14.5px; }
+  .hint { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
+  .hint.first { font-size: 14.5px; }
+  .hint .nw { white-space: nowrap; }
+  .prev { margin: 4px 0 0; font-size: 13px; color: var(--ink-2); }
+  .sets { margin-top: 8px; }
+  .set { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--rule); flex-wrap: wrap; }
+  @media (max-width: 359px) { .set { gap: 5px; } .f.kg input { width: 3.1em; } .f input { font-size: 17px; } }
+  .mark {
+    position: relative; flex: 0 0 44px; width: 44px; height: 44px; border: 0; background: transparent; padding: 0;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+  .mark svg { position: absolute; inset: 0; width: 44px; height: 44px; overflow: visible; }
+  .mark .ring { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+  .mark .pencircle { fill: none; stroke: var(--redpen); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 140; stroke-dashoffset: 140; }
+  .mark[aria-pressed="true"] .pencircle { stroke-dashoffset: 0; }
+  .mark[aria-pressed="true"] .ring { stroke: transparent; }
+  .mark[aria-pressed="true"] { color: var(--redpen); }
+  .mark.just .pencircle { transition: stroke-dashoffset .45s ease-out; }
+  .f { display: inline-flex; align-items: baseline; gap: 3px; font-size: 13px; color: var(--ink-2); }
+  .f input { border: 0; border-bottom: 1.5px solid var(--ink-2); background: transparent; text-align: right; padding: 4px 2px; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .f.kg input { width: 3.6em; }
+  .f.reps input { width: 1.9em; }
+  .f input.sug { color: var(--redpen); font-family: var(--pen); font-weight: 600; }
+  .f select { border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); padding: 4px 2px; font-size: 15px; color: var(--ink); min-height: 36px; }
+  .x { color: var(--ink-2); font-size: 14px; }
+  .tag { font-size: 11.5px; color: var(--redpen); border: 1px solid var(--redpen); border-radius: 4px; padding: 0 4px; white-space: nowrap; }
+  .grad { margin: 10px 0 4px; padding: 10px 12px; background: var(--redpen-tint); border-left: 3px solid var(--redpen); }
+  .grad p { margin: 0 0 4px; font-size: 14.5px; line-height: 1.6; }
+  .grad .pen { font-size: 15.5px; }
+  .gl-h { font-weight: 700; font-size: 13.5px !important; margin-top: 8px !important; }
+  .gl { margin: 2px 0 8px; padding-left: 0; list-style: none; font-size: 14.5px; }
+  .gl li { position: relative; padding-left: 1.5em; margin: 3px 0; }
+  .gl li::before { content: ""; position: absolute; left: .35em; top: .62em; width: .42em; height: .42em; border-radius: 50%; background: var(--redpen); }
+  .grad details { margin: 6px 0 8px; }
+  .grad summary { cursor: pointer; font-weight: 700; font-size: 14px; min-height: 36px; display: flex; align-items: center; }
+  .gbtns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn.small, .btn-line.small { min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .btn-line.small { border-radius: 999px; }
+  .gradcard { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .gradcard h3 { font-size: 17px; display: flex; align-items: center; gap: 10px; }
+  .gradcard .st { font-size: 12.5px; font-weight: 400; border: 1px solid var(--ink-2); color: var(--ink-2); border-radius: 4px; padding: 0 6px; }
+  .gradcard .st.ok { border-color: var(--redpen); color: var(--redpen); font-family: var(--pen); font-weight: 600; }
+  .gradcard .film { font-size: 13.5px; margin: 0 0 8px; }
+  .gl-line { margin-top: 14px; }
+  .basebox { margin: 10px 0 4px; padding: 10px 12px; border: 1.5px dashed var(--ink-2); border-radius: 8px; }
+  .basebox p { margin: 0 0 6px; font-size: 14px; line-height: 1.6; }
+  .basebox .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  table.wk td { font-size: 14.5px; }
+  table.wk td:first-child { white-space: nowrap; }
+  .tips { margin-top: 8px; font-size: 14px; }
+  .tips summary, .grad summary { list-style: none; }
+  .tips summary::-webkit-details-marker, .grad summary::-webkit-details-marker { display: none; }
+  .tips summary::before, .grad summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--ink-2); transition: transform .15s; }
+  .tips details[open] > summary::before, details.tips[open] > summary::before, .grad details[open] > summary::before { transform: rotate(90deg); }
+  @media (prefers-reduced-motion: reduce) { .tips summary::before, .grad summary::before { transition: none; } }
+  .tips summary { cursor: pointer; color: var(--ink-2); min-height: 36px; display: flex; align-items: center; }
+  .tips ul { margin: 4px 0 6px; padding-left: 1.2em; }
+  .tips a, .formlist a { color: var(--focus); }
+  .muted { color: var(--ink-2); }
+
+  /* MAX */
+  .ml { min-width: 6.4em; font-size: 14px; color: var(--ink-2); }
+  .start .mh { font-weight: 700; font-size: 15px; margin: 16px 0 0; }
+  .start .note, .note { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin: 8px 0 4px; }
+  .start .row .ml { min-width: 0; }
+  .maxgrid { margin: 2px 0 8px; }
+  .mrow { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--rule); flex-wrap: wrap; }
+  .mnote { font-size: 12.5px; }
+  .f.kg.mx input { width: 4.4em; }
+  .status[data-mmsg] { color: var(--ink); }
+  .total { margin: 10px 0 0; font-size: 14px; color: var(--ink-2); }
+  .total b { font-size: 21px; color: var(--ink); margin: 0 2px 0 8px; }
+  .linkbtn { border: 0; background: none; padding: 0 0 0 6px; color: var(--focus); text-decoration: underline; font-size: inherit; min-height: 32px; }
+  table.wk .wkg { margin-left: 8px; font-family: var(--pen); color: var(--redpen); font-weight: 600; }
+  .calc { margin-top: 10px; }
+  .calc .cl { margin: 2px 0 6px; font-size: 13.5px; }
+  .calc .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .basebox .row .ml { min-width: 0; }
+
+  /* 休み */
+  .rest { margin-top: 20px; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .rest p { margin: 8px 0 0; }
+
+  /* メモと日報 */
+  .memo { margin: 26px 0 0; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .memo label { display: block; font-size: 14px; color: var(--ink-2); margin: 8px 0 4px; }
+  .memo textarea { width: 100%; border: 1px solid var(--rule); border-radius: 8px; padding: 10px; font-size: 16px; background: var(--paper); resize: vertical; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); font-weight: 700; font-size: 15px; text-decoration: none; }
+  .btn.wide { width: 100%; margin-top: 12px; }
+  .status { min-height: 1.5em; margin: 6px 0 0; font-size: 13.5px; color: var(--line); }
+
+  /* 有料の案内 */
+  .cta { margin: 30px 0 0; padding: 18px 16px; border: 2px solid var(--ink); border-radius: 12px; background: var(--paper); }
+  .cta .pen { font-size: 19px; margin: 0 0 6px; line-height: 1.5; }
+  .cta p { margin: 0 0 12px; font-size: 14.5px; }
+  .btn-line { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 999px; background: var(--line); color: #fff; font-weight: 700; text-decoration: none; font-size: 16px; }
+  .btn-line:hover { background: var(--line-hover); }
+
+  /* 一覧・ルール・フォーム・記録 */
+  .sec { margin: 22px 0 0; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .sec:first-of-type { margin-top: 4px; }
+  .sec p, .sec li { font-size: 15px; }
+  .page > h1 { font-size: 24px; margin-bottom: 4px; }
+  .lead { margin: 0 0 6px; color: var(--ink-2); font-size: 14.5px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 700; color: var(--ink-2); font-size: 13px; }
+  .weeks { list-style: none; margin: 8px 0 0; padding: 0; }
+  .weeks button { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: transparent; padding: 10px 2px; display: grid; grid-template-columns: 3.4em 1fr auto; gap: 4px 10px; align-items: baseline; }
+  .weeks .n { font-weight: 700; font-size: 16px; }
+  .weeks .m { font-size: 13.5px; color: var(--ink-2); }
+  .weeks .p { font-size: 13px; color: var(--ink-2); }
+  .weeks .is-cur button { background: var(--redpen-tint); }
+  .weeks .is-cur .n { color: var(--redpen); }
+  .phase-h { margin: 20px 0 0; font-size: 16px; }
+  .phase-h small { font-weight: 400; color: var(--ink-2); font-size: 13px; margin-left: 6px; }
+  .rules { padding-left: 1.2em; margin: 8px 0 0; }
+  .rules li { margin: 6px 0; }
+  .rules b { display: block; }
+  .formlist { list-style: none; margin: 0; padding: 0; }
+  .formlist > li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .formlist h3 { font-size: 17px; }
+  .formlist ul { margin: 6px 0; padding-left: 1.2em; font-size: 15px; }
+  .links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; }
+  .best { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .best > div { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 8px; background: var(--paper); }
+  .best .l { font-size: 12.5px; color: var(--ink-2); }
+  .best .v { font-size: 18px; font-weight: 700; }
+  .best .d { font-size: 12.5px; }
+  .danger { border-color: var(--redpen); color: var(--redpen); }
+  .fine { font-size: 12.5px; color: var(--ink-2); line-height: 1.7; margin-top: 28px; }
+  .fine p { margin: 0 0 6px; }
+  .fine .legal { display: flex; flex-wrap: wrap; gap: 0 18px; }
+  .fine .legal a { color: var(--ink-2); display: inline-block; padding: 6px 0; }
+
+  /* 下のタブ */
+  .tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: var(--paper); border-top: 1px solid var(--rule);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tabs ul { list-style: none; margin: 0 auto; padding: 0; max-width: 560px; display: grid; grid-template-columns: repeat(5, 1fr); }
+  .tabs button { width: 100%; height: var(--tabs-h); border: 0; background: transparent; font-size: 13.5px; color: var(--ink-2); position: relative; }
+  .tabs button[aria-current="page"] { color: var(--ink); font-weight: 700; }
+  .tabs button[aria-current="page"]::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 12px; height: 3px; border-radius: 2px; background: var(--redpen); }
+  .savewarn { background: var(--redpen-tint); color: var(--redpen); font-size: 13px; padding: 8px 12px; margin: 0 0 12px; border-radius: 8px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mark.just .pencircle { transition: none; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <p class="title" id="topTitle">4ヶ月プログラム<small>挑戦できる自分をつくる16週間</small></p>
+    <button class="today-btn" id="todayBtn" type="button" hidden>今日へ</button>
+  </div>
+</header>
+<main>
+  <div class="page" id="app" aria-live="off"></div>
+</main>
+<nav class="tabs" aria-label="ページの切り替え">
+  <ul>
+    <li><button type="button" data-tab="today">今日</button></li>
+    <li><button type="button" data-tab="weeks">16週</button></li>
+    <li><button type="button" data-tab="rules">ルール</button></li>
+    <li><button type="button" data-tab="form">フォーム</button></li>
+    <li><button type="button" data-tab="log">記録</button></li>
+  </ul>
+</nav>
+<script>
+/* ===== ここだけ書き換えてください ===== */
+const CONFIG = {
+  coachName: "〔お名前〕",                 // 表示する名前
+  lineUrl: "https://lin.ee/XXXXXXX",      // 公式LINEの友だち追加URL
+  pdfUrl: "program.pdf",                  // PDF版（同じフォルダに置く）
+  termsUrl: "terms.html",                 // 利用規約（同じフォルダに置く）
+  privacyUrl: "privacy.html",             // プライバシーポリシー（同じフォルダに置く）
+  form3dUrl: "",                          // 3Dのフォーム見本を公開したらURLを入れる
+  videos: {                               // 教材動画のURL（空欄なら「準備中」と表示）
+    squat: "", bench: "", deadlift: "",
+    pullup: "", lateral: "", curl: "", calf: "", abs: ""
+  }
+};
+/* ===================================== */
+
+const P = {"lifts":{"squat":{"name":"スクワット","big3":true},"bench":{"name":"ベンチプレス","big3":true},"deadlift":{"name":"デッドリフト","big3":true},"pullup":{"name":"懸垂","big3":false},"lateral":{"name":"サイドレイズ","big3":false},"curl":{"name":"アームカール","big3":false},"calf":{"name":"カーフレイズ","big3":false},"abs":{"name":"腹筋（クランチ）","big3":false}},"days":[{"n":1,"name":"ベンチ重め","items":[["bench",85],["squat",70],["abs","acc"]]},{"n":2,"name":"デッド重め","items":[["deadlift",85],["lateral","acc"],["calf","acc"]]},{"n":3,"name":"中くらい","items":[["bench",70],["squat",70],["pullup","acc"],["curl","acc"]]},{"n":4,"name":"ベンチ重め","items":[["bench",85],["deadlift",60],["lateral","acc"],["abs","acc"]]},{"n":5,"name":"軽め","items":[["bench",60],["pullup","acc"],["lateral","acc"],["curl","acc"],["calf","acc"]]},{"n":6,"name":"スクワット重め","items":[["squat",85],["bench",70],["pullup","acc"],["curl","acc"]]},{"n":7,"name":"休み","items":[]}],"sets":3,"reps":5,"baseRatio":0.95,"inc":{"bench":2.5,"squat":5,"deadlift":5},"easePct":5,"accSets":3,"stages":[{"n":1,"name":"初心者のターン","when":"初日〜卒業まで","text":"初日から動画を送り、理学療法士が卒業ラインを確かめる。フォームが崩れない重さで、RPE6まで。卒業は種目ごと。"},{"n":2,"name":"%で積み上げる","when":"卒業〜16週目","text":"毎週同じメニュー。MAXから出した重さ（基準の85・70・60%）で5回×3セット。85%の日の結果で、MAXを週ごとに上げる。軽い週はなし。"}],"maxRules":["MAXを入れると、毎日の重さが決まる。基準＝MAXの95%、その日の重さ＝基準の85・70・60%（2.5kg刻みに丸める）。","MAXは測らない。今の自分で1回挙げられる重さを入れる。わからない種目は空欄でよく、卒業した日に、いちばん新しい5回の記録から推定MAXを出す。","85%の日に3セットとも5回できて、どのセットもRPE8.5以内なら、次の週はMAXを上げる（ベンチ+2.5kg、スクワット・デッドリフト+5kg）。ベンチは週2回の85%の日が両方そろったとき。","5回に届かなかった、または重さを下げたときは、MAXはそのまま。","RPE9以上になったときは、次の週はMAXを下げる（ベンチ−2.5kg、スクワット・デッドリフト−5kg）。","久しぶりの人は、昔のMAXではなく今の力で。迷ったら軽いほうにする。"],"p5":{"5":73.9,"5.5":75.1,"6":76.2,"6.5":77.4,"7":78.6,"7.5":79.9,"8":81.1,"8.5":82.4,"9":83.7,"9.5":85.0,"10":86.3},"maxf":{"5":1.35,"5.5":1.33,"6":1.31,"6.5":1.29,"7":1.27,"7.5":1.25,"8":1.23,"8.5":1.21,"9":1.19,"9.5":1.18,"10":1.16},"maxFactors":[[6,1.31],[6.5,1.29],[7,1.27],[7.5,1.25],[8,1.23],[8.5,1.21]],"acc":{"pullup":{"reps":"5〜10","rpe":8,"load":"自重から","tip":"1回もできない人は、跳んで上がり3〜5秒かけて下りる×5回。全セット10回に届いたら、体に2.5kg足す。"},"lateral":{"reps":"12〜20","rpe":8,"load":"軽いダンベル","tip":"全セット20回に届いたら、1〜2kg重いダンベルへ。"},"curl":{"reps":"8〜12","rpe":8,"load":"ダンベルかバーベル","tip":"全セット12回に届いたら、1〜2kg重く。"},"calf":{"reps":"10〜15","rpe":8,"load":"自重かマシン","tip":"下で1秒止める。全セット15回に届いたら2.5〜5kg重く。"},"abs":{"reps":"10〜20","rpe":8,"load":"自重から","tip":"全セット20回に届いたら、胸の前にプレートを抱えて重さを足す。"}},"rpe":[[6,"あと4回できた"],[6.5,"あと3〜4回できた"],[7,"あと3回できた"],[7.5,"あと2〜3回できた"],[8,"あと2回できた"],[8.5,"あと1〜2回できた"]],"form":{"squat":["つま先と膝を同じ向きに（膝が内に入らない）","骨盤が丸まらない深さまで下りる","足裏全体で床を押して立つ"],"bench":["肩甲骨を寄せて下げたまま","肘を真横に開かない","バーは手首の真上。胸の下あたりに下ろす"],"deadlift":["バーをすねの近くに置く","背中と腰を丸めない","腰で引かず、床を押して立ち上がる"],"pullup":["反動を使わない","肩をすくめず、胸を張って上がる","下までしっかり伸ばす"],"lateral":["肩をすくめない","反動を使わず、肘から上げる","肩の高さまで"],"curl":["体を振らない","肘の位置を動かさない","下までしっかり伸ばす"],"calf":["かかとを下まで下ろし、上まで上げきる","下で1秒止める","ひざは伸ばしたまま"],"abs":["首で引っ張らない","おへそをのぞき込むように背中を丸める","息を吐きながら上がる"]},"checkRules":[{"when":"痛み・しびれがある","do":"その部位を使う種目はやめる。続くときは医療機関へ。"},{"when":"疲れが4以上、または睡眠5時間未満","do":"BIG3はセットを1つ減らし、%を5下げる（85%→80%）。補助種目は1セット減らす。"},{"when":"疲れ4以上が2日続いた","do":"その日は休み。翌日にずらさず、飛ばして次へ進む。"},{"when":"セットの途中でRPE8.5を超えそう","do":"次のセットから2.5〜5kg下げる。その週はMAXを上げない。"},{"when":"フォームが崩れた","do":"5回に届かなくても、そのセットはそこで終える。"}],"grad":{"squat":{"lines":["バットウインクが出ない（しゃがみきったとき、骨盤が丸まらない）","ニーインが出ない（膝が内側に入らない）","ラックアップが真っ直ぐ後方にできる（背骨が曲がらない）"],"film":"正面と真横の2本。ラックから外して後ろに下がるところから撮る"},"bench":{"lines":["降ろす速度が一定","痛みが出ない"],"film":"真横から。降ろして挙げるまでが全部入る位置で撮る"},"deadlift":{"lines":["挙がる瞬間、お尻が先に浮かない","挙がる瞬間、腰の曲がりがそれ以上曲がらない"],"film":"真横から。バーが床から離れる瞬間が見える高さで撮る"}},"gradRules":["初日から、BIG3をやった日は動画をLINEに送る（スクワットは正面と真横の2本）。","理学療法士が、卒業ラインを満たしているかを見て返信する。","卒業するまで、その種目はフォームが崩れない重さで、RPE6まで。","卒業は種目ごと。卒業した種目から、MAXから出した重さで進める。"],"gradRpe":6};
+
+const KEY = "big3-16w-v1";
+const P5 = {}, MAXF = {};
+if (P) { for (const k in P.p5) P5[Number(k)] = P.p5[k]; for (const k in P.maxf) MAXF[Number(k)] = P.maxf[k]; }
+const RPE_CHOICES = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+const WD = ["日", "月", "火", "水", "木", "金", "土"];
+const BIG3 = ["squat", "bench", "deadlift"];
+const SHORT = { squat: "スクワット", bench: "ベンチ", deadlift: "デッド" };
+
+const app = document.getElementById("app");
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const r2 = r => String(Math.round(r * 2) / 2);
+const kgText = v => (Math.round(v * 100) / 100).toString();
+const round25 = x => Math.floor(x / 2.5 + 0.5 + 1e-9) * 2.5;   /* PDFの早見表と同じ丸め */
+const round05 = x => Math.floor(x * 2 + 0.5 + 1e-9) / 2;
+const numIn = v => { const n = Number(String(v == null ? "" : v).replace(/[０-９．]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(",", ".").trim()); return n > 0 && n < 600 ? n : null; };
+
+/* ---- 保存 ---- */
+let S = null, saveOk = true;
+try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) { S = null; }
+if (!S || typeof S !== "object") S = { start: null, logs: {} };
+if (!S.logs || typeof S.logs !== "object") S.logs = {};
+if (!S.grad || typeof S.grad !== "object") S.grad = {};
+if (!S.mx || typeof S.mx !== "object") S.mx = {};        /* 種目ごとのMAXの起点 [{w,d,kg,src}]（卒業後） */
+if (!S.maxIn || typeof S.maxIn !== "object") S.maxIn = {};  /* 入れたMAX {kg,src} */
+if (!S.gpos || typeof S.gpos !== "object") S.gpos = {};    /* 卒業した位置 {w,d} */
+if (S.base && typeof S.base === "object") {                 /* 前の版（基準を保存）からの移しかえ */
+  for (const l in S.base) {
+    const b = S.base[l];
+    if (b && b.kg > 0 && !S.mx[l]) { S.mx[l] = [{ w: b.w, d: b.d, kg: round05(b.kg / 0.95), src: "est" }]; if (!S.gpos[l]) S.gpos[l] = { w: b.w, d: b.d }; }
+  }
+  delete S.base;
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); saveOk = true; }
+  catch (e) { saveOk = false; }
+}
+const isPre = lift => !!(P.lifts[lift] && P.lifts[lift].big3 && !S.grad[lift]);
+
+/* ---- 日付 ---- */
+function parseYmd(s) { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); }
+function ymd(dt) { return dt.getFullYear() + "-" + String(dt.getMonth() + 1).padStart(2, "0") + "-" + String(dt.getDate()).padStart(2, "0"); }
+function todayIndex() {
+  if (!S.start) return null;
+  const s = parseYmd(S.start), t = new Date();
+  const t0 = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  return Math.round((t0 - s) / 864e5);
+}
+function posOf(i) {
+  if (i == null || i < 0) return { w: 1, d: 1 };
+  if (i >= 112) return { w: 16, d: 7 };
+  return { w: Math.floor(i / 7) + 1, d: (i % 7) + 1 };
+}
+function dateOf(w, d) {
+  if (!S.start) return null;
+  const s = parseYmd(S.start);
+  s.setDate(s.getDate() + (w - 1) * 7 + (d - 1));
+  return s;
+}
+function jpDate(dt) { return (dt.getMonth() + 1) + "月" + dt.getDate() + "日（" + WD[dt.getDay()] + "）"; }
+
+/* ---- 表示の状態 ---- */
+const V = { tab: "today", w: 1, d: 1 };
+function goToday() { const p = posOf(todayIndex()); V.w = p.w; V.d = p.d; }
+function nowPos() { return S.start ? posOf(todayIndex()) : { w: V.w, d: V.d }; }
+goToday();
+
+/* ---- 記録 ---- */
+function dayLog(w, d, create) {
+  const k = w + "-" + d;
+  if (!S.logs[k] && create) S.logs[k] = { sets: {}, check: {}, memo: "" };
+  return S.logs[k] || null;
+}
+function order(w, d, i) { return ((w - 1) * 7 + (d - 1)) * 100 + i; }
+function needsEase(check) {
+  if (!check) return false;
+  const f = Number(check.fatigue) || 0;
+  const sl = check.sleep === "" || check.sleep == null ? null : Number(check.sleep);
+  return f >= 4 || (sl != null && !isNaN(sl) && sl < 5);
+}
+function prevDayTired(w, d) {
+  const i = (w - 1) * 7 + (d - 1) - 1;
+  if (i < 0) return false;
+  const p = posOf(i), lg = dayLog(p.w, p.d, false);
+  return !!(lg && lg.check && Number(lg.check.fatigue) >= 4);
+}
+
+/* ---- MAXから重さを出す。基準＝MAXの95%、その日の重さ＝基準の%。MAXは測らない ---- */
+const baseOf = mx => round05(mx * P.baseRatio);
+const kgAt = (mx, pct) => round25(baseOf(mx) * pct / 100);
+function maxFromSet(kg, rpe) {          /* 5回できた重さ×係数＝推定MAX */
+  const f = MAXF[rpe];
+  if (!f || !(kg > 0)) return null;
+  return round05(kg * f);
+}
+const before = (a, b) => order(a.w, a.d, 0) < order(b.w, b.d, 0);
+function heavyDays(lift) { return P.days.filter(d => d.items.some(([l, x]) => l === lift && x === 85)).map(d => d.n); }
+function anchorsOf(lift) { return (S.mx[lift] || []).slice().sort((a, b) => order(a.w, a.d, 0) - order(b.w, b.d, 0)); }
+/* その週の85%の日の結果：up / keep / down / null（記録なし）。起点より前の日は見ない */
+function weekResult(lift, w, maxKg, a) {
+  const tgt = kgAt(maxKg, 85);
+  let any = false, ok = true, down = false;
+  heavyDays(lift).forEach(d => {
+    if (before({ w, d }, a)) { ok = false; return; }
+    const lg = dayLog(w, d, false);
+    let n = 0;
+    for (let i = 0; i < P.sets; i++) {
+      const v = lg && lg.sets[lift + ":" + i];
+      if (!v || !v.done) continue;
+      n++; any = true;
+      const kg = Number(v.kg), reps = Number(v.reps), rpe = Number(v.rpe);
+      if (reps < 5 || !(rpe > 0 && rpe <= 8.5) || !(kg >= tgt - 0.01)) ok = false;
+      if (rpe >= 9) down = true;
+    }
+    if (n < P.sets) ok = false;
+  });
+  if (!any) return null;
+  if (down) return "down";
+  return ok ? "up" : "keep";
+}
+/* w週目のMAX（卒業後）。その週までのいちばん新しい起点から、週ごとの結果で上げ下げする */
+function maxInfo(lift, w) {
+  let a = null;
+  anchorsOf(lift).forEach(x => { if (x.w <= w) a = x; });
+  if (!a) return null;
+  let kg = a.kg;
+  for (let x = a.w; x < w && x <= 16; x++) {
+    const r = weekResult(lift, x, kg, a);
+    if (r === "up") kg += P.inc[lift];
+    else if (r === "down") kg = Math.max(P.inc[lift], kg - P.inc[lift]);
+  }
+  return { kg, a };
+}
+function maxFor(lift, w) { const m = maxInfo(lift, w); return m ? m.kg : null; }
+/* 卒業前も含めて、いまわかっているMAX（表示と目安用） */
+function knownMax(lift, w) {
+  if (!isPre(lift)) { const m = maxFor(lift, w); if (m != null) return m; }
+  return S.maxIn[lift] ? S.maxIn[lift].kg : null;
+}
+/* その日が卒業より前か（卒業した種目で、前の日を見返したとき） */
+function preOn(lift, w, d) {
+  if (isPre(lift)) return true;
+  const g = S.gpos[lift] || anchorsOf(lift)[0];
+  return !!(g && before({ w, d }, g));
+}
+/* MAXを入れる・直す。卒業後は、今日の位置から新しい起点にする */
+function setMax(lift, kg, src) {
+  S.maxIn[lift] = { kg, src: src || "in" };
+  if (!isPre(lift)) {
+    const np = nowPos();
+    S.mx[lift] = anchorsOf(lift).filter(a => before(a, np));
+    S.mx[lift].push({ w: np.w, d: np.d, kg, src: src || "in" });
+  }
+}
+
+/* ---- 卒業前の目安（直前の5回・RPEの記録から） ---- */
+function lastFive(lift, before) {
+  let best = null;
+  for (const k in S.logs) {
+    const [lw, ld] = k.split("-").map(Number);
+    const sets = (S.logs[k] && S.logs[k].sets) || {};
+    for (const sk in sets) {
+      const [l, idx] = sk.split(":");
+      if (l !== lift) continue;
+      const v = sets[sk];
+      if (!v || !v.done) continue;
+      const kg = Number(v.kg), reps = Number(v.reps), rpe = Number(v.rpe);
+      if (!(kg > 0) || reps !== 5 || !P5[rpe]) continue;
+      const o = order(lw, ld, Number(idx));
+      if (o >= before) continue;
+      if (!best || o > best.o) best = { o, kg, rpe };
+    }
+  }
+  return best;
+}
+function suggest(lift, rpe, w, d, i) {
+  const r = lastFive(lift, order(w, d, i));
+  if (!r) return null;
+  let s = r.kg * P5[rpe] / P5[r.rpe];
+  if (s >= r.kg) s = Math.min(r.kg + 5, Math.floor(s / 2.5 + 1e-9) * 2.5);
+  else s = Math.round(s / 2.5) * 2.5;
+  return Math.max(0, s);
+}
+function preSug(it, i) {
+  const s1 = suggest(it.lift, it.rows[i].rpe, V.w, V.d, i);
+  return s1 != null ? s1 : it.start;
+}
+function lastAcc(lift, w, d) {
+  let best = null;
+  const now = order(w, d, 0);
+  for (const k in S.logs) {
+    const [lw, ld] = k.split("-").map(Number);
+    const o = order(lw, ld, 0);
+    if (o >= now) continue;
+    const sets = (S.logs[k] && S.logs[k].sets) || {};
+    const arr = [];
+    for (const sk in sets) {
+      const [l, idx] = sk.split(":");
+      if (l === lift && sets[sk] && sets[sk].done) arr.push({ i: Number(idx), kg: sets[sk].kg, reps: sets[sk].reps });
+    }
+    if (arr.length && (!best || o > best.o)) best = { o, arr: arr.sort((a, b) => a.i - b.i) };
+  }
+  return best ? best.arr : null;
+}
+
+/* ---- 1日のメニュー ---- */
+function planDay(w, d) {
+  const day = P.days[d - 1];
+  const lg = dayLog(w, d, false);
+  const ease = needsEase(lg && lg.check);
+  return day.items.map(([lift, x]) => {
+    if (x === "acc") {
+      const a = P.acc[lift];
+      return { lift, acc: true, sets: Math.max(1, P.accSets - (ease ? 1 : 0)), reps: a.reps, rpe: a.rpe };
+    }
+    const sets = Math.max(1, P.sets - (ease ? 1 : 0));
+    if (preOn(lift, w, d)) {
+      /* 初心者のターン：RPE6まで。MAXがわかっていれば、いちばん軽い60%の日の重さを最初の目安にする */
+      const mk = knownMax(lift, w);
+      return { lift, acc: false, pre: true, past: !isPre(lift), pct0: x, sets, ease, mk, start: mk != null ? kgAt(mk, 60) : null,
+        rows: Array.from({ length: sets }, () => ({ rpe: P.gradRpe })) };
+    }
+    const pct = x - (ease ? P.easePct : 0);
+    const max = maxFor(lift, w);
+    const kg = max == null ? null : kgAt(max, pct);
+    return { lift, acc: false, pre: false, pct0: x, pct, max, base: max == null ? null : baseOf(max), kg, sets, ease, rows: Array.from({ length: sets }, () => ({ kg })) };
+  });
+}
+function prescText(it) {
+  if (it.acc) return it.reps + "回 × " + it.sets + "セット・RPE" + r2(it.rpe);
+  if (it.pre) return "5回 × " + it.sets + "セット・RPE" + r2(P.gradRpe) + "まで（卒業前）";
+  return "5回 × " + it.sets + "セット・基準の" + it.pct + "%" + (it.ease ? "（疲れの日）" : "");
+}
+function dayDone(w, d) {
+  if (d === 7) return false;
+  const lg = dayLog(w, d, false);
+  if (!lg) return false;
+  return planDay(w, d).every(it => {
+    for (let i = 0; i < it.sets; i++) { const v = lg.sets[it.lift + ":" + i]; if (!v || !v.done) return false; }
+    return true;
+  });
+}
+
+/* ---- 部品 ---- */
+function ringSvg() {
+  return '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="ring" cx="22" cy="22" r="17"/>' +
+    '<path class="pencircle" d="M24 4.6c9.6.9 16.3 8.4 15.6 17.9-.7 9.3-8.9 16.5-18.1 15.9C12.2 37.8 5 30 5.5 20.9 6 12.6 12.4 5.7 20.6 4.9"/></svg>';
+}
+function rpeOptions(sel, blank) {
+  return (blank ? '<option value=""' + (sel == null || sel === "" ? " selected" : "") + ">—</option>" : "") +
+    RPE_CHOICES.map(v => '<option value="' + v + '"' + (sel !== "" && sel != null && Number(sel) === v ? " selected" : "") + ">" + r2(v) + "</option>").join("");
+}
+function videoLinks(lift) {
+  const v = CONFIG.videos[lift];
+  return (v ? '<a href="' + esc(v) + '" target="_blank" rel="noopener">教材動画を見る</a>' : '<span class="muted">教材動画（準備中）</span>') +
+    (CONFIG.form3dUrl ? '<a href="' + esc(CONFIG.form3dUrl) + '" target="_blank" rel="noopener">3Dで動きを見る</a>' : "");
+}
+function formTips(lift) {
+  return '<details class="tips"><summary>フォームのポイント</summary><ul>' +
+    (P.form[lift] || []).map(t => "<li>" + esc(t) + "</li>").join("") + '</ul><div class="links">' + videoLinks(lift) + "</div></details>";
+}
+function gradBox(lift, today) {
+  const g = P.grad[lift], name = P.lifts[lift].name;
+  let h = '<div class="grad">';
+  if (today) h += '<p class="pen">卒業前：フォームが崩れない重さで、RPE' + r2(P.gradRpe) + "まで。</p>" +
+    "<p>今日の" + esc(name) + "を撮って、LINEで送ってください。" + esc(g.film) + "。</p>";
+  h += "<details><summary>初心者卒業ライン（" + g.lines.length + "つ）</summary><ul class=\"gl\">" + g.lines.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></details>";
+  h += '<div class="gbtns">' + (today ? '<a class="btn-line small" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで動画を送る</a>' : "") +
+    '<button class="btn small" type="button" data-grad="' + lift + '">卒業の返信が来たら押す</button></div></div>';
+  return h;
+}
+function calcBox(lift) {
+  /* MAXがわからないとき：5回できた重さとRPEから推定MAXを出して、MAXの欄に入れる */
+  return '<details class="tips calc"><summary>MAXがわからないとき</summary><p class="cl">最近「5回」できた重さとRPEから、推定MAXを出します。</p><div class="row">' +
+    (lift ? "" : '<label class="f"><select data-clift aria-label="種目">' + BIG3.map(l => '<option value="' + l + '">' + esc(P.lifts[l].name) + "</option>").join("") + "</select></label>") +
+    '<label class="f kg"><input type="text" inputmode="decimal" data-ckg aria-label="5回できた重さ"><span>kg × 5回</span></label>' +
+    '<label class="f rpe"><span>RPE</span><select data-crpe aria-label="そのときのRPE">' + rpeOptions(8, false) + "</select></label>" +
+    '<button class="btn small" type="button" data-mcalc="' + (lift || "") + '">推定MAXを出す</button></div></details>';
+}
+function maxInput(lift, val) {
+  return '<label class="f kg mx"><input type="text" inputmode="decimal" data-mkg="' + lift + '" value="' + esc(val == null ? "" : kgText(val)) + '" aria-label="' + esc(P.lifts[lift].name) + 'のMAX"><span>kg</span></label>';
+}
+function maxForm(lift) {
+  return '<div class="basebox"><p>MAXがまだありません。MAXを入れると、今日からの重さが自動で決まります。測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。</p>' +
+    '<div class="row"><span class="ml">MAX</span>' + maxInput(lift, null) + '<button class="btn small" type="button" data-msave="' + lift + '">MAXを入れる</button></div>' +
+    calcBox(lift) + '<p class="status" data-mmsg role="status"></p></div>';
+}
+
+/* ---- 今日 ---- */
+function stageLine() {
+  const pre = BIG3.filter(isPre).map(l => P.lifts[l].name);
+  const done = BIG3.filter(l => !isPre(l) && maxFor(l, V.w) != null).map(l => SHORT[l] + " " + kgText(maxFor(l, V.w)) + "kg");
+  let t = "";
+  if (pre.length) t += "初心者のターン：" + pre.join("・") + "は卒業前";
+  if (done.length) t += (t ? "　" : "") + "MAX " + done.join("・");
+  return t || "%で積み上げる";
+}
+function stripItems(w, d) {
+  const ti = todayIndex(), tp = posOf(ti);
+  return P.days.map(x => {
+    const cls = [x.n === d ? "is-cur" : "", dayDone(w, x.n) ? "is-done" : "", S.start && ti >= 0 && tp.w === w && tp.d === x.n ? "is-today" : ""].join(" ");
+    return '<li class="' + cls + '"><button type="button" data-day="' + x.n + '" aria-label="' + w + "週目" + x.n + "日目 " + esc(x.name) + '">' + (x.n === 7 ? "休" : x.n) + "</button></li>";
+  }).join("");
+}
+function adviceHtml(w, d) {
+  const lg = dayLog(w, d, false), ck = (lg && lg.check) || {};
+  const advice = [];
+  if (ck.pain === true) advice.push("痛み・しびれがある部位を使う種目は、今日はやめましょう。続くときは医療機関へ。");
+  if (needsEase(ck)) advice.push("今日はBIG3のセットを1つ減らして、%を5下げています。補助種目も1セット減らしています。この日はMAXを上げる判定に入りません。");
+  if (Number(ck.fatigue) >= 4 && prevDayTired(w, d)) advice.push("疲れ4以上が2日続いています。今日は休みにして、明日のメニューへ進みましょう。");
+  return advice.length ? '<div class="advice pen"><small>理学療法士メモ</small>' + advice.map(esc).join("<br>") + "</div>" : "";
+}
+function exListHtml(w, d) {
+  const lg = dayLog(w, d, false) || { sets: {}, check: {}, memo: "" };
+  V.easeShown = needsEase(lg.check);
+  return planDay(w, d).map((it, k) => exBlock(it, k, lg)).join("");
+}
+function renderToday() {
+  const { w, d } = V;
+  const day = P.days[d - 1];
+  const ti = todayIndex(), tp = posOf(ti);
+  const dt = dateOf(w, d);
+  let h = "";
+  if (!saveOk) h += '<p class="savewarn">このブラウザでは記録を保存できません。プライベートブラウズを切ると保存できます。</p>';
+  if (!S.start) h += startCard();
+  else if (ti < 0) h += '<p class="advice"><small>開始前</small>開始日は' + jpDate(parseYmd(S.start)) + 'です。あと' + (-ti) + '日。いまはメニューを先に見られます。</p>';
+  h += '<section class="dayhead"><p class="phase">' + esc(stageLine()) + "</p>";
+  h += '<div class="dayline"><button class="arrow" type="button" data-step="-1" aria-label="前の日"' + (w === 1 && d === 1 ? " disabled" : "") + '>‹</button>' +
+    '<h1><span class="wk num">' + w + "週目・" + d + "日目</span>" + esc(day.name) + "</h1>" +
+    '<button class="arrow" type="button" data-step="1" aria-label="次の日"' + (w === 16 && d === 7 ? " disabled" : "") + ">›</button></div>";
+  if (dt) h += '<p class="date">' + jpDate(dt) + (S.start && ti >= 0 && tp.w === w && tp.d === d ? "・今日" : "") + "</p>";
+  h += '<ol class="strip" id="strip">' + stripItems(w, d) + "</ol></section>";
+
+  if (d === 7) {
+    const done = [1, 2, 3, 4, 5, 6].filter(n => dayDone(w, n)).length;
+    h += '<section class="rest"><h2>休みの日</h2><p>休むのもメニューのうちです。よく眠って、来週に備えましょう。</p>' +
+      '<p>この週にやり切った日：<b class="num">' + done + "</b> / 6日</p>";
+    const res = BIG3.filter(l => !isPre(l) && maxInfo(l, w)).map(l => {
+      const mi = maxInfo(l, w), r = weekResult(l, w, mi.kg, mi.a);
+      const nx = Math.min(16, w + 1);
+      return P.lifts[l].name + "：" + (r === "up" ? "来週はMAX+" + kgText(P.inc[l]) + "kg" : r === "down" ? "来週はMAX−" + kgText(P.inc[l]) + "kg" : "来週もMAXはそのまま") +
+        (w < 16 ? "（" + kgText(maxFor(l, nx)) + "kg）" : "");
+    });
+    if (res.length) h += '<p class="pen">' + res.map(esc).join("<br>") + "</p>";
+    h += "</section>" + cta();
+    app.innerHTML = h + fine();
+    return;
+  }
+
+  const lg = dayLog(w, d, false) || { sets: {}, check: {}, memo: "" };
+  const ck = lg.check || {};
+  h += '<section class="check" aria-labelledby="ckh"><h2 id="ckh">今日の体調</h2>' +
+    '<div class="row"><span class="lab">睡眠</span><label class="field"><input id="sleep" type="text" inputmode="decimal" value="' + esc(ck.sleep == null ? "" : ck.sleep) + '" aria-label="睡眠時間"><span>時間</span></label></div>' +
+    '<div class="row"><span class="lab" id="fatl">疲れ</span><span class="seg" role="group" aria-labelledby="fatl">' +
+    [1, 2, 3, 4, 5].map(n => '<button type="button" data-fatigue="' + n + '" aria-pressed="' + (Number(ck.fatigue) === n) + '">' + n + "</button>").join("") + "</span>" +
+    '<span class="muted" style="font-size:12.5px">1 元気〜5 へとへと</span></div>' +
+    '<div class="row"><span class="lab" id="painl">痛み・しびれ</span><span class="seg" role="group" aria-labelledby="painl">' +
+    '<button type="button" data-pain="0" aria-pressed="' + (ck.pain === false) + '">なし</button><button type="button" data-pain="1" aria-pressed="' + (ck.pain === true) + '">あり</button></span></div>';
+  h += '<div id="advice">' + adviceHtml(w, d) + "</div></section>";
+  h += '<div id="exlist">' + exListHtml(w, d) + "</div>";
+  h += '<section class="memo"><h2>ひとこと</h2><label for="memo">気になったこと（フォーム、痛み、うれしかったこと）</label>' +
+    '<textarea id="memo" rows="3">' + esc(lg.memo || "") + "</textarea>" +
+    '<button class="btn wide" type="button" id="copyReport">日報をコピー</button><p class="status" id="copyMsg" role="status"></p></section>';
+  h += cta();
+  app.innerHTML = h + fine();
+}
+
+function setRow(it, i, v, inner) {
+  return '<div class="set" data-key="' + it.lift + ":" + i + '"' + (it.acc ? ' data-acc="1"' : "") + ">" +
+    '<button class="mark" type="button" aria-pressed="' + !!v.done + '" aria-label="' + (i + 1) + 'セット目を終えた">' + ringSvg() + '<span class="num">' + (i + 1) + "</span></button>" + inner + "</div>";
+}
+function exBlock(it, k, lg) {
+  const name = P.lifts[it.lift].name;
+  const label = it.acc ? "" : it.pre ? "卒業前" : it.pct + "%";
+  let h = '<section class="ex" data-k="' + k + '"><h2>' + esc(name) + (label ? "<small>" + label + "</small>" : "") + "</h2>";
+  h += '<p class="presc">' + esc(prescText(it)) + "</p>";
+  if (it.acc) {
+    const a = P.acc[it.lift], prev = lastAcc(it.lift, V.w, V.d);
+    h += '<p class="prev">' + (prev ? "前回：" + esc(prev.map(x => (x.kg !== undefined && x.kg !== "" ? kgText(Number(x.kg)) + "kg×" : "") + (x.reps || "—") + "回").join("、")) : esc(a.load) + "。" + esc(a.tip)) + "</p>";
+    h += '<div class="sets">';
+    for (let i = 0; i < it.sets; i++) {
+      const v = lg.sets[it.lift + ":" + i] || {};
+      h += setRow(it, i, v,
+        '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" value="' + esc(v.kg == null ? "" : v.kg) + '" placeholder="自重" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
+        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? "" : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>');
+    }
+    h += "</div>";
+  } else if (it.pre) {
+    h += it.past ? '<p class="prev">この日は、まだ卒業前でした。</p>' : gradBox(it.lift, true);
+    const rec = suggest(it.lift, it.rows[0].rpe, V.w, V.d, 0), first = preSug(it, 0);
+    if (first == null) h += '<p class="hint first pen">初めての日：バーだけから5回ずつ少しずつ重くして、RPE' + r2(P.gradRpe) + "で5回、フォームが崩れない重さを探しましょう。</p>";
+    else h += '<p class="hint pen">目安 <span class="num">' + kgText(first) + "</span>kg から</p>" +
+      (rec == null ? '<p class="prev">MAX ' + kgText(it.mk) + "kgの、いちばん軽い日（60%）の重さです。フォームが崩れたら下げてください。</p>" : "");
+    h += '<div class="sets">';
+    it.rows.forEach((row, i) => {
+      const v = lg.sets[it.lift + ":" + i] || {};
+      const sug = preSug(it, i);
+      const hasKg = v.kg != null && v.kg !== "";
+      const kgVal = hasKg ? v.kg : (sug != null ? kgText(sug) : "");
+      h += setRow(it, i, v,
+        '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" class="' + (!hasKg && sug != null ? "sug" : "") + '" value="' + esc(kgVal) + '" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
+        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
+        '<label class="f rpe"><span>RPE</span><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : row.rpe, false) + "</select></label>");
+    });
+    h += "</div>";
+  } else {
+    if (it.kg == null) h += maxForm(it.lift);
+    else h += '<p class="hint pen"><span class="nw">MAX <span class="num">' + kgText(it.max) + '</span>kg →</span> <span class="nw">基準 <span class="num">' + kgText(it.base) + "</span>kg × " + it.pct + "% ＝ <span class=\"num\">" + kgText(it.kg) + "</span>kg</span></p>";
+    h += '<div class="sets">';
+    for (let i = 0; i < it.sets; i++) {
+      const v = lg.sets[it.lift + ":" + i] || {};
+      const hasKg = v.kg != null && v.kg !== "";
+      const kgVal = hasKg ? v.kg : (it.kg != null ? kgText(it.kg) : "");
+      const heavy = it.pct0 === 85;
+      h += setRow(it, i, v,
+        '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" class="' + (!hasKg && it.kg != null ? "sug" : "") + '" value="' + esc(kgVal) + '" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
+        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
+        '<label class="f rpe"><span>RPE</span><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : (heavy ? "" : 6), heavy) + "</select></label>");
+    }
+    h += "</div>";
+    if (it.pct0 === 85 && it.kg != null) h += '<p class="prev">3セットとも5回・RPE8.5以内なら、来週のMAXは+' + kgText(P.inc[it.lift]) + "kg。RPEを選んでください。</p>";
+  }
+  h += formTips(it.lift) + "</section>";
+  return h;
+}
+function updateDayParts() {
+  const lg = dayLog(V.w, V.d, false);
+  const a = document.getElementById("advice");
+  if (a) a.innerHTML = adviceHtml(V.w, V.d);
+  const ex = document.getElementById("exlist");
+  if (ex && needsEase(lg && lg.check) !== V.easeShown) ex.innerHTML = exListHtml(V.w, V.d);
+  const st = document.getElementById("strip");
+  if (st) st.innerHTML = stripItems(V.w, V.d);
+}
+function refreshEx(exEl) {
+  if (!exEl) return;
+  const it = planDay(V.w, V.d)[Number(exEl.dataset.k)];
+  if (!it || !it.pre) return;
+  const lg = dayLog(V.w, V.d, false) || { sets: {} };
+  exEl.querySelectorAll(".set").forEach((el, i) => {
+    const v = lg.sets[it.lift + ":" + i] || {};
+    if (v.kg != null && v.kg !== "") return;
+    const inp = el.querySelector('[data-f="kg"]');
+    if (!inp || document.activeElement === inp || !it.rows[i]) return;
+    const sug = preSug(it, i);
+    inp.value = sug != null ? kgText(sug) : "";
+    inp.classList.toggle("sug", sug != null);
+  });
+}
+function startCard() {
+  return '<section class="start"><h2>開始日とMAXを決めましょう</h2>' +
+    "<p>開始日から数えて、今日のメニューを出します。MAXを入れると、毎日の重さが自動で決まります。最初は「初心者のターン」です。始める前に「フォーム」の教材動画と卒業ラインを見ておきましょう。</p>" +
+    '<div class="row"><label for="startDate" class="ml">開始日</label><input type="date" id="startDate" value="' + ymd(new Date()) + '"></div>' +
+    '<p class="mh">MAX（わかる種目だけ）</p><div class="maxgrid">' +
+    BIG3.map(l => '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, S.maxIn[l] ? S.maxIn[l].kg : null) + "</div>").join("") + "</div>" +
+    '<p class="note">MAXは測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。久しぶりの人は、昔の記録ではなく今の力で。わからない種目は空欄のままで、卒業するときに5回の記録から自動で出します。</p>' +
+    '<p class="status" data-mmsg role="status"></p><button class="btn wide" type="button" id="setStart">この日から始める</button></section>';
+}
+function cta() {
+  return '<aside class="cta"><p class="pen">一人でやり切るか、伴走つきでやり切るか。</p>' +
+    "<p>同じメニューを、理学療法士が毎日の日報への返信と週1回のZoomで、あなたに合わせて直していくコーチング（有料）もあります。</p>" +
+    '<a class="btn-line" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで「面談希望」と送る</a></aside>';
+}
+function fine() {
+  return '<div class="fine"><p>このプログラムは健康な方のための運動プログラムで、医療行為や治療ではありません。痛みや持病がある方は、先に医師に相談してください。</p>' +
+    "<p>成果には個人差があり、結果を保証するものではありません。最大重量（MAX）は測りません。MAXは、今の自分で挙げられる重さか、5回の記録から出す推定です。どのセットもRPE8.5までにしてください。</p>" +
+    "<p>記録はこのスマホのブラウザだけに保存されます。</p>" +
+    (CONFIG.termsUrl || CONFIG.privacyUrl ? '<p class="legal">' + [CONFIG.termsUrl ? '<a href="' + esc(CONFIG.termsUrl) + '">利用規約</a>' : "", CONFIG.privacyUrl ? '<a href="' + esc(CONFIG.privacyUrl) + '">プライバシーポリシー</a>' : ""].filter(Boolean).join("") + "</p>" : "") +
+    "<p>© " + esc(CONFIG.coachName) + "</p></div>";
+}
+
+/* ---- 16週 ---- */
+function renderWeeks() {
+  const tp = posOf(todayIndex()), cw = S.start ? tp.w : V.w;
+  let h = "<h1>16週間</h1><p class=\"lead\">最初は初心者のターン。卒業した種目から、毎週同じメニューを、MAXから出した重さで進めます。軽い週はありません。MAXは、85%の日の結果で週ごとに上がります。</p>";
+  const mk = {};
+  BIG3.forEach(l => { mk[l] = knownMax(l, cw); });
+  const known = BIG3.filter(l => mk[l] != null);
+  h += '<section class="sec"><h2>1週間のメニュー</h2>' +
+    (known.length ? '<p class="lead">重さは' + cw + "週目のMAX（" + known.map(l => esc(SHORT[l]) + " " + kgText(mk[l]) + "kg").join("・") + "）から計算しています。" +
+      (known.length < 3 ? '<button class="linkbtn" type="button" data-goto="log">ほかの種目のMAXを入れる</button>' : "") + "</p>"
+      : '<p class="lead">MAXを入れると、ここにその人の重さが出ます。<button class="linkbtn" type="button" data-goto="log">MAXを入れる</button></p>') +
+    '<table class="wk"><thead><tr><th>日</th><th>BIG3（5回×3セット）</th></tr></thead><tbody>' +
+    P.days.map(d => "<tr><td class=\"num\">" + d.n + "日目<br><span class=\"muted\" style=\"font-size:12px\">" + esc(d.name) + "</span></td><td>" +
+      (d.items.length ? d.items.filter(([, x]) => x !== "acc").map(([l, x]) => esc(P.lifts[l].name) + " " + x + "%" +
+        (mk[l] != null ? '<b class="wkg num">' + kgText(kgAt(mk[l], x)) + "kg</b>" : "")).join("<br>") + '<br><span class="muted" style="font-size:12.5px">補助：' +
+        esc(d.items.filter(([, x]) => x === "acc").map(([l]) => P.lifts[l].name).join("、")) + "</span>" : "休み") + "</td></tr>").join("") + "</tbody></table>" +
+    (known.some(l => isPre(l)) ? '<p class="note">卒業前の種目は、卒業してからこの重さで進めます。</p>' : "") + "</section>";
+  h += '<section class="sec"><h2>週ごとのMAX</h2><ol class="weeks">';
+  for (let w = 1; w <= 16; w++) {
+    const done = [1, 2, 3, 4, 5, 6].filter(n => dayDone(w, n)).length;
+    const bs = BIG3.map(l => {
+      const m = isPre(l) ? null : maxFor(l, w);
+      if (m != null) return SHORT[l] + " " + kgText(m) + "kg";
+      return SHORT[l] + (!isPre(l) && !anchorsOf(l).length ? " MAXなし" : " 卒業前");
+    }).join(" / ");
+    h += '<li class="' + (S.start && w === tp.w ? "is-cur" : "") + '"><button type="button" data-goweek="' + w + '">' +
+      '<span class="n num">' + w + "週</span><span class=\"m\">" + esc(bs) + "</span><span class=\"p num\">" + done + "/6日</span></button></li>";
+  }
+  h += "</ol></section>";
+  app.innerHTML = h + fine();
+}
+
+/* ---- ルール ---- */
+function renderRules() {
+  let h = "<h1>ルール</h1>";
+  h += '<section class="sec"><h2>3つの決まり</h2><ol class="rules">' +
+    "<li><b>最大重量（MAX）は測らない</b>ケガを防ぐためです。MAXは、今の自分で1回挙げられる重さを入れます。わからなければ、5回の記録から推定MAXを出します。重さは、MAXの95%（基準）の%で自動で決まります。</li>" +
+    "<li><b>BIG3は5回×3セット。どのセットもRPE8.5まで</b>超えそうなら、次のセットで重さを下げます。</li>" +
+    "<li><b>フォームが崩れない重さで</b>初日から動画をLINEに送り、「初心者卒業ライン」を満たすまでは、その種目はRPE6まで。崩れたら、5回に届かなくてもそのセットは終わりです。</li></ol></section>";
+  h += '<section class="sec"><h2>重さの決め方（MAXから）</h2><ul class="rules">' + P.maxRules.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>" +
+    '<p class="lead" style="margin-top:10px">MAXがわからないとき：推定MAX＝5回できた重さ×係数</p><table><thead><tr><th>そのときのRPE</th><th>係数</th></tr></thead><tbody>' +
+    P.maxFactors.map(([r, f]) => '<tr><td class="num">' + r2(r) + '</td><td class="num">' + f.toFixed(2) + "</td></tr>").join("") + "</tbody></table>" +
+    '<p class="note">例：60kgで5回・RPE7 → 60×1.27＝76.2 → 推定MAX 76kg → 基準72kg → 85%の日は60kg、70%は50kg、60%は42.5kg。</p></section>';
+  h += '<section class="sec"><h2>RPEのめやす</h2><p class="lead">5回やり終えたとき、あと何回できそうだったか。</p><table><thead><tr><th>RPE</th><th>感覚</th></tr></thead><tbody>' +
+    P.rpe.map(([r, t]) => '<tr><td class="num">' + r2(r) + "</td><td>" + esc(t) + "</td></tr>").join("") +
+    '<tr><td class="num">9以上</td><td>このプログラムでは使いません</td></tr></tbody></table></section>';
+  h += '<section class="sec"><h2>体調チェックのルール</h2><p class="lead">トレーニング前に、睡眠・疲れ・痛みをチェックします。</p><ul class="rules">' +
+    P.checkRules.map(x => "<li><b>" + esc(x.when) + "</b>" + esc(x.do) + "</li>").join("") + "</ul></section>";
+  h += '<section class="sec"><h2>ウォームアップと休憩</h2><ul class="rules">' +
+    "<li>BIG3は、その日の重さの前に「バーだけ10回 → 半分の重さで5回 → 7割で3回 → 9割で1回」。</li>" +
+    "<li>セットの間の休憩は、BIG3が2〜3分、補助種目が1〜1分半。</li>" +
+    "<li>休んだ日は、翌日に詰め込まずに飛ばして次へ進みます。</li></ul></section>";
+  app.innerHTML = h + fine();
+}
+
+/* ---- フォーム ---- */
+function renderForm() {
+  let h = "<h1>フォームのポイント</h1><p class=\"lead\">BIG3は教材動画でポイントを覚えてから始めましょう。</p>";
+  h += '<section class="sec"><h2>BIG3 初心者卒業ライン</h2><p class="lead">できているかどうかは、初日から送ってもらう動画で、理学療法士が確かめます。</p><ol class="rules">' +
+    P.gradRules.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol>";
+  BIG3.forEach(l => {
+    const g = P.grad[l], d = S.grad[l];
+    h += '<div class="gradcard"><h3>' + esc(P.lifts[l].name) + '<span class="st' + (d ? " ok" : "") + '">' + (d ? "卒業 " + esc(jpDate(parseYmd(d))) : "卒業前") + "</span></h3>" +
+      '<ul class="gl">' + g.lines.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>" +
+      '<p class="muted film">撮り方：' + esc(g.film) + "</p>" +
+      (d ? '<button class="btn small" type="button" data-ungrad="' + l + '">卒業を取り消す</button>'
+         : '<button class="btn small" type="button" data-grad="' + l + '">卒業の返信が来たら押す</button>') + "</div>";
+  });
+  h += '<p class="gl-line"><a class="btn-line" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで動画を送る</a></p></section>';
+  h += '<section class="sec"><h2>8種目のポイント</h2><ul class="formlist">';
+  Object.keys(P.lifts).forEach(l => {
+    h += "<li><h3>" + esc(P.lifts[l].name) + "</h3><ul>" + (P.form[l] || []).map(t => "<li>" + esc(t) + "</li>").join("") + "</ul>" +
+      '<div class="links">' + videoLinks(l) + "</div></li>";
+  });
+  app.innerHTML = h + "</ul></section>" + fine();
+}
+
+/* ---- 記録 ---- */
+function renderLog() {
+  const cw = S.start ? posOf(todayIndex()).w : V.w;
+  let h = "<h1>記録</h1><p class=\"lead\">MAXは、85%の日に3セットとも5回・RPE8.5以内でできた週の次の週に上がります。</p>";
+  h += '<div class="best">' + BIG3.map(l => {
+    const name = esc(SHORT[l]);
+    if (isPre(l)) return '<div><div class="l">' + name + '</div><div class="d muted">卒業前' + (S.maxIn[l] ? '<br>MAX <span class="num">' + kgText(S.maxIn[l].kg) + "</span>kg" : "") + "</div></div>";
+    const mi = maxInfo(l, cw);
+    if (!mi) return '<div><div class="l">' + name + '</div><div class="d muted">MAXを入れてください</div></div>';
+    const diff = mi.kg - mi.a.kg;
+    return '<div><div class="l">' + name + 'のMAX</div><div class="v num">' + kgText(mi.kg) + 'kg</div><div class="d num">' +
+      (diff ? (diff > 0 ? "+" : "") + kgText(diff) + "kg（" + mi.a.w + "週目から）" : mi.a.w + "週目から") + "</div></div>";
+  }).join("") + "</div>";
+  const tot = BIG3.map(l => knownMax(l, cw));
+  if (tot.every(v => v != null)) h += '<p class="total">BIG3合計（MAX）<b class="num">' + kgText(tot.reduce((a, b) => a + b, 0)) + "</b>kg</p>";
+
+  h += '<section class="sec" id="maxsec"><h2>MAX</h2><p class="lead">MAXを入れると、毎日の重さが自動で決まります。基準＝MAXの95%、その日の重さ＝基準の85・70・60%。MAXは測らなくて大丈夫です。直すと、今日から新しいMAXで計算します。</p><div class="maxgrid">' +
+    BIG3.map(l => {
+      const v = knownMax(l, cw), src = isPre(l) ? (S.maxIn[l] && S.maxIn[l].src) : ((maxInfo(l, cw) || {}).a || {}).src;
+      return '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, v) +
+        '<span class="mnote muted">' + [v != null && src === "est" ? "推定" : "", isPre(l) ? "卒業前" : ""].filter(Boolean).join("・") + "</span></div>";
+    }).join("") + "</div>" +
+    '<button class="btn" type="button" data-msaveall>MAXを保存</button><p class="status" data-mmsg role="status"></p>' + calcBox(null) + "</section>";
+
+  h += '<section class="sec"><h2>週ごとのMAXと結果</h2><p class="lead">↑ 次の週に上がる　→ そのまま　↓ 下がる</p><table><thead><tr><th>週</th>' +
+    BIG3.map(l => "<th>" + esc(P.lifts[l].name) + "</th>").join("") + "</tr></thead><tbody>";
+  for (let w = 1; w <= 16; w++) {
+    h += '<tr><td class="num">' + w + "</td>" + BIG3.map(l => {
+      const mi = isPre(l) ? null : maxInfo(l, w);
+      if (!mi) return '<td class="muted">—</td>';
+      const r = weekResult(l, w, mi.kg, mi.a);
+      return '<td class="num">' + kgText(mi.kg) + '<span class="muted" style="font-size:12px"> ' + (r === "up" ? "↑" : r === "down" ? "↓" : r === "keep" ? "→" : "") + "</span></td>";
+    }).join("") + "</tr>";
+  }
+  h += "</tbody></table></section>";
+  h += '<section class="sec"><h2>開始日</h2><p class="lead">開始日を変えると、「今日」のメニューの位置が変わります。記録は消えません。</p>' +
+    '<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><input type="date" id="startDate" value="' + esc(S.start || ymd(new Date())) + '" style="border:1px solid var(--rule);border-radius:8px;padding:8px 10px;min-height:44px">' +
+    '<button class="btn" type="button" id="setStart">この日にする</button></div></section>';
+  if (CONFIG.pdfUrl) h += '<section class="sec"><h2>PDF版</h2><p class="lead">印刷して使いたいときは、PDF版をどうぞ。</p><a class="btn" href="' + esc(CONFIG.pdfUrl) + '" target="_blank" rel="noopener">PDFを開く</a></section>';
+  h += '<section class="sec"><h2>記録を消す</h2><p class="lead">このスマホに保存したトレーニングの記録をすべて消します。卒業とMAXは残ります。元に戻せません。</p>' +
+    '<button class="btn danger" type="button" id="reset" data-armed="0">記録をすべて消す</button></section>';
+  app.innerHTML = h + cta() + fine();
+}
+
+/* ---- 描画と操作 ---- */
+function render() {
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-current", b.dataset.tab === V.tab ? "page" : "false"));
+  const tp = posOf(todayIndex());
+  document.getElementById("todayBtn").hidden = !(S.start && (V.tab !== "today" || V.w !== tp.w || V.d !== tp.d));
+  if (V.tab === "today") renderToday();
+  else if (V.tab === "weeks") renderWeeks();
+  else if (V.tab === "rules") renderRules();
+  else if (V.tab === "form") renderForm();
+  else renderLog();
+}
+function setField(setEl, field, value) {
+  const lg = dayLog(V.w, V.d, true);
+  const key = setEl.dataset.key;
+  const v = lg.sets[key] || (lg.sets[key] = {});
+  if (field === "kg") v.kg = value === "" ? "" : value.replace(",", ".");
+  else if (field === "reps") v.reps = value === "" ? "" : value;
+  else if (field === "rpe") v.rpe = value === "" ? null : Number(value);
+  save();
+}
+function toggleSet(setEl) {
+  const lg = dayLog(V.w, V.d, true);
+  const key = setEl.dataset.key;
+  const v = lg.sets[key] || (lg.sets[key] = {});
+  const kgIn = setEl.querySelector('[data-f="kg"]'), repsIn = setEl.querySelector('[data-f="reps"]'), rpeIn = setEl.querySelector('[data-f="rpe"]');
+  v.done = !v.done;
+  if (v.done) {
+    if (kgIn && (v.kg == null || v.kg === "") && kgIn.value !== "") v.kg = kgIn.value.replace(",", ".");
+    if (repsIn && (v.reps == null || v.reps === "")) v.reps = repsIn.value || (setEl.dataset.acc ? "" : "5");
+    if (rpeIn && v.rpe == null && rpeIn.value !== "") v.rpe = Number(rpeIn.value);
+    if (kgIn) kgIn.classList.remove("sug");
+  }
+  save();
+  const mark = setEl.querySelector(".mark");
+  mark.setAttribute("aria-pressed", String(!!v.done));
+  if (v.done) {
+    mark.classList.add("just");
+    const c = mark.querySelector(".pencircle");
+    c.style.strokeDashoffset = "140";
+    requestAnimationFrame(() => requestAnimationFrame(() => { c.style.strokeDashoffset = ""; }));
+  }
+  refreshEx(setEl.closest(".ex"));
+  updateDayParts();
+}
+function copyText(t) {
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+  return new Promise((ok, ng) => {
+    const ta = document.createElement("textarea");
+    ta.value = t; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy") ? ok() : ng(); } catch (e) { ng(e); }
+    document.body.removeChild(ta);
+  });
+}
+function reportText() {
+  const { w, d } = V, day = P.days[d - 1];
+  const lg = dayLog(w, d, false) || { sets: {}, check: {}, memo: "" };
+  const dt = dateOf(w, d);
+  const lines = ["【日報】" + (dt ? jpDate(dt) + " " : "") + w + "週目・" + d + "日目 " + day.name];
+  const ck = lg.check || {};
+  lines.push("睡眠 " + (ck.sleep !== undefined && ck.sleep !== "" ? ck.sleep + "時間" : "—") + "／疲れ " + (ck.fatigue || "—") + "／痛み " + (ck.pain === true ? "あり" : ck.pain === false ? "なし" : "—"));
+  const plan = planDay(w, d);
+  plan.forEach(it => {
+    const parts = [];
+    for (let i = 0; i < it.sets; i++) {
+      const v = lg.sets[it.lift + ":" + i];
+      if (!v || !v.done) continue;
+      const kg = v.kg !== undefined && v.kg !== "" ? kgText(Number(v.kg)) + "kg" : (it.acc ? "自重" : "—kg");
+      parts.push(kg + "×" + (v.reps || "") + (it.acc ? "" : "（" + (v.rpe != null ? r2(v.rpe) : "—") + "）"));
+    }
+    if (parts.length) lines.push("・" + P.lifts[it.lift].name + (it.acc || it.pre ? "" : " " + it.pct + "%") + " " + parts.join(" "));
+  });
+  const pre = plan.filter(it => it.pre).map(it => P.lifts[it.lift].name);
+  if (pre.length) lines.push("卒業前：" + pre.join("・") + "（動画を送ります）");
+  if (lg.memo) lines.push("ひとこと：" + lg.memo);
+  return lines.join("\n");
+}
+
+document.querySelector(".tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-tab]");
+  if (!b) return;
+  V.tab = b.dataset.tab;
+  render();
+  window.scrollTo(0, 0);
+});
+document.getElementById("todayBtn").addEventListener("click", () => { V.tab = "today"; goToday(); render(); window.scrollTo(0, 0); });
+
+app.addEventListener("click", e => {
+  const t = e.target;
+  const mark = t.closest(".mark");
+  if (mark) { toggleSet(mark.closest(".set")); return; }
+  const step = t.closest("[data-step]");
+  if (step) {
+    let i = (V.w - 1) * 7 + (V.d - 1) + Number(step.dataset.step);
+    i = Math.max(0, Math.min(111, i));
+    const p = posOf(i); V.w = p.w; V.d = p.d; render(); return;
+  }
+  const dayB = t.closest("[data-day]");
+  if (dayB) { V.d = Number(dayB.dataset.day); render(); return; }
+  const gw = t.closest("[data-goweek]");
+  if (gw) { V.tab = "today"; V.w = Number(gw.dataset.goweek); V.d = 1; render(); window.scrollTo(0, 0); return; }
+  const fat = t.closest("[data-fatigue]");
+  if (fat) {
+    const lg = dayLog(V.w, V.d, true), n = Number(fat.dataset.fatigue);
+    lg.check.fatigue = Number(lg.check.fatigue) === n ? null : n;
+    save();
+    fat.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(Number(lg.check.fatigue) === Number(b.dataset.fatigue))));
+    updateDayParts();
+    return;
+  }
+  const pain = t.closest("[data-pain]");
+  if (pain) {
+    const lg = dayLog(V.w, V.d, true), val = pain.dataset.pain === "1";
+    lg.check.pain = lg.check.pain === val ? null : val;
+    save();
+    pain.parentNode.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(lg.check.pain === (b.dataset.pain === "1"))));
+    updateDayParts();
+    return;
+  }
+  const gb = t.closest("[data-grad]");
+  if (gb) {
+    if (gb.dataset.armed !== "1") { gb.dataset.armed = "1"; gb.textContent = "理学療法士から卒業の返信が来ましたか？もう一度押すと卒業"; return; }
+    const l = gb.dataset.grad, np = nowPos();
+    S.grad[l] = ymd(new Date());
+    S.gpos[l] = { w: np.w, d: np.d };
+    /* 入れたMAXがあればそれを、なければ、いちばん新しい5回の記録から推定MAXを出す */
+    let kg = S.maxIn[l] ? S.maxIn[l].kg : null, src = S.maxIn[l] ? S.maxIn[l].src : "in";
+    if (kg == null) {
+      const r = lastFive(l, Infinity);
+      if (r) { kg = maxFromSet(r.kg, r.rpe); src = "est"; if (kg) S.maxIn[l] = { kg, src }; }
+    }
+    S.mx[l] = kg ? [{ w: np.w, d: np.d, kg, src }] : [];
+    save(); render(); return;
+  }
+  const ug = t.closest("[data-ungrad]");
+  if (ug) {
+    const l = ug.dataset.ungrad, m = maxFor(l, nowPos().w);
+    if (m != null) S.maxIn[l] = { kg: m, src: "in" };
+    delete S.grad[l]; delete S.mx[l]; delete S.gpos[l];
+    save(); render(); return;
+  }
+  const mc = t.closest("[data-mcalc]");
+  if (mc) {
+    const box = mc.closest(".basebox, #maxsec"), msg = box.querySelector("[data-mmsg]");
+    const l = mc.dataset.mcalc || box.querySelector("[data-clift]").value;
+    const kg = numIn(box.querySelector("[data-ckg]").value), rpe = Number(box.querySelector("[data-crpe]").value);
+    const m = kg ? maxFromSet(kg, rpe) : null;
+    if (!m) { if (msg) msg.textContent = "5回できた重さを数字で入れてください。"; return; }
+    const inp = box.querySelector('[data-mkg="' + l + '"]');
+    inp.value = kgText(m); inp.dataset.src = "est";
+    if (msg) msg.textContent = P.lifts[l].name + "の推定MAXは" + kgText(m) + "kgです。よければ「" + (mc.dataset.mcalc ? "MAXを入れる" : "MAXを保存") + "」を押してください。";
+    return;
+  }
+  const ms = t.closest("[data-msave]");
+  if (ms) {
+    const l = ms.dataset.msave, box = ms.closest(".basebox"), inp = box.querySelector('[data-mkg="' + l + '"]');
+    const kg = numIn(inp.value);
+    if (!kg) { box.querySelector("[data-mmsg]").textContent = "MAXを数字で入れてください（例：60）。"; return; }
+    setMax(l, round05(kg), inp.dataset.src || "in");
+    save(); render(); return;
+  }
+  if (t.closest("[data-msaveall]")) {
+    const box = document.getElementById("maxsec"), msg = box.querySelector("[data-mmsg]"), cw = nowPos().w;
+    let changed = 0, bad = 0;
+    BIG3.forEach(l => {
+      const inp = box.querySelector('[data-mkg="' + l + '"]');
+      if (!inp || inp.value.trim() === "") return;
+      const kg = numIn(inp.value);
+      if (!kg) { bad++; return; }
+      if (knownMax(l, cw) === round05(kg)) return;
+      setMax(l, round05(kg), inp.dataset.src || "in"); changed++;
+    });
+    if (bad) { msg.textContent = "数字でないMAXがあります。数字で入れてください。"; return; }
+    save(); render();
+    const m2 = document.querySelector("#maxsec [data-mmsg]");
+    if (m2) m2.textContent = changed ? "保存しました。今日から、このMAXで重さを計算します。" : "変わったMAXはありません。";
+    return;
+  }
+  const gt = t.closest("[data-goto]");
+  if (gt) { V.tab = gt.dataset.goto; render(); const ms2 = document.getElementById("maxsec"); if (ms2) ms2.scrollIntoView(); else window.scrollTo(0, 0); return; }
+  if (t.id === "setStart") {
+    const v = document.getElementById("startDate").value;
+    if (!v) return;
+    const card = t.closest(".start");
+    if (card) {
+      let bad = false;
+      card.querySelectorAll("[data-mkg]").forEach(inp => { if (inp.value.trim() !== "" && !numIn(inp.value)) bad = true; });
+      if (bad) { card.querySelector("[data-mmsg]").textContent = "MAXは数字で入れてください（わからなければ空欄のままで大丈夫です）。"; return; }
+    }
+    S.start = v;
+    if (card) card.querySelectorAll("[data-mkg]").forEach(inp => { const kg = numIn(inp.value); if (kg) setMax(inp.dataset.mkg, round05(kg), "in"); });
+    save(); V.tab = "today"; goToday(); render(); window.scrollTo(0, 0);
+    return;
+  }
+  if (t.id === "copyReport") {
+    const msg = document.getElementById("copyMsg");
+    copyText(reportText()).then(() => { msg.textContent = "コピーしました。LINEのトークに貼って送れます。"; },
+      () => { msg.textContent = "コピーできませんでした。長押しで選んでコピーしてください。"; });
+    return;
+  }
+  if (t.id === "reset") {
+    if (t.dataset.armed !== "1") { t.dataset.armed = "1"; t.textContent = "もう一度押すと消えます"; return; }
+    S = { start: S.start, logs: {}, grad: S.grad, mx: S.mx, maxIn: S.maxIn, gpos: S.gpos }; save(); render();
+  }
+});
+app.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "memo") { const lg = dayLog(V.w, V.d, true); lg.memo = t.value; save(); return; }
+  if (t.id === "sleep") { const lg = dayLog(V.w, V.d, true); lg.check.sleep = t.value.replace(",", "."); save(); return; }
+  const setEl = t.closest(".set");
+  if (setEl && t.dataset.f) { t.classList.remove("sug"); setField(setEl, t.dataset.f, t.value); }
+});
+app.addEventListener("change", e => {
+  const t = e.target;
+  if (t.id === "sleep") { updateDayParts(); return; }
+  const setEl = t.closest(".set");
+  if (setEl && t.dataset.f) { setField(setEl, t.dataset.f, t.value); refreshEx(setEl.closest(".ex")); }
+});
+
+if (!P) { app.textContent = "プログラムを読み込めませんでした。"; } else { render(); }
+</script>
+</body>
+</html>
