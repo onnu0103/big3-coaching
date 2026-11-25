@@ -313,6 +313,12 @@
   .terms dt { color: var(--ink-2); }
   .terms dd { margin: 0; font-weight: 700; }
   .price-cta { margin-top: 28px; }
+.consult-list { list-style: none; margin: 0 0 14px; padding: 0; }
+.consult-list li { position: relative; padding: 10px 0 10px 34px; border-top: 1px solid var(--grid); line-height: 1.6; font-weight: 700; }
+.consult-list li:first-child { border-top: 0; padding-top: 0; }
+.consult-list li::before { content: ""; position: absolute; left: 8px; top: calc(50% - 11px); width: 8px; height: 15px; border-right: 2.5px solid var(--redpen); border-bottom: 2.5px solid var(--redpen); transform: rotate(45deg); }
+.consult-list li:first-child::before { top: calc(50% - 16px); }
+.consult-note { margin: 16px 0 0; font-size: 15px; }
 
   /* 流れ */
   .flow { list-style: none; margin: 24px 0 0; padding: 0; counter-reset: step; }
@@ -394,7 +400,7 @@
     <a class="brand" href="#top"><span data-bind="coachName">〔お名前〕</span><small>理学療法士のオンライン筋トレコーチング</small></a>
     <a class="btn btn-line btn-small" data-line="add" href="https://lin.ee/VrjsKUs">
       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
-      LINEで無料診断
+      無料プログラム
     </a>
   </div>
 </header>
@@ -415,9 +421,9 @@
         <div class="hero-cta">
           <a class="btn btn-line" data-line="add" href="https://lin.ee/VrjsKUs">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
-            LINEで無料フォーム診断を受ける
+            LINEで4ヶ月プログラムを受け取る
           </a>
-          <a class="quiet-link" href="#price">料金と内容を見る</a>
+          <a class="quiet-link" href="#price">無料面談について見る</a>
         </div>
         <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
         <p class="status" data-status>第1期モニター募集中：残り<span data-bind="slotsLeft">5</span>枠（<span data-bind="startMonth">2027年1月</span>開始）</p>
@@ -546,7 +552,6 @@
         <li><span>8種目の実演動画<small>理学療法士本人の実演。送ってもらった動画には、毎回添削を返します</small></span><b>8本</b></li>
         <li><span>LINE相談<small>原則24時間以内に返信します</small></span><b>回数無制限</b></li>
         <li><span>最終週の測定と、次の16週間の計画書</span><b>1回</b></li>
-        <li class="total"><span>16週間の料金</span><b><span data-bind="priceYen">39,800</span>円（税込）</b></li>
       </ul>
     </div>
   </section>
@@ -566,12 +571,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">月あたりの費用</th>
-              <td class="us">約<span data-bind="perMonth">9,950</span>円<small>4ヶ月で計算</small></td>
-              <td>0.8〜3万円（週1回）<br>4〜6万円（手厚いコース）</td>
-              <td>10〜15万円<small>2ヶ月で20〜30万円が目安</small></td>
-            </tr>
             <tr>
               <th scope="row">理学療法士の評価</th>
               <td class="us">あり（初回60分）</td>
@@ -605,7 +604,7 @@
           </tbody>
         </table>
       </div>
-      <p class="fineprint">費用は、2026年11月時点で公開されている料金をもとにした目安です。サービスの内容は事業者ごとに異なります。</p>
+      <p class="fineprint">ほかのサービスの内容は、事業者やプランによって異なります。</p>
     </div>
   </section>
 
@@ -627,16 +626,17 @@
 
   <section class="sec price-sec" id="price" aria-labelledby="price-title">
     <div class="wrap">
-      <h2 id="price-title">第1期モニター募集</h2>
+      <h2 id="price-title">まずは、15分の無料面談から</h2>
+      <p>いきなり申し込む必要はありません。Zoomで15分、次の3つを一緒に確かめます。</p>
       <div class="price">
-        <p class="price-label">16週間のコーチング（モニター価格）</p>
-        <p class="price-amount"><span data-bind="priceYen">39,800</span><span class="yen">円</span><span class="tax">（税込）</span></p>
-        <ul class="price-split">
-          <li>1週間あたり約<span data-bind="perWeek">2,490</span>円</li>
-          <li>1日あたり約<span data-bind="perDay">355</span>円</li>
+        <ul class="consult-list">
+          <li>4ヶ月後に挑戦したいこと</li>
+          <li>いまのトレーニングと、週6日を続けられそうか</li>
+          <li>痛みやケガの心配がないか</li>
         </ul>
-        <p class="pen">参考：対面のパーソナルトレーニングは、1回8,000〜20,000円が目安です。</p>
+        <p class="pen">合うかどうかを、正直にお伝えします。合わなければ、その場で断って大丈夫です。</p>
       </div>
+      <p class="consult-note">コーチングの内容と料金は、面談でご説明します。無理にすすめることはしません。料金は<a href="tokushoho.html">特定商取引法に基づく表記</a>にも記載しています。</p>
 
       <div class="slots">
         <p class="slots-label">募集は先着<span data-bind="slotsTotal">5</span>名</p>
@@ -647,18 +647,19 @@
       <dl class="terms">
         <div><dt>締切</dt><dd data-bind="deadline">〔12月◯日〕</dd></div>
         <div><dt>開始</dt><dd><span data-bind="startMonth">2027年1月</span>（新しい年の16週間）</dd></div>
-        <div><dt>返金</dt><dd>初回面談から7日以内は全額返金</dd></div>
+        <div><dt>解約</dt><dd>契約書面を受け取ってから8日間は、クーリング・オフで無条件に解約できます</dd></div>
+        <div><dt>返金</dt><dd>そのあとも、初回面談から7日以内は全額返金</dd></div>
       </dl>
 
-      <h3>なぜこの価格なのか</h3>
-      <p>オンライン指導の実績を一緒につくっていただく、第1期の方だけのモニター価格です。修了時に、変化の記録と感想の共有（匿名可）にご協力ください。先着<span data-bind="slotsTotal">5</span>名なのは、毎日の日報を丁寧に見られる人数の上限だからです。</p>
+      <h3>なぜ先着<span data-bind="slotsTotal">5</span>名なのか</h3>
+      <p>毎日の日報を丁寧に見られる人数の上限だからです。第1期の方には、修了時に、変化の記録と感想の共有（匿名可）にご協力をお願いしています。</p>
 
       <div class="price-cta">
         <a class="btn btn-line btn-block" data-line="interview" href="https://lin.ee/VrjsKUs">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
           <span data-interview-label>LINEで無料面談を申し込む</span>
         </a>
-        <p class="micro">15分のZoomで、合うかどうかを確かめられます。合わなければ、その場で断って大丈夫です。</p>
+        <p class="micro">LINEに「面談希望」と送るだけです。日程は24時間以内にご案内します。</p>
       </div>
     </div>
   </section>
@@ -667,10 +668,11 @@
     <div class="wrap">
       <h2 id="flow-title">はじめるまでの流れ</h2>
       <ol class="flow">
-        <li><h3>LINEを友だち追加</h3><p>30秒で終わります。登録のお礼に「可動域セルフチェック」をお送りします。</p></li>
-        <li><h3>無料フォーム診断</h3><p>いつもの種目の動画を1本送ると、改善ポイントを1つお返しします。</p></li>
-        <li><h3>無料面談（Zoom 15分）</h3><p>目標と生活リズムを伺い、16週間で何ができるかをお話しします。</p></li>
-        <li><h3>お申し込みとスタート</h3><p><span data-bind="startMonth">2027年1月</span>から16週間。初回評価のZoom（60分）から始めます。</p></li>
+        <li><h3>LINEを友だち追加</h3><p>30秒で終わります。登録のお礼に「4ヶ月プログラム」をそのままお渡しします。</p></li>
+        <li><h3>初心者卒業ラインの確認</h3><p>BIG3の動画を送ると、フォームが卒業ラインを満たしているかを見てお返事します。</p></li>
+        <li><h3>無料面談（Zoom 15分）</h3><p>目標と生活リズムを伺い、コーチングの内容と料金をご説明します。</p></li>
+        <li><h3>お申し込み</h3><p>契約書面をお送りします。受け取った日から8日間は、クーリング・オフで無条件に解約できます。</p></li>
+        <li><h3>スタート</h3><p><span data-bind="startMonth">2027年1月</span>から16週間。初回評価のZoom（60分）から始めます。</p></li>
       </ol>
     </div>
   </section>
@@ -704,8 +706,12 @@
           <div class="a"><p>原則24時間以内に返信します。土日・祝日も同じです。</p></div>
         </details>
         <details>
+          <summary>料金はいくらですか？</summary>
+          <div class="a"><p>無料面談で、コーチングの内容と一緒にご説明します。<a href="tokushoho.html">特定商取引法に基づく表記</a>にも記載しています。</p></div>
+        </details>
+        <details>
           <summary>支払い方法と、途中でやめる場合は？</summary>
-          <div class="a"><p>銀行振込（一括）でお願いします。振込先は、無料面談のあとに公式LINEでお知らせします。振込手数料はご負担ください。</p><p>初回面談の日から7日以内にLINEでお申し出いただければ、理由を問わず全額をお返しします。開始前のキャンセルも全額返金です。<span class="ph">8日目以降も途中でやめることができ、残りの週数分を週割りでお返しします。</span></p></div>
+          <div class="a"><p>銀行振込（一括）でお願いします。お申し込みのあとにお送りする契約書面に、振込先と期限を書いています。振込手数料はご負担ください。</p><p>契約書面を受け取った日から8日以内なら、クーリング・オフで無条件に解約できます。支払った代金は全額お返しし、すでに行った面談の料金もいただきません。</p><p>そのあとも、開始前のキャンセルと、初回面談の日から7日以内のお申し出は、理由を問わず全額をお返しします。<span class="ph">8日目以降も途中でやめることができ、残りの週数分を週割りでお返しします。</span></p></div>
         </details>
       </div>
     </div>
@@ -713,11 +719,11 @@
 
   <section class="sec final" id="final" aria-labelledby="final-title">
     <div class="wrap">
-      <h2 id="final-title">まずは、いつもの種目を<br>1本見せてください。</h2>
-      <p>動画を1本送るだけで、理学療法士の視点から改善ポイントを1つお返しします。無料です。</p>
+      <h2 id="final-title">まずは、LINEで<br>4ヶ月プログラムを。</h2>
+      <p>友だち追加すると、16週間・週6日・8種目のプログラムをそのままお渡しします。コーチングが気になったら、15分の無料面談からどうぞ。</p>
       <a class="btn btn-line btn-block" data-line="add" href="https://lin.ee/VrjsKUs">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
-        LINEで無料フォーム診断を受ける
+        LINEで4ヶ月プログラムを受け取る
       </a>
       <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
     </div>
@@ -744,7 +750,7 @@
 <div class="sticky" data-sticky>
   <a class="btn btn-line btn-block" data-line="add" href="https://lin.ee/VrjsKUs">
     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
-    LINEで無料フォーム診断を受ける
+    LINEで4ヶ月プログラムを受け取る
   </a>
 </div>
 
@@ -756,7 +762,6 @@ const CONFIG = {
   lineId: "@228naeny",                  // LINE ID（例 "@abc1234"）。入れると面談ボタンで「面談希望」が入力された状態でLINEが開きます
   sportsCareer: "〔競技名・年数〕",       // 例 "高校サッカー部で5年"
   strengthCareer: "〔年数・人数〕",       // 例 "6年・120名"
-  price: 39800,                         // 税込の料金（円）
   weeks: 16,                            // 期間（週）
   zoomMinutes: 60,                      // 週1回のZoomの時間（分）
   slotsTotal: 5,                        // 募集人数
@@ -775,10 +780,6 @@ const CONFIG = {
     coachName: c.coachName,
     sportsCareer: c.sportsCareer,
     strengthCareer: c.strengthCareer,
-    priceYen: yen(c.price),
-    perWeek: yen(Math.round(c.price / c.weeks / 10) * 10),
-    perDay: yen(Math.round(c.price / (c.weeks * 7))),
-    perMonth: yen(Math.round(c.price / (c.weeks / 4) / 10) * 10),
     weeks: String(c.weeks),
     days: String(c.weeks * 7),
     zoomMinutes: String(c.zoomMinutes),
