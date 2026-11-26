@@ -4,72 +4,246 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>資料① RPE早見表｜重さを決めるものさし</title>
-<meta name="description" content="セットを終えたときの「あと何回できたか」で、重さを決める。4ヶ月プログラムでのRPEの使い方を1枚にまとめました。">
+<meta name="description" content="セットを終えたときの「あと何回できたか」を選ぶだけで、RPEと次にやることがわかる。4ヶ月プログラムのRPE早見表です。">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#1F2A44">
+<meta name="theme-color" content="#0D1B3E">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Klee+One:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="library.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0D1B3E;
+    --night-2: #172B5E;
+    --gold: #E2B54A;
+    --gold-hi: #F7E3A3;
+    --ink: #18213B;
+    --muted: #5B6478;
+    --hair: #DCE1EA;
+    --floor: #EDF0F5;
+    --paper: #FFFFFF;
+    --p6: #2E9E5B;   /* 10kg プレート */
+    --p7: #E3B10C;   /* 15kg */
+    --p8: #2B5FD9;   /* 20kg */
+    --p85: #1E46A8;
+    --p9: #D7312B;   /* 25kg */
+    --p10: #1C1C22;  /* 黒 */
+    --line: #06C755;
+    --line-dark: #05A648;
+    --focus: #F7B500;
+    --sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif;
+    --num: "Barlow Condensed", "Noto Sans JP", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.8; letter-spacing: .02em; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 20px; }
+  .num { font-family: var(--num); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+
+  /* 上の帯 */
+  .hero { background: radial-gradient(120% 90% at 85% 0%, #24418A 0%, var(--night) 55%); color: #fff; padding: calc(22px + env(safe-area-inset-top)) 0 26px; }
+  .badge { display: inline-block; background: linear-gradient(180deg, #FBEAB4, #D9A93A); color: #2A1E00; font-weight: 900; font-size: 13px; line-height: 1; padding: 7px 12px 6px; border-radius: 999px; }
+  .hero h1 { margin: 14px 0 0; font-size: 42px; font-weight: 900; line-height: 1.15; letter-spacing: .04em;
+    background: linear-gradient(180deg, #FFF6D6 0%, var(--gold) 70%, #C8922B 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .sub { margin: 6px 0 0; font-size: 17px; font-weight: 700; }
+  .hero .how { margin: 12px 0 0; font-size: 14.5px; line-height: 1.7; color: #D6DDF0; }
+
+  /* チェッカー */
+  .check { background: var(--floor); padding: 22px 0 24px; }
+  .check h2 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.4; }
+  .check .hint { margin: 2px 0 0; font-size: 13.5px; color: var(--muted); }
+  .choices { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .choices button {
+    width: 100%; min-height: 74px; border: 2px solid var(--hair); border-radius: 14px; background: var(--paper);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer;
+    position: relative; overflow: hidden; padding: 8px 4px 8px 10px;
+  }
+  .choices button::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c); }
+  .choices .big { font-family: var(--num); font-size: 30px; font-weight: 700; line-height: 1; }
+  .choices .big small { font-family: var(--sans); font-size: 13px; font-weight: 700; margin-left: 2px; }
+  .choices .lab { font-size: 12.5px; color: var(--muted); line-height: 1.3; }
+  .choices button[aria-pressed="true"] { border-color: var(--c); background: var(--c); color: #fff; }
+  .choices button[aria-pressed="true"] .lab { color: rgba(255,255,255,.9); }
+
+  .result { margin-top: 14px; background: var(--paper); border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 88px 1fr; gap: 14px; align-items: start; border: 2px solid var(--hair); }
+  .plate { width: 88px; height: 88px; border-radius: 50%; background: var(--c, #B9C1CF); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 0 6px rgba(255,255,255,.18), inset 0 0 0 30px rgba(0,0,0,.06); }
+  .plate .rp { font-size: 12px; font-weight: 700; line-height: 1; opacity: .9; }
+  .plate .v { font-family: var(--num); font-size: 38px; font-weight: 700; line-height: 1; }
+  .result h3 { margin: 2px 0 0; font-size: 18px; font-weight: 900; line-height: 1.45; }
+  .result ul { margin: 6px 0 0; padding: 0; list-style: none; }
+  .result li { position: relative; padding-left: 18px; font-size: 15px; line-height: 1.65; margin-top: 4px; }
+  .result li::before { content: ""; position: absolute; left: 2px; top: .65em; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--muted)); }
+  .result.empty h3 { color: var(--muted); font-weight: 700; font-size: 15.5px; }
+
+  /* 本文 */
+  .sec { padding: 26px 0 4px; }
+  .sec h2 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.4; display: flex; align-items: center; gap: 10px; }
+  .sec h2::before { content: ""; width: 6px; height: 22px; border-radius: 3px; background: var(--gold); }
+  .sec p { margin: 8px 0 0; }
+
+  /* ものさし */
+  .scale { margin: 16px 0 0; display: grid; grid-template-columns: repeat(6, 1fr); align-items: end; position: relative; padding: 0 4px; }
+  .scale::after { content: ""; position: absolute; left: 0; right: 0; bottom: 34px; height: 8px; border-radius: 4px; background: linear-gradient(180deg, #C9CFD9, #8D96A6); z-index: 0; }
+  .pl { display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; z-index: 1; }
+  .pl i { display: block; width: 30px; border-radius: 6px; background: var(--c); box-shadow: inset -5px 0 0 rgba(0,0,0,.16); }
+  .pl b { font-family: var(--num); font-size: 20px; line-height: 28px; height: 28px; }
+  .marks { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; margin: 14px 0 0; padding: 0 4px; font-size: 12.5px; font-weight: 700; line-height: 1.35; text-align: center; }
+  .marks span { padding: 6px 2px; border-top: 3px solid var(--c); }
+  .marks .gap { border-top-color: transparent; }
+
+  /* MAX */
+  .max { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+  .max li { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: 14px; background: var(--floor); }
+  .max .ic { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 900; background: var(--c); }
+  .max b { display: block; font-size: 16.5px; line-height: 1.5; }
+  .max span { display: block; font-size: 14.5px; line-height: 1.65; color: var(--muted); }
+
+  .stop { margin: 14px 0 0; border-left: 5px solid var(--p9); padding: 4px 0 4px 14px; }
+  .stop p { margin: 6px 0 0; font-size: 15px; }
+  .stop b { font-weight: 900; }
+
+  .tips { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: t; }
+  .tips li { counter-increment: t; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--hair); }
+  .tips li::before { content: counter(t); font-family: var(--num); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--gold); }
+  .tips b { display: block; font-size: 16px; line-height: 1.5; }
+  .tips span { display: block; font-size: 14.5px; line-height: 1.65; color: var(--muted); }
+
+  .cta { margin: 28px 0 0; background: var(--night); color: #fff; border-radius: 18px; padding: 20px 18px; }
+  .cta h2 { margin: 0; font-size: 19px; font-weight: 900; line-height: 1.45; }
+  .cta p { margin: 6px 0 0; font-size: 15px; color: #D6DDF0; }
+  .btn-line { margin-top: 14px; display: flex; align-items: center; justify-content: center; min-height: 54px; border-radius: 999px; background: var(--line); color: #fff; font-weight: 900; text-decoration: none; font-size: 16.5px; }
+  .btn-line:hover { background: var(--line-dark); }
+  .btn-sub { margin-top: 10px; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.55); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; }
+
+  footer { padding: 22px 0 calc(32px + env(safe-area-inset-bottom)); font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  footer p { margin: 2px 0 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .result { transition: border-color .2s; }
+  }
+  @media print {
+    .check .choices, .result, .cta { display: none; }
+  }
+</style>
 </head>
 <body>
-<header class="top"><div class="top-in">いどむの資料室<small>LINE友だち限定・4ヶ月プログラムといっしょに使う資料</small></div></header>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">LINE友だち限定　資料①</span>
+    <h1>RPE早見表</h1>
+    <p class="sub">重さを決める、ものさし。</p>
+    <p class="how">セットが終わったら、下で「あと何回できたか」を選ぶだけ。RPEと、次にやることが出ます。</p>
+  </div>
+</header>
+
 <main>
-<article class="page">
-  <p class="no">資料①</p>
-  <h1>RPE早見表</h1>
-  <p class="lead">RPEは、重さを決めるものさしです。セットを終えたときに「あと何回できたか」で、キツさを数字にします。ジムでこのページを開いて、セットのたびに見返してください。</p>
-
-  <section class="sec">
-    <h2>早見表</h2>
-    <table class="tbl num">
-      <thead><tr><th>RPE</th><th>セットを終えたとき</th></tr></thead>
-      <tbody>
-        <tr><td class="r">10</td><td>もう1回もできない</td></tr>
-        <tr class="mark"><td class="r">9</td><td>あと1回できた<span class="pen">ここまで来たら、次の週はMAXを下げる</span></td></tr>
-        <tr class="mark"><td class="r">8.5</td><td>あと1回は確実。2回はわからない<span class="pen">卒業してからは、どのセットもここまで</span></td></tr>
-        <tr><td class="r">8</td><td>あと2回できた</td></tr>
-        <tr><td class="r">7</td><td>あと3回できた</td></tr>
-        <tr class="mark"><td class="r">6</td><td>あと4回できた<span class="pen">卒業ラインまでは、ここまで</span></td></tr>
-      </tbody>
-    </table>
+  <section class="check" aria-labelledby="q">
+    <div class="wrap">
+      <h2 id="q">今のセット、あと何回できた？</h2>
+      <p class="hint">終わってすぐ、正直に選んでください。</p>
+      <ul class="choices">
+        <li><button type="button" data-r="6" style="--c:var(--p6)" aria-pressed="false"><span class="big">4<small>回以上</small></span><span class="lab">まだまだ</span></button></li>
+        <li><button type="button" data-r="7" style="--c:var(--p7)" aria-pressed="false"><span class="big">3<small>回</small></span><span class="lab">余裕あり</span></button></li>
+        <li><button type="button" data-r="8" style="--c:var(--p8)" aria-pressed="false"><span class="big">2<small>回</small></span><span class="lab">ちょうどいい</span></button></li>
+        <li><button type="button" data-r="8.5" style="--c:var(--p85)" aria-pressed="false"><span class="big">1〜2<small>回</small></span><span class="lab">1回は確実</span></button></li>
+        <li><button type="button" data-r="9" style="--c:var(--p9)" aria-pressed="false"><span class="big">1<small>回</small></span><span class="lab">ギリギリ</span></button></li>
+        <li><button type="button" data-r="10" style="--c:var(--p10)" aria-pressed="false"><span class="big">0<small>回</small></span><span class="lab">もう無理</span></button></li>
+      </ul>
+      <div class="result empty" id="result" aria-live="polite">
+        <div class="plate"><span class="rp">RPE</span><span class="v num">?</span></div>
+        <div><h3>ボタンを押すと、ここにRPEと次にやることが出ます。</h3></div>
+      </div>
+    </div>
   </section>
 
-  <section class="sec">
-    <h2>プログラムでの使い方</h2>
-    <ul class="rules">
-      <li><span class="when">卒業ラインを満たすまで（初心者のターン）</span><span class="do">フォームが崩れない重さで、RPE6まで。</span></li>
-      <li><span class="when">85%の日に、3セットとも5回できて、どのセットもRPE8.5以内</span><span class="do">次の週はMAXを上げる。ベンチは+2.5kg、スクワットとデッドリフトは+5kg。</span><span class="small">ベンチは、週2回の85%の日が両方そろったとき。</span></li>
-      <li><span class="when">5回に届かなかった、または重さを下げた</span><span class="do">MAXはそのまま。</span></li>
-      <li><span class="when">RPE9以上になった</span><span class="do">次の週はMAXを下げる。ベンチは−2.5kg、スクワットとデッドリフトは−5kg。</span></li>
-      <li><span class="when">セットの途中で、RPE8.5を超えそう</span><span class="do">次のセットから2.5〜5kg下げる。その週はMAXを上げない。</span></li>
-    </ul>
-    <p class="note"><span class="pen">限界まで追い込まない理由</span>フォームを崩さずに、16週間ずっと続けるためです。「余力を残して終える」は、サボりではなく作戦です。</p>
-  </section>
+  <div class="wrap">
+    <section class="sec" aria-labelledby="s1">
+      <h2 id="s1">RPEのものさし</h2>
+      <p>セットを終えたときに「あと何回できたか」で、キツさを数字にします。プレートが重いほど、キツいセットです。</p>
+      <div class="scale" aria-hidden="true">
+        <div class="pl" style="--c:var(--p6)"><i style="height:66px"></i><b class="num">6</b></div>
+        <div class="pl" style="--c:var(--p7)"><i style="height:78px"></i><b class="num">7</b></div>
+        <div class="pl" style="--c:var(--p8)"><i style="height:90px"></i><b class="num">8</b></div>
+        <div class="pl" style="--c:var(--p85)"><i style="height:100px"></i><b class="num">8.5</b></div>
+        <div class="pl" style="--c:var(--p9)"><i style="height:112px"></i><b class="num">9</b></div>
+        <div class="pl" style="--c:var(--p10)"><i style="height:124px"></i><b class="num">10</b></div>
+      </div>
+      <div class="marks">
+        <span style="--c:var(--p6)">卒業まで<br>ここまで</span>
+        <span class="gap"></span>
+        <span class="gap"></span>
+        <span style="--c:var(--p85)">卒業後の<br>上限</span>
+        <span style="--c:var(--p9);grid-column:span 2">ここまで来たら<br>重さを下げる</span>
+      </div>
+    </section>
 
-  <section class="sec">
-    <h2>RPEを正しくつける5つのコツ</h2>
-    <ol class="steps">
-      <li><b>セットが終わったら、すぐにつける</b><span>時間がたつと、キツさを軽く感じやすくなります。</span></li>
-      <li><b>「あと何回できたか」を正直に</b><span>見栄をはると、次の週の重さが合わなくなります。</span></li>
-      <li><b>迷ったら、キツいほうの数字にする</b><span>8か8.5か迷ったら8.5。重さを上げすぎないための安全策です。</span></li>
-      <li><b>フォームが崩れた回は数えない</b><span>崩れたら、5回に届かなくてもそのセットは終えます。</span></li>
-      <li><b>最後の1回のスピードを見る</b><span>それまでより明らかに遅くなったら、余力は少ないサインです。</span></li>
-    </ol>
-  </section>
+    <section class="sec" aria-labelledby="s2">
+      <h2 id="s2">週ごとのMAXの決め方</h2>
+      <p>85%の日の結果で、次の週のMAXが決まります。</p>
+      <ul class="max">
+        <li><span class="ic" style="--c:var(--p6)" aria-hidden="true">▲</span><div><b>MAXを上げる</b><span>3セットとも5回できて、どのセットもRPE8.5まで。ベンチは+2.5kg、スクワットとデッドリフトは+5kg。ベンチは週2回の85%の日が、両方そろったとき。</span></div></li>
+        <li><span class="ic" style="--c:#8D96A6" aria-hidden="true">■</span><div><b>MAXはそのまま</b><span>5回に届かなかった、または途中で重さを下げた。</span></div></li>
+        <li><span class="ic" style="--c:var(--p9)" aria-hidden="true">▼</span><div><b>MAXを下げる</b><span>RPE9以上になった。ベンチは−2.5kg、スクワットとデッドリフトは−5kg。</span></div></li>
+      </ul>
+      <div class="stop">
+        <p><b>セットの途中で、RPE8.5を超えそうなら</b><br>次のセットから2.5〜5kg下げる。その週はMAXを上げない。</p>
+        <p><b>フォームが崩れたら</b><br>5回に届かなくても、そのセットはそこで終える。</p>
+      </div>
+    </section>
 
-  <aside class="cta">
-    <h2>このRPEで合っているか、迷ったら</h2>
-    <p>動画をこのLINEに送ってもらえれば、フォームと一緒に見てお返事します。</p>
-    <a class="btn-line" href="https://line.me/R/oaMessage/%40228naeny/">LINEで送る</a>
-    <a class="btn-sub" href="../program.html">4ヶ月プログラムを開く</a>
-  </aside>
-</article>
+    <section class="sec" aria-labelledby="s3">
+      <h2 id="s3">RPEを正しくつける5つのコツ</h2>
+      <ol class="tips">
+        <li><div><b>終わったら、すぐにつける</b><span>時間がたつと、キツさを軽く感じやすくなります。</span></div></li>
+        <li><div><b>「あと何回」を正直に</b><span>見栄をはると、次の週の重さが合わなくなります。</span></div></li>
+        <li><div><b>迷ったら、キツいほうにする</b><span>8か8.5か迷ったら8.5。重さを上げすぎないための安全策です。</span></div></li>
+        <li><div><b>フォームが崩れた回は数えない</b><span>崩れたら、そのセットは終えます。</span></div></li>
+        <li><div><b>最後の1回のスピードを見る</b><span>それまでより明らかに遅くなったら、余力は少ないサインです。</span></div></li>
+      </ol>
+    </section>
+
+    <aside class="cta" aria-labelledby="c1">
+      <h2 id="c1">このRPEで合っているか、迷ったら</h2>
+      <p>セットの動画をLINEに送ってもらえれば、フォームと一緒に見てお返事します。</p>
+      <a class="btn-line" href="https://line.me/R/oaMessage/%40228naeny/">LINEで動画を送る</a>
+      <a class="btn-sub" href="../program.html">4ヶ月プログラムを開く</a>
+    </aside>
+
+    <footer>
+      <p>理学療法士 いどむ｜4ヶ月プログラムの資料</p>
+      <p>※痛みやしびれがあるときは中止して、医療機関に相談してください。効果には個人差があります。</p>
+    </footer>
+  </div>
 </main>
-<footer>
-  <p>理学療法士 いどむ｜4ヶ月プログラムの資料</p>
-  <p>※痛みやしびれがあるときは中止して、医療機関に相談してください。効果には個人差があります。</p>
-</footer>
+
+<script>
+(function () {
+  var R = {
+    "6":   { c: "var(--p6)",  h: "余力を残せています", n: ["卒業ラインを満たすまでは、この重さまで（初心者のターン）", "卒業してからは、プログラムの重さのままでOK"] },
+    "7":   { c: "var(--p7)",  h: "まだ余裕があります", n: ["重さはこのままで、5回をきれいに", "85%の日に3セットとも5回できたら、次の週はMAXを上げる"] },
+    "8":   { c: "var(--p8)",  h: "ちょうどいいキツさです", n: ["重さはこのままで続ける", "85%の日に3セットとも5回できたら、次の週はMAXを上げる"] },
+    "8.5": { c: "var(--p85)", h: "ここが上限です", n: ["重さはこのままでOK", "卒業してからは、どのセットもここまでに収める", "85%の日に3セットとも5回できたら、次の週はMAXを上げる"] },
+    "9":   { c: "var(--p9)",  h: "キツすぎます", n: ["次のセットから2.5〜5kg下げる", "この週はMAXを上げない", "次の週はMAXを下げる（ベンチ−2.5kg、スクワット・デッドリフト−5kg）"] },
+    "10":  { c: "var(--p10)", h: "限界まで行きました", n: ["このセットはここまで。次のセットから2.5〜5kg下げる", "この週はMAXを上げない", "次の週はMAXを下げる（ベンチ−2.5kg、スクワット・デッドリフト−5kg）"] }
+  };
+  var box = document.getElementById("result");
+  var buttons = document.querySelectorAll(".choices button");
+  function show(r) {
+    var d = R[r]; if (!d) return;
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.r === r ? "true" : "false"); });
+    box.classList.remove("empty");
+    box.style.setProperty("--c", d.c);
+    box.style.borderColor = d.c;
+    box.innerHTML = '<div class="plate"><span class="rp">RPE</span><span class="v num">' + r + '</span></div>' +
+      '<div><h3>' + d.h + '</h3><ul>' + d.n.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul></div>";
+  }
+  buttons.forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.r); }); });
+})();
+</script>
 </body>
 </html>
