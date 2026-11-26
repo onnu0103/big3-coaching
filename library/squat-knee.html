@@ -65,6 +65,19 @@
   .sec h2::before { content: ""; flex: none; width: 6px; height: 22px; border-radius: 3px; background: var(--gold); }
   .sec > p { margin: 8px 0 0; }
 
+  /* 動画（悪い例→良い例） */
+  .vid { padding: 24px 0 4px; }
+  .vid h2 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.4; display: flex; align-items: center; gap: 10px; }
+  .vid h2::before { content: ""; flex: none; width: 6px; height: 22px; border-radius: 3px; background: var(--gold); }
+  .vid .hint { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); }
+  .vid video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; margin-top: 12px; border-radius: 16px; background: var(--night); }
+  .vs { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  .vs li { display: grid; grid-template-columns: 1fr 22px 1fr; align-items: center; gap: 6px; font-size: 14px; line-height: 1.5; font-weight: 700; }
+  .vs .ng, .vs .ok { padding: 8px 10px; border-radius: 10px; display: flex; gap: 6px; align-items: flex-start; }
+  .vs .ng { background: var(--p9-tint); color: var(--p9-ink); }
+  .vs .ok { background: var(--p6-tint); color: var(--p6-ink); }
+  .vs .ar { text-align: center; color: var(--muted); font-weight: 400; }
+
   /* 撮り方 */
   .map { margin: 14px 0 0; background: var(--floor); border-radius: 16px; padding: 12px 10px 6px; }
   .map svg { display: block; width: 100%; height: auto; }
@@ -185,6 +198,18 @@
 </header>
 
 <main>
+
+  <section class="vid" aria-labelledby="vh">
+    <div class="wrap">
+      <h2 id="vh">動画で見る：悪い例と良い例</h2>
+      <p class="hint">正面から膝の向き、真横から腰と骨盤。✖の動きのあとに、◯の動きが出ます（約29秒・音は出ません）。</p>
+      <video controls playsinline muted preload="metadata" poster="video/squat-knee.jpg" width="720" height="900">
+        <source src="video/squat-knee.mp4" type="video/mp4">
+      </video>
+      <ul class="vs"><li><span class="ng">✖ 立ち上がるとき、膝が内側に入る</span><span class="ar" aria-hidden="true">→</span><span class="ok">◯ 膝は、つま先と同じ向き</span></li><li><span class="ng">✖ いちばん下で、腰が丸まる</span><span class="ar" aria-hidden="true">→</span><span class="ok">◯ 骨盤の角度を保ったまま</span></li></ul>
+    </div>
+  </section>
+
   <div class="wrap">
     <section class="sec" aria-labelledby="s1">
       <h2 id="s1">撮り方</h2>
