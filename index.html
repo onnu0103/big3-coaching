@@ -474,15 +474,15 @@
       <h2 id="goals-title">体と重量を、<br>ひとつの計画で狙います。</h2>
       <p>種目は、目標のための手段です。何をどれだけやるかは、あなたの目標と体から逆算して決めます。</p>
       <dl class="goals">
-        <div><dt>重量を伸ばす</dt><dd>メインの種目は、低い回数と高い重量で記録を伸ばします。</dd></div>
-        <div><dt>体をつくる</dt><dd>補助の種目は回数を多めにして、見た目に効く部位を育てます。</dd></div>
+        <div><dt>重量を伸ばす</dt><dd>土台のBIG3は、低い回数と高い重量で記録を伸ばします。</dd></div>
+        <div><dt>体をつくる</dt><dd>BIG3で、全身の大きな筋肉を一度に使います。足りない部位は、補助の5種目（任意）を回数多めに行って育てます。</dd></div>
         <div><dt>回復を管理する</dt><dd>睡眠と疲れを日報で見て、攻める週と休ませる週を調整します。</dd></div>
       </dl>
       <figure class="vid" data-video hidden>
-        <video controls muted playsinline preload="metadata" poster="video_7shumoku_poster.jpg">
-          <source src="video_7shumoku.mp4" type="video/mp4">
+        <video controls muted playsinline preload="metadata" poster="video_big3_hojo_poster.jpg">
+          <source src="video_big3_hojo.mp4" type="video/mp4">
         </video>
-        <figcaption>体をつくる種目は7つだけ（40秒・音なし）</figcaption>
+        <figcaption>土台はBIG3、補助の5種目は任意（約50秒・音なし）</figcaption>
       </figure>
     </div>
   </section>
@@ -549,7 +549,7 @@
         <li><span>週6日のプログラム<small>体と重量の両方から逆算し、毎週、日報を見て更新します</small></span><b><span data-bind="weeks">16</span>回</b></li>
         <li><span>日報へのフィードバック<small>トレーニングの日も、休みの日も</small></span><b><span data-bind="days">112</span>日分</b></li>
         <li><span>Zoom面談（<span data-bind="zoomMinutes">60</span>分）<small>1回目は初回評価。目標・可動域・フォーム・ケガ歴を確認します。2回目からは、フォーム動画を一緒に見て翌週の計画を決めます</small></span><b><span data-bind="weeks">16</span>回</b></li>
-        <li><span>8種目の実演動画<small>理学療法士本人の実演。送ってもらった動画には、毎回添削を返します</small></span><b>8本</b></li>
+        <li><span>全種目の実演動画<small>BIG3と補助の5種目を、理学療法士本人が実演。送ってもらった動画には、毎回添削を返します</small></span><b>8本</b></li>
         <li><span>LINE相談<small>原則24時間以内に返信します</small></span><b>回数無制限</b></li>
         <li><span>最終週の測定と、次の16週間の計画書</span><b>1回</b></li>
       </ul>
@@ -720,7 +720,7 @@
   <section class="sec final" id="final" aria-labelledby="final-title">
     <div class="wrap">
       <h2 id="final-title">まずは、LINEで<br>4ヶ月プログラムを。</h2>
-      <p>友だち追加すると、16週間・週6日・8種目のプログラムをそのままお渡しします。コーチングが気になったら、30分の無料面談からどうぞ。</p>
+      <p>友だち追加すると、BIG3を土台にした16週間・週6日のプログラムを、そのままお渡しします。コーチングが気になったら、30分の無料面談からどうぞ。</p>
       <a class="btn btn-line btn-block" data-line="add" href="https://lin.ee/VrjsKUs">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4V21l3.6-2.2c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg>
         LINEで4ヶ月プログラムを受け取る
@@ -846,7 +846,7 @@ const CONFIG = {
     });
   });
 
-  // 動画（video_7shumoku.mp4 を同じフォルダに置くと表示されます）
+  // 動画（video_big3_hojo.mp4 を同じフォルダに置くと表示されます）
   const vidFig = document.querySelector("[data-video]");
   if (vidFig) {
     const v = vidFig.querySelector("video");
