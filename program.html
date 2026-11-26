@@ -5,264 +5,328 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>4ヶ月プログラム｜挑戦できる自分をつくる16週間</title>
 <meta name="description" content="理学療法士がつくった、週6日・8種目の16週間プログラム。MAXを入れると、毎日の重さが自動で出ます。記録もスマホで。">
-<meta name="theme-color" content="#1F2A44">
+<meta name="theme-color" content="#0D1B3E">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
+  /* 資料①RPE早見表と同じ色：紺・金・プレートの色 */
   :root {
+    --night: #0D1B3E;
+    --night-2: #172B5E;
+    --night-3: #24418A;
+    --on-night: #C9D2EA;
+    --gold: #E2B54A;
+    --gold-hi: #F7E3A3;
+    --gold-ink: #7A5A0E;
+    --gold-tint: #FBF3DC;
+    --ink: #18213B;
+    --muted: #5B6478;
+    --hair: #DCE1EA;
+    --floor: #EDF0F5;
     --paper: #FFFFFF;
-    --wash: #F3F6FA;
-    --grid: #E9EFF6;
-    --rule: #CDD6E1;
-    --ink: #1F2A44;
-    --ink-2: #56607A;
-    --redpen: #D62F3C;
-    --redpen-tint: #FFF4F4;
-    --line: #00873C;
-    --line-hover: #006F31;
-    --focus: #2B6CB0;
-    --font: "BIZ UDPGothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif;
-    --pen: "Klee One", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
-    --tabs-h: 60px;
+    --p6: #2E9E5B;   /* 10kg プレート */
+    --p7: #E3B10C;   /* 15kg */
+    --p8: #2B5FD9;   /* 20kg */
+    --p85: #1E46A8;
+    --p9: #D7312B;   /* 25kg */
+    --p10: #1C1C22;
+    --p6-ink: #1E7A45;
+    --p6-tint: #E6F4EC;
+    --p9-ink: #B3261E;
+    --p9-tint: #FCEBEA;
+    --link: #2B5FD9;
+    --line: #06C755;
+    --line-dark: #05A648;
+    --focus: #F7B500;
+    --sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif;
+    --num: "Barlow Condensed", "Noto Sans JP", "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+    --tabs-h: 62px;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0;
-    color: var(--ink);
-    font-family: var(--font);
-    font-size: 16px;
-    line-height: 1.7;
-    letter-spacing: 0.02em;
-    background-color: var(--paper);
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-attachment: fixed;
+    margin: 0; color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.75; letter-spacing: .02em;
+    background: var(--floor);
     padding-bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom) + 24px);
   }
   button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
   button { cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 8px; }
   a { color: inherit; }
   h1, h2, h3 { margin: 0; line-height: 1.4; }
-  .num { font-variant-numeric: tabular-nums; }
-  .pen { font-family: var(--pen); font-weight: 600; color: var(--redpen); }
+  .num { font-family: var(--num); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  .muted { color: var(--muted); }
 
   /* 上の帯 */
-  .top {
-    position: sticky; top: 0; z-index: 10;
-    background: var(--ink); color: #fff;
-    padding: calc(8px + env(safe-area-inset-top)) 16px 8px;
-  }
+  .top { position: sticky; top: 0; z-index: 10; background: var(--night); color: #fff; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; }
   .top-in { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-  .top .title { flex: 1; min-width: 0; font-size: 15px; font-weight: 700; line-height: 1.3; }
-  .top .title small { display: block; font-size: 11.5px; font-weight: 400; opacity: .8; }
-  .top .today-btn {
-    border: 1px solid rgba(255,255,255,.55); background: transparent; color: #fff;
-    border-radius: 999px; padding: 6px 14px; font-size: 13px; min-height: 36px;
-  }
+  .top .title { flex: 1; min-width: 0; margin: 0; font-size: 15px; font-weight: 900; line-height: 1.3; color: var(--gold-hi); }
+  .top .title small { display: block; font-size: 11.5px; font-weight: 400; color: var(--on-night); }
+  .top .today-btn { border: 1.5px solid var(--gold); background: transparent; color: var(--gold-hi); border-radius: 999px; padding: 0 16px; font-size: 13.5px; font-weight: 700; min-height: 38px; }
   .top .today-btn[hidden] { display: none; }
 
   main { max-width: 560px; margin: 0 auto; padding: 0 16px; }
-  .page { background: var(--paper); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); margin: 0 -16px; padding: 20px 16px 28px; min-height: 60vh; }
+  .page { min-height: 60vh; }
+  /* 紺の帯（画面の端まで） */
+  .bleed { margin: 0 -16px; padding-left: 16px; padding-right: 16px; background: var(--night); color: #fff;
+    box-shadow: 0 0 0 100vmax var(--night); clip-path: inset(0 -100vmax); }
 
   /* 日の見出し */
-  .phase { margin: 0 0 6px; font-size: 13px; color: var(--ink-2); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .phase .light { color: var(--redpen); border: 1px solid var(--redpen); border-radius: 4px; padding: 0 6px; font-size: 12px; }
-  .dayline { display: flex; align-items: center; gap: 8px; }
-  .dayline h1 { flex: 1; font-size: 24px; }
-  .dayline h1 .wk { font-size: 15px; color: var(--ink-2); font-weight: 400; margin-right: 8px; }
-  .arrow { width: 44px; height: 44px; border: 1px solid var(--rule); border-radius: 50%; background: var(--paper); font-size: 18px; line-height: 1; }
-  .arrow:disabled { opacity: .3; cursor: default; }
-  .date { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); }
+  .dayhead { padding-top: 4px; padding-bottom: 18px; }
+  .phase { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--on-night); text-align: center; }
+  .dayline { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .dayline h1 { flex: 1; min-width: 0; text-align: center; font-size: 25px; font-weight: 900; line-height: 1.25; color: #fff; }
+  .dayline h1 .wk { display: block; margin: 0 0 3px; font-size: 16px; font-weight: 600; color: var(--gold); letter-spacing: .04em; }
+  .arrow { flex: 0 0 44px; width: 44px; height: 44px; border: 1.5px solid rgba(255,255,255,.3); border-radius: 50%; background: transparent; color: #fff; font-size: 24px; line-height: 1; padding: 0 0 4px; }
+  .arrow:disabled { opacity: .25; cursor: default; }
+  .date { margin: 4px 0 0; font-size: 13px; color: var(--on-night); text-align: center; }
+  .todaychip { display: inline-block; margin-left: 6px; padding: 0 9px; border-radius: 999px; background: var(--gold); color: #1B1406; font-size: 11.5px; font-weight: 900; line-height: 1.75; vertical-align: 1px; }
   .strip { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0 0; padding: 0; }
-  .strip button {
-    width: 100%; min-height: 44px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
-    font-size: 14px; position: relative; padding: 4px 0;
-  }
-  .strip .is-cur button { border: 2px solid var(--ink); font-weight: 700; }
-  .strip .is-done button { background: var(--wash); }
-  .strip .is-done button::after { content: "済"; position: absolute; right: 3px; top: 1px; font-size: 10px; color: var(--redpen); font-family: var(--pen); }
-  .strip .is-today button { box-shadow: inset 0 -3px 0 var(--redpen); }
+  .strip button { position: relative; width: 100%; min-height: 46px; border: 1.5px solid rgba(255,255,255,.2); border-radius: 12px; background: rgba(255,255,255,.06); color: #fff; font-family: var(--num); font-size: 19px; font-weight: 700; padding: 0; }
+  .strip li:last-child button { font-family: var(--sans); font-size: 13px; }
+  .strip .is-done button { background: rgba(255,255,255,.16); }
+  .strip .is-done button::after { content: ""; position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: #4CC27E; }
+  .strip .is-cur button { background: var(--gold); border-color: var(--gold); color: #1B1406; }
+  .strip .is-cur.is-done button::after { background: var(--p6-ink); }
+  .strip .is-today button::before { content: ""; position: absolute; left: 50%; bottom: 5px; width: 14px; height: 3px; margin-left: -7px; border-radius: 2px; background: var(--gold); }
+  .strip .is-cur.is-today button::before { background: #1B1406; }
 
-  /* はじめに */
-  .start { border: 2px solid var(--ink); border-radius: 12px; padding: 16px; margin: 0 0 20px; background: var(--paper); }
-  .start h2 { font-size: 18px; margin-bottom: 6px; }
-  .start p { margin: 0 0 10px; font-size: 14.5px; }
-  .start .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .start input[type=date] { border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; min-height: 44px; background: var(--paper); }
+  /* カード */
+  .check, .ex, .memo, .rest, .sec, .start { background: var(--paper); border-radius: 18px; padding: 16px 14px; margin-top: 12px; }
+  .check h2, .memo h2, .rest h2, .sec h2, .start h2 { font-size: 17.5px; font-weight: 900; display: flex; align-items: center; gap: 9px; }
+  .check h2::before, .memo h2::before, .rest h2::before, .sec h2::before, .start h2::before { content: ""; flex: none; width: 5px; height: 20px; border-radius: 3px; background: var(--gold); }
+  .lead { margin: 6px 0 0; font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .note { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 8px 0 4px; }
+
+  /* はじめに（開始日とMAX） */
+  .nightwrap { padding-top: 10px; padding-bottom: 4px; }
+  .start { margin-top: 0; color: var(--ink); }
+  .start p { margin: 6px 0 10px; font-size: 14px; color: var(--muted); }
+  .start .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .start .mh { font-weight: 900; font-size: 15px; margin: 16px 0 0; color: var(--ink); }
+  .start .note { margin: 8px 0 4px; }
+  input[type=date] { height: 46px; border: 1.5px solid var(--hair); border-radius: 10px; padding: 0 12px; background: var(--paper); font-size: 16px; color: var(--ink); }
 
   /* 体調 */
-  .check { margin: 20px 0 0; padding: 14px 0 4px; border-top: 2px solid var(--ink); }
-  .check h2, .ex h2, .memo h2, .sec h2 { font-size: 18px; }
-  .check .row { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-  .check .lab { width: 5.5em; font-size: 14px; color: var(--ink-2); }
-  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-  .seg button { border: 0; border-left: 1px solid var(--rule); background: var(--paper); min-width: 44px; min-height: 40px; font-size: 15px; }
-  .seg button:first-child { border-left: 0; }
-  .seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
-  .field { display: inline-flex; align-items: baseline; gap: 4px; }
-  .field input { width: 4em; border: 0; border-bottom: 1.5px solid var(--ink-2); background: transparent; text-align: right; padding: 4px 2px; font-size: 17px; }
-  .advice { margin: 12px 0 0; padding: 10px 12px; background: var(--redpen-tint); border-left: 3px solid var(--redpen); font-size: 15px; line-height: 1.6; }
-  .advice small { display: block; font-family: var(--font); font-weight: 400; color: var(--ink-2); font-size: 12px; margin-bottom: 2px; }
+  .check .row { display: grid; grid-template-columns: 5.4em 1fr; align-items: center; gap: 4px 10px; margin-top: 12px; }
+  .check .lab { font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .check .cap { grid-column: 2; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; }
+  .seg button { min-height: 44px; border: 1.5px solid var(--hair); border-radius: 10px; background: var(--paper); font-family: var(--num); font-size: 19px; font-weight: 700; padding: 0; }
+  .seg.txt button { font-family: var(--sans); font-size: 14.5px; }
+  .seg button[aria-pressed="true"] { background: var(--night); border-color: var(--night); color: #fff; }
+  .seg button.warn[aria-pressed="true"] { background: var(--p9); border-color: var(--p9); }
+  .field { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .field input { width: 4.2em; height: 44px; border: 1.5px solid var(--hair); border-radius: 10px; background: var(--paper); text-align: right; padding: 0 10px; font-family: var(--num); font-size: 22px; font-weight: 600; color: var(--ink); }
+  .advice { margin: 14px 0 0; padding: 10px 12px 10px 14px; background: var(--gold-tint); border-left: 4px solid var(--gold); border-radius: 4px 10px 10px 4px; font-size: 14.5px; line-height: 1.65; }
+  .advice small { display: block; font-size: 12px; font-weight: 700; color: var(--gold-ink); margin-bottom: 2px; }
+  .page > .advice { margin-top: 12px; }
 
   /* 種目 */
-  .ex { margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--rule); }
-  .ex h2 small { font-size: 13px; font-weight: 400; color: var(--ink-2); margin-left: 6px; }
-  .presc { margin: 2px 0 0; font-size: 14.5px; }
-  .hint { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
-  .hint.first { font-size: 14.5px; }
+  .ex { padding: 16px 14px 10px; }
+  .ex h2 { font-size: 19px; font-weight: 900; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .chip { display: inline-block; font-family: var(--num); font-size: 15px; font-weight: 700; line-height: 1; padding: 5px 10px 4px; border-radius: 999px; letter-spacing: .02em; white-space: nowrap; }
+  .chip.hi { background: var(--night); color: var(--gold-hi); }
+  .chip.mid { background: var(--night-3); color: #fff; }
+  .chip.lo { background: var(--floor); color: var(--ink); }
+  .chip.pre { background: var(--p6-tint); color: var(--p6-ink); font-family: var(--sans); font-size: 12.5px; padding: 5px 10px; }
+  .chip.acc { background: var(--floor); color: var(--muted); font-family: var(--sans); font-size: 12px; padding: 5px 9px; }
+  .presc { margin: 3px 0 0; font-size: 13.5px; color: var(--muted); }
+  .hint { margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; }
   .hint .nw { white-space: nowrap; }
-  .prev { margin: 4px 0 0; font-size: 13px; color: var(--ink-2); }
-  .sets { margin-top: 8px; }
-  .set { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--rule); flex-wrap: wrap; }
-  @media (max-width: 359px) { .set { gap: 5px; } .f.kg input { width: 3.1em; } .f input { font-size: 17px; } }
-  .mark {
-    position: relative; flex: 0 0 44px; width: 44px; height: 44px; border: 0; background: transparent; padding: 0;
-    font-size: 15px; font-weight: 700; color: var(--ink);
+  .hint .num { font-size: 1.2em; font-weight: 700; }
+  .hint .res { font-size: 1.6em; color: var(--night); }
+  .hint.calc { color: var(--muted); }
+  .hint.calc .res { color: var(--ink); }
+  .hint.go { display: inline-block; padding: 3px 12px; border-radius: 10px; background: var(--gold-tint); }
+  .hint.go .num { font-size: 1.6em; color: var(--night); }
+  .hint.first { padding: 10px 12px; border-radius: 10px; background: var(--gold-tint); font-weight: 700; }
+  .prev { margin: 6px 0 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .prev.up { margin-top: 10px; }
+  .prev.up::before { content: "▲"; color: var(--p6); margin-right: 5px; font-size: 11px; vertical-align: 1px; }
+
+  .sets { margin-top: 12px; display: grid; gap: 8px; }
+  .set { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .mark { position: relative; flex: 0 0 46px; width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--hair); background: var(--paper); padding: 0;
+    display: flex; align-items: center; justify-content: center; color: var(--muted); font-family: var(--num); font-size: 21px; font-weight: 700; }
+  .mark .ck { display: none; width: 22px; height: 22px; }
+  .mark[aria-pressed="true"] { background: var(--c, var(--night)); border-color: var(--c, var(--night)); color: var(--t, #fff); box-shadow: inset 0 0 0 4px rgba(255,255,255,.22); }
+  .mark[aria-pressed="true"] .n { display: none; }
+  .mark[aria-pressed="true"] .ck { display: block; }
+  .f { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; color: var(--muted); }
+  .f input { height: 46px; border: 1.5px solid var(--hair); border-radius: 10px; background: var(--paper); text-align: right; padding: 0 8px;
+    font-family: var(--num); font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .f.kg input { width: 3.3em; }
+  .f.reps input { width: 2em; }
+  .f input.sug { color: var(--muted); border-style: dashed; }
+  .f input::placeholder { color: #8C95A8; font-family: var(--sans); font-size: 13px; }
+  .f select { appearance: none; -webkit-appearance: none; height: 46px; min-width: 4.9em; border: 1.5px solid var(--hair); border-radius: 999px; padding: 0 24px 0 12px;
+    background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2318213B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center / 10px 6px;
+    font-family: var(--num); font-size: 18px; font-weight: 700; color: var(--ink); }
+  .set .f.rpe { margin-left: auto; }
+  .f select.on { background-color: var(--c); border-color: var(--c); color: var(--t);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23FFFFFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .f select.on.dk { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231B1406' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  @media (max-width: 374px) {
+    .set { gap: 6px; }
+    .mark { flex-basis: 44px; width: 44px; height: 44px; }
+    .f.kg input { width: 3.1em; font-size: 21px; }
+    .f.reps input { font-size: 21px; }
+    .f select { min-width: 5em; font-size: 17px; padding: 0 22px 0 10px; background-position: right 9px center; }
   }
-  .mark svg { position: absolute; inset: 0; width: 44px; height: 44px; overflow: visible; }
-  .mark .ring { fill: none; stroke: var(--rule); stroke-width: 1.5; }
-  .mark .pencircle { fill: none; stroke: var(--redpen); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 140; stroke-dashoffset: 140; }
-  .mark[aria-pressed="true"] .pencircle { stroke-dashoffset: 0; }
-  .mark[aria-pressed="true"] .ring { stroke: transparent; }
-  .mark[aria-pressed="true"] { color: var(--redpen); }
-  .mark.just .pencircle { transition: stroke-dashoffset .45s ease-out; }
-  .f { display: inline-flex; align-items: baseline; gap: 3px; font-size: 13px; color: var(--ink-2); }
-  .f input { border: 0; border-bottom: 1.5px solid var(--ink-2); background: transparent; text-align: right; padding: 4px 2px; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .f.kg input { width: 3.6em; }
-  .f.reps input { width: 1.9em; }
-  .f input.sug { color: var(--redpen); font-family: var(--pen); font-weight: 600; }
-  .f select { border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); padding: 4px 2px; font-size: 15px; color: var(--ink); min-height: 36px; }
-  .x { color: var(--ink-2); font-size: 14px; }
-  .tag { font-size: 11.5px; color: var(--redpen); border: 1px solid var(--redpen); border-radius: 4px; padding: 0 4px; white-space: nowrap; }
-  .grad { margin: 10px 0 4px; padding: 10px 12px; background: var(--redpen-tint); border-left: 3px solid var(--redpen); }
-  .grad p { margin: 0 0 4px; font-size: 14.5px; line-height: 1.6; }
-  .grad .pen { font-size: 15.5px; }
-  .gl-h { font-weight: 700; font-size: 13.5px !important; margin-top: 8px !important; }
-  .gl { margin: 2px 0 8px; padding-left: 0; list-style: none; font-size: 14.5px; }
-  .gl li { position: relative; padding-left: 1.5em; margin: 3px 0; }
-  .gl li::before { content: ""; position: absolute; left: .35em; top: .62em; width: .42em; height: .42em; border-radius: 50%; background: var(--redpen); }
-  .grad details { margin: 6px 0 8px; }
-  .grad summary { cursor: pointer; font-weight: 700; font-size: 14px; min-height: 36px; display: flex; align-items: center; }
-  .gbtns { display: flex; gap: 8px; flex-wrap: wrap; }
-  .btn.small, .btn-line.small { min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
-  .btn-line.small { border-radius: 999px; }
-  .gradcard { padding: 12px 0; border-bottom: 1px solid var(--rule); }
-  .gradcard h3 { font-size: 17px; display: flex; align-items: center; gap: 10px; }
-  .gradcard .st { font-size: 12.5px; font-weight: 400; border: 1px solid var(--ink-2); color: var(--ink-2); border-radius: 4px; padding: 0 6px; }
-  .gradcard .st.ok { border-color: var(--redpen); color: var(--redpen); font-family: var(--pen); font-weight: 600; }
-  .gradcard .film { font-size: 13.5px; margin: 0 0 8px; }
-  .gl-line { margin-top: 14px; }
-  .basebox { margin: 10px 0 4px; padding: 10px 12px; border: 1.5px dashed var(--ink-2); border-radius: 8px; }
-  .basebox p { margin: 0 0 6px; font-size: 14px; line-height: 1.6; }
-  .basebox .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  table.wk td { font-size: 14.5px; }
-  table.wk td:first-child { white-space: nowrap; }
-  .tips { margin-top: 8px; font-size: 14px; }
-  .tips summary, .grad summary { list-style: none; }
-  .tips summary::-webkit-details-marker, .grad summary::-webkit-details-marker { display: none; }
-  .tips summary::before, .grad summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--ink-2); transition: transform .15s; }
-  .tips details[open] > summary::before, details.tips[open] > summary::before, .grad details[open] > summary::before { transform: rotate(90deg); }
-  @media (prefers-reduced-motion: reduce) { .tips summary::before, .grad summary::before { transition: none; } }
-  .tips summary { cursor: pointer; color: var(--ink-2); min-height: 36px; display: flex; align-items: center; }
-  .tips ul { margin: 4px 0 6px; padding-left: 1.2em; }
-  .tips a, .formlist a { color: var(--focus); }
-  .muted { color: var(--ink-2); }
+
+  /* 卒業前 */
+  .grad { margin: 12px 0 4px; padding: 12px 14px; background: var(--p6-tint); border-radius: 14px; }
+  .grad p { margin: 0 0 6px; font-size: 14.5px; line-height: 1.6; }
+  .grad .pen { font-weight: 900; color: var(--p6-ink); font-size: 15px; }
+  .gbtns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .gl { list-style: none; margin: 4px 0 8px; padding: 0; font-size: 14.5px; }
+  .gl li { position: relative; padding-left: 26px; margin: 6px 0; line-height: 1.6; }
+  .gl li::before { content: ""; position: absolute; left: 2px; top: .3em; width: 15px; height: 15px; border-radius: 5px; border: 2px solid var(--p6); }
+
+  /* 開く・閉じる */
+  details > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; min-height: 42px; font-size: 14px; font-weight: 700; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: ""; flex: none; width: 7px; height: 7px; margin: 0 2px 0 3px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
+  details[open] > summary::before { transform: rotate(45deg); }
+  .tips { margin-top: 10px; border-top: 1px solid var(--hair); font-size: 14px; }
+  .tips > summary { color: var(--muted); }
+  .tips ul { margin: 0 0 8px; padding-left: 1.2em; }
+  .tips li { margin: 3px 0; }
+  .tips a, .formlist a, .links a { color: var(--link); }
+  .links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13.5px; }
 
   /* MAX */
-  .ml { min-width: 6.4em; font-size: 14px; color: var(--ink-2); }
-  .start .mh { font-weight: 700; font-size: 15px; margin: 16px 0 0; }
-  .start .note, .note { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin: 8px 0 4px; }
-  .start .row .ml { min-width: 0; }
-  .maxgrid { margin: 2px 0 8px; }
-  .mrow { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--rule); flex-wrap: wrap; }
+  .basebox { margin: 12px 0 4px; padding: 12px 14px; border: 2px dashed var(--gold); border-radius: 14px; background: var(--gold-tint); }
+  .basebox p { margin: 0 0 8px; font-size: 14px; line-height: 1.6; }
+  .basebox .row, .calc .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .basebox .tips, .calc { border-top: 0; margin-top: 6px; }
+  .calc .cl { margin: 0 0 8px; font-size: 13.5px; color: var(--muted); }
+  .ml { min-width: 6.4em; font-size: 14px; font-weight: 700; }
+  .basebox .row .ml, .start .row .ml { min-width: 0; }
+  .maxgrid { margin: 6px 0 10px; }
+  .mrow { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--hair); flex-wrap: wrap; }
+  .mrow:last-child { border-bottom: 0; }
   .mnote { font-size: 12.5px; }
-  .f.kg.mx input { width: 4.4em; }
-  .status[data-mmsg] { color: var(--ink); }
-  .total { margin: 10px 0 0; font-size: 14px; color: var(--ink-2); }
-  .total b { font-size: 21px; color: var(--ink); margin: 0 2px 0 8px; }
-  .linkbtn { border: 0; background: none; padding: 0 0 0 6px; color: var(--focus); text-decoration: underline; font-size: inherit; min-height: 32px; }
-  table.wk .wkg { margin-left: 8px; font-family: var(--pen); color: var(--redpen); font-weight: 600; }
-  .calc { margin-top: 10px; }
-  .calc .cl { margin: 2px 0 6px; font-size: 13.5px; }
-  .calc .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .basebox .row .ml { min-width: 0; }
+  .f.kg.mx input { width: 4.2em; }
+  .status { min-height: 1.5em; margin: 6px 0 0; font-size: 13.5px; color: var(--p6-ink); }
+  .linkbtn { border: 0; background: none; padding: 0 0 0 6px; color: var(--link); text-decoration: underline; font-size: inherit; min-height: 32px; }
+
+  /* ボタン */
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 6px 20px; border: 2px solid var(--night); border-radius: 999px; background: var(--paper); color: var(--night);
+    font-weight: 700; font-size: 15px; line-height: 1.4; text-decoration: none; text-align: center; }
+  .btn.primary { background: var(--night); color: #fff; }
+  .btn.wide { width: 100%; margin-top: 12px; }
+  .btn.small { min-height: 44px; padding: 4px 16px; font-size: 14px; }
+  .btn.danger { border-color: var(--p9); color: var(--p9-ink); }
+  .btn-line { display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 6px 18px; border-radius: 999px; background: var(--line); color: #fff;
+    font-weight: 900; font-size: 16px; line-height: 1.4; text-decoration: none; text-align: center; }
+  .btn-line:hover { background: var(--line-dark); }
+  .btn-line.small { display: inline-flex; min-height: 44px; font-size: 14px; padding: 4px 16px; }
+  .btn-line.wide { width: 100%; margin-top: 12px; }
 
   /* 休み */
-  .rest { margin-top: 20px; padding-top: 14px; border-top: 2px solid var(--ink); }
   .rest p { margin: 8px 0 0; }
+  .done6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin: 8px 0 0; }
+  .done6 i { height: 8px; border-radius: 4px; background: var(--hair); }
+  .done6 i.on { background: var(--p6); }
+  .nextmax { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+  .nextmax li { position: relative; padding: 10px 12px 10px 54px; border-radius: 12px; background: var(--floor); font-weight: 700; font-size: 15px; line-height: 1.5; min-height: 52px; display: flex; align-items: center; }
+  .nextmax li::before { position: absolute; left: 10px; top: 50%; margin-top: -16px; width: 32px; height: 32px; border-radius: 9px; color: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+  .nextmax li.up::before { content: "▲"; background: var(--p6); }
+  .nextmax li.keep::before { content: "■"; background: #8D96A6; }
+  .nextmax li.down::before { content: "▼"; background: var(--p9); }
 
   /* メモと日報 */
-  .memo { margin: 26px 0 0; padding-top: 14px; border-top: 2px solid var(--ink); }
-  .memo label { display: block; font-size: 14px; color: var(--ink-2); margin: 8px 0 4px; }
-  .memo textarea { width: 100%; border: 1px solid var(--rule); border-radius: 8px; padding: 10px; font-size: 16px; background: var(--paper); resize: vertical; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); font-weight: 700; font-size: 15px; text-decoration: none; }
-  .btn.wide { width: 100%; margin-top: 12px; }
-  .status { min-height: 1.5em; margin: 6px 0 0; font-size: 13.5px; color: var(--line); }
+  .memo label { display: block; font-size: 13.5px; color: var(--muted); margin: 8px 0 6px; }
+  .memo textarea { width: 100%; border: 1.5px solid var(--hair); border-radius: 12px; padding: 10px 12px; font-size: 16px; background: var(--paper); resize: vertical; line-height: 1.6; }
+  .memo .btn.wide { margin-top: 8px; }
 
-  /* 有料の案内 */
-  .cta { margin: 30px 0 0; padding: 18px 16px; border: 2px solid var(--ink); border-radius: 12px; background: var(--paper); }
-  .cta .pen { font-size: 19px; margin: 0 0 6px; line-height: 1.5; }
-  .cta p { margin: 0 0 12px; font-size: 14.5px; }
-  .btn-line { display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 999px; background: var(--line); color: #fff; font-weight: 700; text-decoration: none; font-size: 16px; }
-  .btn-line:hover { background: var(--line-hover); }
+  /* 面談の案内 */
+  .cta { margin: 20px 0 0; background: var(--night); color: #fff; border-radius: 18px; padding: 20px 18px; }
+  .cta h2 { margin: 0; font-size: 19px; font-weight: 900; line-height: 1.45; color: var(--gold-hi); }
+  .cta p { margin: 8px 0 0; font-size: 15px; color: #D6DDF0; }
+  .cta p b { color: #fff; }
+  .cta .btn-line { margin-top: 14px; }
 
   /* 一覧・ルール・フォーム・記録 */
-  .sec { margin: 22px 0 0; padding-top: 14px; border-top: 2px solid var(--ink); }
-  .sec:first-of-type { margin-top: 4px; }
+  .pagehead { padding-top: 18px; padding-bottom: 22px; }
+  .pagehead h1 { font-size: 30px; font-weight: 900; line-height: 1.2; letter-spacing: .04em;
+    background: linear-gradient(180deg, #FFF6D6 0%, var(--gold) 70%, #C8922B 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .pagehead .lead { margin: 8px 0 0; font-size: 14px; color: var(--on-night); }
   .sec p, .sec li { font-size: 15px; }
-  .page > h1 { font-size: 24px; margin-bottom: 4px; }
-  .lead { margin: 0 0 6px; color: var(--ink-2); font-size: 14.5px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  th { font-weight: 700; color: var(--ink-2); font-size: 13px; }
+  .sec > .lead { font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  th, td { text-align: left; padding: 9px 6px; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  thead th { font-weight: 700; color: var(--muted); font-size: 12.5px; border-bottom: 2px solid var(--night); vertical-align: bottom; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  table.wk td { font-size: 14.5px; line-height: 1.9; }
+  table.wk td:first-child { white-space: nowrap; width: 5.6em; line-height: 1.5; }
+  table.wk .chip { margin-left: 2px; font-size: 13px; padding: 3px 7px 2px; vertical-align: 1px; }
+  table.wk .wkg { margin-left: 8px; font-family: var(--num); color: var(--night); font-weight: 700; font-size: 17px; }
   .weeks { list-style: none; margin: 8px 0 0; padding: 0; }
-  .weeks button { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: transparent; padding: 10px 2px; display: grid; grid-template-columns: 3.4em 1fr auto; gap: 4px 10px; align-items: baseline; }
-  .weeks .n { font-weight: 700; font-size: 16px; }
-  .weeks .m { font-size: 13.5px; color: var(--ink-2); }
-  .weeks .p { font-size: 13px; color: var(--ink-2); }
-  .weeks .is-cur button { background: var(--redpen-tint); }
-  .weeks .is-cur .n { color: var(--redpen); }
-  .phase-h { margin: 20px 0 0; font-size: 16px; }
-  .phase-h small { font-weight: 400; color: var(--ink-2); font-size: 13px; margin-left: 6px; }
-  .rules { padding-left: 1.2em; margin: 8px 0 0; }
-  .rules li { margin: 6px 0; }
-  .rules b { display: block; }
-  .formlist { list-style: none; margin: 0; padding: 0; }
-  .formlist > li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
-  .formlist h3 { font-size: 17px; }
-  .formlist ul { margin: 6px 0; padding-left: 1.2em; font-size: 15px; }
-  .links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; }
-  .best { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
-  .best > div { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 8px; background: var(--paper); }
-  .best .l { font-size: 12.5px; color: var(--ink-2); }
-  .best .v { font-size: 18px; font-weight: 700; }
-  .best .d { font-size: 12.5px; }
-  .danger { border-color: var(--redpen); color: var(--redpen); }
-  .fine { font-size: 12.5px; color: var(--ink-2); line-height: 1.7; margin-top: 28px; }
+  .weeks li + li { border-top: 1px solid var(--hair); }
+  .weeks button { width: 100%; text-align: left; border: 0; background: transparent; padding: 10px 8px; display: grid; grid-template-columns: 3em 1fr auto; gap: 2px 10px; align-items: center; border-radius: 10px; }
+  .weeks .n { font-size: 20px; font-weight: 700; line-height: 1.1; }
+  .weeks .m { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .weeks .p { font-size: 12.5px; color: var(--muted); text-align: right; line-height: 1.3; }
+  .bar6 { display: grid; grid-template-columns: repeat(6, 7px); gap: 3px; justify-content: end; margin-bottom: 4px; }
+  .bar6 i { height: 7px; border-radius: 2px; background: var(--hair); }
+  .bar6 i.on { background: var(--p6); }
+  .weeks .is-cur button { background: var(--gold-tint); box-shadow: inset 4px 0 0 var(--gold); }
+  .weeks .is-cur .n { color: var(--gold-ink); }
+  .rules { list-style: none; margin: 10px 0 0; padding: 0; counter-reset: r; }
+  .rules li { position: relative; margin: 0; padding: 10px 0 10px 20px; border-top: 1px solid var(--hair); }
+  .rules li:first-child { border-top: 0; }
+  .rules li::before { content: ""; position: absolute; left: 3px; top: 1.15em; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+  ol.rules li { counter-increment: r; padding-left: 40px; }
+  ol.rules li::before { content: counter(r); left: 0; top: 10px; width: 28px; height: 28px; border-radius: 50%; background: var(--night); color: var(--gold-hi);
+    font-family: var(--num); font-weight: 700; font-size: 17px; display: flex; align-items: center; justify-content: center; }
+  .rules b { display: block; font-size: 15.5px; }
+  .rp { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 28px; padding: 0 8px; border-radius: 999px; background: var(--c); color: var(--t, #fff); font-family: var(--num); font-weight: 700; font-size: 17px; }
+  .gradcard { padding: 14px 0; border-top: 1px solid var(--hair); }
+  .gradcard h3 { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .gradcard .st { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px; background: var(--floor); color: var(--muted); }
+  .gradcard .st.ok { background: var(--gold); color: #1B1406; }
+  .gradcard .film { font-size: 13px; margin: 2px 0 10px; }
+  .gl-line { margin: 14px 0 0; }
+  .formlist { list-style: none; margin: 4px 0 0; padding: 0; }
+  .formlist > li { padding: 12px 0; border-top: 1px solid var(--hair); }
+  .formlist > li:first-child { border-top: 0; }
+  .formlist h3 { font-size: 16px; font-weight: 900; }
+  .formlist ul { margin: 6px 0; padding-left: 1.2em; font-size: 14.5px; }
+  .best { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .best > div { background: var(--paper); border-radius: 14px; padding: 12px 10px; min-width: 0; }
+  .best .l { font-size: 12px; color: var(--muted); font-weight: 700; line-height: 1.4; }
+  .best .v { font-size: 30px; font-weight: 700; line-height: 1.1; margin-top: 4px; }
+  .best .d { font-size: 12px; line-height: 1.5; margin-top: 2px; }
+  .best .d.upk { color: var(--p6-ink); font-weight: 700; }
+  .total { margin: 8px 0 0; padding: 12px 16px; background: var(--night); color: var(--on-night); border-radius: 14px; font-size: 14px; }
+  .total b { font-size: 30px; color: var(--gold-hi); margin: 0 2px 0 8px; font-weight: 700; }
+  .ar { font-weight: 700; margin-left: 4px; }
+  .ar.up { color: var(--p6-ink); }
+  .ar.down { color: var(--p9-ink); }
+  .ar.keep { color: var(--muted); }
+  .fine { font-size: 12px; color: var(--muted); line-height: 1.75; margin-top: 24px; padding: 0 2px; }
   .fine p { margin: 0 0 6px; }
   .fine .legal { display: flex; flex-wrap: wrap; gap: 0 18px; }
-  .fine .legal a { color: var(--ink-2); display: inline-block; padding: 6px 0; }
+  .fine .legal a { color: var(--muted); display: inline-block; padding: 6px 0; }
 
   /* 下のタブ */
-  .tabs {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-    background: var(--paper); border-top: 1px solid var(--rule);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--paper); border-top: 1px solid var(--hair); padding-bottom: env(safe-area-inset-bottom); }
   .tabs ul { list-style: none; margin: 0 auto; padding: 0; max-width: 560px; display: grid; grid-template-columns: repeat(5, 1fr); }
-  .tabs button { width: 100%; height: var(--tabs-h); border: 0; background: transparent; font-size: 13.5px; color: var(--ink-2); position: relative; }
-  .tabs button[aria-current="page"] { color: var(--ink); font-weight: 700; }
-  .tabs button[aria-current="page"]::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 12px; height: 3px; border-radius: 2px; background: var(--redpen); }
-  .savewarn { background: var(--redpen-tint); color: var(--redpen); font-size: 13px; padding: 8px 12px; margin: 0 0 12px; border-radius: 8px; }
+  .tabs button { position: relative; width: 100%; height: var(--tabs-h); border: 0; background: transparent; color: var(--muted); font-size: 11.5px; font-weight: 700; line-height: 1.2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; }
+  .tabs svg { width: 24px; height: 24px; }
+  .tabs button[aria-current="page"] { color: var(--night); }
+  .tabs button[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 24%; right: 24%; height: 3px; border-radius: 0 0 3px 3px; background: var(--gold); }
+  .savewarn { background: var(--p9-tint); color: var(--p9-ink); font-size: 13px; padding: 10px 12px; margin: 12px 0 0; border-radius: 10px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .mark.just .pencircle { transition: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mark { transition: background-color .18s ease-out, border-color .18s ease-out; }
+    details > summary::before { transition: transform .15s; }
   }
 </style>
 </head>
@@ -278,11 +342,11 @@
 </main>
 <nav class="tabs" aria-label="ページの切り替え">
   <ul>
-    <li><button type="button" data-tab="today">今日</button></li>
-    <li><button type="button" data-tab="weeks">16週</button></li>
-    <li><button type="button" data-tab="rules">ルール</button></li>
-    <li><button type="button" data-tab="form">フォーム</button></li>
-    <li><button type="button" data-tab="log">記録</button></li>
+    <li><button type="button" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5v5M6.5 6.5v11M17.5 6.5v11M21 9.5v5M6.5 12h11"/></svg><span>今日</span></button></li>
+    <li><button type="button" data-tab="weeks"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2M8 17h2"/></svg><span>16週</span></button></li>
+    <li><button type="button" data-tab="rules"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2 2 0 0 1 7 3.5h12v14H7a2 2 0 0 0-2 2z"/><path d="M5 19.5a2 2 0 0 0 2 2h12v-4M9 8h6M9 11.5h4"/></svg><span>ルール</span></button></li>
+    <li><button type="button" data-tab="form"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6.5M7.5 10l4.5-1.6 4.5 1.6M9 21l3-7.5 3 7.5"/></svg><span>フォーム</span></button></li>
+    <li><button type="button" data-tab="log"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7.5 15.5l3.5-4.5 3 2.5 5-6.5"/></svg><span>記録</span></button></li>
   </ul>
 </nav>
 <script>
@@ -290,6 +354,7 @@
 const CONFIG = {
   coachName: "〔お名前〕",                 // 表示する名前
   lineUrl: "https://lin.ee/VrjsKUs",      // 公式LINEの友だち追加URL
+  lineChatUrl: "https://line.me/R/oaMessage/%40228naeny/",  // 公式LINEのトークを開く（動画・日報・面談希望）
   pdfUrl: "program.pdf",                  // PDF版（同じフォルダに置く）
   termsUrl: "terms.html",                 // 利用規約（同じフォルダに置く）
   privacyUrl: "privacy.html",             // プライバシーポリシー（同じフォルダに置く）
@@ -546,13 +611,30 @@ function dayDone(w, d) {
 }
 
 /* ---- 部品 ---- */
-function ringSvg() {
-  return '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="ring" cx="22" cy="22" r="17"/>' +
-    '<path class="pencircle" d="M24 4.6c9.6.9 16.3 8.4 15.6 17.9-.7 9.3-8.9 16.5-18.1 15.9C12.2 37.8 5 30 5.5 20.9 6 12.6 12.4 5.7 20.6 4.9"/></svg>';
+const CHECK_SVG = '<svg class="ck" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+/* RPEの色。資料①RPE早見表と同じプレートの色 */
+function rpeTone(v) {
+  const r = Number(v);
+  if (v === "" || v == null || !(r > 0)) return null;
+  if (r <= 6) return ["var(--p6)", "#fff", 0];
+  if (r <= 7) return ["var(--p7)", "#1B1406", 1];
+  if (r <= 8) return ["var(--p8)", "#fff", 0];
+  if (r <= 8.5) return ["var(--p85)", "#fff", 0];
+  if (r <= 9.5) return ["var(--p9)", "#fff", 0];
+  return ["var(--p10)", "#fff", 0];
 }
+/* セットの丸とRPEの欄を、選んだRPEの色にする（補助種目と、RPEが空のときは紺） */
+function paintSet(el) {
+  const sel = el.querySelector('[data-f="rpe"]');
+  const tone = sel ? rpeTone(sel.value) : null;
+  el.style.setProperty("--c", tone ? tone[0] : "var(--night)");
+  el.style.setProperty("--t", tone ? tone[1] : "#fff");
+  if (sel) { sel.classList.toggle("on", !!tone); sel.classList.toggle("dk", !!(tone && tone[2])); }
+}
+function paintAll() { app.querySelectorAll(".set").forEach(paintSet); }
 function rpeOptions(sel, blank) {
-  return (blank ? '<option value=""' + (sel == null || sel === "" ? " selected" : "") + ">—</option>" : "") +
-    RPE_CHOICES.map(v => '<option value="' + v + '"' + (sel !== "" && sel != null && Number(sel) === v ? " selected" : "") + ">" + r2(v) + "</option>").join("");
+  return (blank ? '<option value=""' + (sel == null || sel === "" ? " selected" : "") + ">RPE —</option>" : "") +
+    RPE_CHOICES.map(v => '<option value="' + v + '"' + (sel !== "" && sel != null && Number(sel) === v ? " selected" : "") + ">RPE " + r2(v) + "</option>").join("");
 }
 function videoLinks(lift) {
   const v = CONFIG.videos[lift];
@@ -569,7 +651,7 @@ function gradBox(lift, today) {
   if (today) h += '<p class="pen">卒業前：フォームが崩れない重さで、RPE' + r2(P.gradRpe) + "まで。</p>" +
     "<p>今日の" + esc(name) + "を撮って、LINEで送ってください。" + esc(g.film) + "。</p>";
   h += "<details><summary>初心者卒業ライン（" + g.lines.length + "つ）</summary><ul class=\"gl\">" + g.lines.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></details>";
-  h += '<div class="gbtns">' + (today ? '<a class="btn-line small" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで動画を送る</a>' : "") +
+  h += '<div class="gbtns">' + (today ? '<a class="btn-line small" href="' + esc(CONFIG.lineChatUrl) + '">LINEで動画を送る</a>' : "") +
     '<button class="btn small" type="button" data-grad="' + lift + '">卒業の返信が来たら押す</button></div></div>';
   return h;
 }
@@ -578,7 +660,7 @@ function calcBox(lift) {
   return '<details class="tips calc"><summary>MAXがわからないとき</summary><p class="cl">最近「5回」できた重さとRPEから、推定MAXを出します。</p><div class="row">' +
     (lift ? "" : '<label class="f"><select data-clift aria-label="種目">' + BIG3.map(l => '<option value="' + l + '">' + esc(P.lifts[l].name) + "</option>").join("") + "</select></label>") +
     '<label class="f kg"><input type="text" inputmode="decimal" data-ckg aria-label="5回できた重さ"><span>kg × 5回</span></label>' +
-    '<label class="f rpe"><span>RPE</span><select data-crpe aria-label="そのときのRPE">' + rpeOptions(8, false) + "</select></label>" +
+    '<label class="f rpe"><select data-crpe aria-label="そのときのRPE">' + rpeOptions(8, false) + "</select></label>" +
     '<button class="btn small" type="button" data-mcalc="' + (lift || "") + '">推定MAXを出す</button></div></details>';
 }
 function maxInput(lift, val) {
@@ -586,7 +668,7 @@ function maxInput(lift, val) {
 }
 function maxForm(lift) {
   return '<div class="basebox"><p>MAXがまだありません。MAXを入れると、今日からの重さが自動で決まります。測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。</p>' +
-    '<div class="row"><span class="ml">MAX</span>' + maxInput(lift, null) + '<button class="btn small" type="button" data-msave="' + lift + '">MAXを入れる</button></div>' +
+    '<div class="row"><span class="ml">MAX</span>' + maxInput(lift, null) + '<button class="btn small primary" type="button" data-msave="' + lift + '">MAXを入れる</button></div>' +
     calcBox(lift) + '<p class="status" data-mmsg role="status"></p></div>';
 }
 
@@ -603,7 +685,7 @@ function stripItems(w, d) {
   const ti = todayIndex(), tp = posOf(ti);
   return P.days.map(x => {
     const cls = [x.n === d ? "is-cur" : "", dayDone(w, x.n) ? "is-done" : "", S.start && ti >= 0 && tp.w === w && tp.d === x.n ? "is-today" : ""].join(" ");
-    return '<li class="' + cls + '"><button type="button" data-day="' + x.n + '" aria-label="' + w + "週目" + x.n + "日目 " + esc(x.name) + '">' + (x.n === 7 ? "休" : x.n) + "</button></li>";
+    return '<li class="' + cls + '"><button type="button" data-day="' + x.n + '" aria-label="' + w + "週目" + x.n + "日目 " + esc(x.name) + (dayDone(w, x.n) ? "（済み）" : "") + '"' + (x.n === d ? ' aria-current="true"' : "") + '>' + (x.n === 7 ? "休" : x.n) + "</button></li>";
   }).join("");
 }
 function adviceHtml(w, d) {
@@ -626,26 +708,28 @@ function renderToday() {
   const dt = dateOf(w, d);
   let h = "";
   if (!saveOk) h += '<p class="savewarn">このブラウザでは記録を保存できません。プライベートブラウズを切ると保存できます。</p>';
-  if (!S.start) h += startCard();
-  else if (ti < 0) h += '<p class="advice"><small>開始前</small>開始日は' + jpDate(parseYmd(S.start)) + 'です。あと' + (-ti) + '日。いまはメニューを先に見られます。</p>';
-  h += '<section class="dayhead"><p class="phase">' + esc(stageLine()) + "</p>";
+  if (!S.start) h += '<div class="nightwrap bleed">' + startCard() + "</div>";
+  h += '<section class="dayhead bleed"><p class="phase">' + esc(stageLine()) + "</p>";
   h += '<div class="dayline"><button class="arrow" type="button" data-step="-1" aria-label="前の日"' + (w === 1 && d === 1 ? " disabled" : "") + '>‹</button>' +
     '<h1><span class="wk num">' + w + "週目・" + d + "日目</span>" + esc(day.name) + "</h1>" +
     '<button class="arrow" type="button" data-step="1" aria-label="次の日"' + (w === 16 && d === 7 ? " disabled" : "") + ">›</button></div>";
-  if (dt) h += '<p class="date">' + jpDate(dt) + (S.start && ti >= 0 && tp.w === w && tp.d === d ? "・今日" : "") + "</p>";
+  if (dt) h += '<p class="date">' + jpDate(dt) + (S.start && ti >= 0 && tp.w === w && tp.d === d ? '<span class="todaychip">今日</span>' : "") + "</p>";
   h += '<ol class="strip" id="strip">' + stripItems(w, d) + "</ol></section>";
+  if (S.start && ti < 0) h += '<p class="advice"><small>開始前</small>開始日は' + jpDate(parseYmd(S.start)) + 'です。あと' + (-ti) + '日。いまはメニューを先に見られます。</p>';
 
   if (d === 7) {
     const done = [1, 2, 3, 4, 5, 6].filter(n => dayDone(w, n)).length;
     h += '<section class="rest"><h2>休みの日</h2><p>休むのもメニューのうちです。よく眠って、来週に備えましょう。</p>' +
-      '<p>この週にやり切った日：<b class="num">' + done + "</b> / 6日</p>";
+      '<p>この週にやり切った日：<b class="num">' + done + "</b> / 6日</p>" +
+      '<div class="done6" aria-hidden="true">' + [1, 2, 3, 4, 5, 6].map(n => '<i class="' + (n <= done ? "on" : "") + '"></i>').join("") + "</div>";
     const res = BIG3.filter(l => !isPre(l) && maxInfo(l, w)).map(l => {
       const mi = maxInfo(l, w), r = weekResult(l, w, mi.kg, mi.a);
       const nx = Math.min(16, w + 1);
-      return P.lifts[l].name + "：" + (r === "up" ? "来週はMAX+" + kgText(P.inc[l]) + "kg" : r === "down" ? "来週はMAX−" + kgText(P.inc[l]) + "kg" : "来週もMAXはそのまま") +
-        (w < 16 ? "（" + kgText(maxFor(l, nx)) + "kg）" : "");
+      return { r: r === "up" ? "up" : r === "down" ? "down" : "keep",
+        t: P.lifts[l].name + "：" + (r === "up" ? "来週はMAX+" + kgText(P.inc[l]) + "kg" : r === "down" ? "来週はMAX−" + kgText(P.inc[l]) + "kg" : "来週もMAXはそのまま") +
+        (w < 16 ? "（" + kgText(maxFor(l, nx)) + "kg）" : "") };
     });
-    if (res.length) h += '<p class="pen">' + res.map(esc).join("<br>") + "</p>";
+    if (res.length) h += '<ul class="pen nextmax">' + res.map(x => '<li class="' + x.r + '">' + esc(x.t) + "</li>").join("") + "</ul>";
     h += "</section>" + cta();
     app.innerHTML = h + fine();
     return;
@@ -656,27 +740,30 @@ function renderToday() {
   h += '<section class="check" aria-labelledby="ckh"><h2 id="ckh">今日の体調</h2>' +
     '<div class="row"><span class="lab">睡眠</span><label class="field"><input id="sleep" type="text" inputmode="decimal" value="' + esc(ck.sleep == null ? "" : ck.sleep) + '" aria-label="睡眠時間"><span>時間</span></label></div>' +
     '<div class="row"><span class="lab" id="fatl">疲れ</span><span class="seg" role="group" aria-labelledby="fatl">' +
-    [1, 2, 3, 4, 5].map(n => '<button type="button" data-fatigue="' + n + '" aria-pressed="' + (Number(ck.fatigue) === n) + '">' + n + "</button>").join("") + "</span>" +
-    '<span class="muted" style="font-size:12.5px">1 元気〜5 へとへと</span></div>' +
-    '<div class="row"><span class="lab" id="painl">痛み・しびれ</span><span class="seg" role="group" aria-labelledby="painl">' +
-    '<button type="button" data-pain="0" aria-pressed="' + (ck.pain === false) + '">なし</button><button type="button" data-pain="1" aria-pressed="' + (ck.pain === true) + '">あり</button></span></div>';
+    [1, 2, 3, 4, 5].map(n => '<button type="button" data-fatigue="' + n + '"' + (n >= 4 ? ' class="warn"' : "") + ' aria-pressed="' + (Number(ck.fatigue) === n) + '">' + n + "</button>").join("") + "</span>" +
+    '<span class="cap">1 元気 〜 5 へとへと</span></div>' +
+    '<div class="row"><span class="lab" id="painl">痛み・しびれ</span><span class="seg txt" role="group" aria-labelledby="painl">' +
+    '<button type="button" data-pain="0" aria-pressed="' + (ck.pain === false) + '">なし</button><button type="button" data-pain="1" class="warn" aria-pressed="' + (ck.pain === true) + '">あり</button></span></div>';
   h += '<div id="advice">' + adviceHtml(w, d) + "</div></section>";
   h += '<div id="exlist">' + exListHtml(w, d) + "</div>";
-  h += '<section class="memo"><h2>ひとこと</h2><label for="memo">気になったこと（フォーム、痛み、うれしかったこと）</label>' +
+  h += '<section class="memo"><h2>ひとこと・日報</h2><label for="memo">気になったこと（フォーム、痛み、うれしかったこと）</label>' +
     '<textarea id="memo" rows="3">' + esc(lg.memo || "") + "</textarea>" +
+    '<a class="btn-line wide" id="sendReport" href="' + esc(CONFIG.lineChatUrl) + '">今日の日報をLINEで送る</a>' +
     '<button class="btn wide" type="button" id="copyReport">日報をコピー</button><p class="status" id="copyMsg" role="status"></p></section>';
   h += cta();
   app.innerHTML = h + fine();
+  paintAll();
 }
 
 function setRow(it, i, v, inner) {
   return '<div class="set" data-key="' + it.lift + ":" + i + '"' + (it.acc ? ' data-acc="1"' : "") + ">" +
-    '<button class="mark" type="button" aria-pressed="' + !!v.done + '" aria-label="' + (i + 1) + 'セット目を終えた">' + ringSvg() + '<span class="num">' + (i + 1) + "</span></button>" + inner + "</div>";
+    '<button class="mark" type="button" aria-pressed="' + !!v.done + '" aria-label="' + (i + 1) + 'セット目を終えた"><span class="n">' + (i + 1) + "</span>" + CHECK_SVG + "</button>" + inner + "</div>";
 }
 function exBlock(it, k, lg) {
   const name = P.lifts[it.lift].name;
-  const label = it.acc ? "" : it.pre ? "卒業前" : it.pct + "%";
-  let h = '<section class="ex" data-k="' + k + '"><h2>' + esc(name) + (label ? "<small>" + label + "</small>" : "") + "</h2>";
+  const label = it.acc ? "補助" : it.pre ? "卒業前" : it.pct + "%";
+  const tone = it.acc ? "acc" : it.pre ? "pre" : it.pct0 === 85 ? "hi" : it.pct0 === 70 ? "mid" : "lo";
+  let h = '<section class="ex" data-k="' + k + '"><h2>' + esc(name) + '<small class="chip ' + tone + '">' + label + "</small></h2>";
   h += '<p class="presc">' + esc(prescText(it)) + "</p>";
   if (it.acc) {
     const a = P.acc[it.lift], prev = lastAcc(it.lift, V.w, V.d);
@@ -686,14 +773,14 @@ function exBlock(it, k, lg) {
       const v = lg.sets[it.lift + ":" + i] || {};
       h += setRow(it, i, v,
         '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" value="' + esc(v.kg == null ? "" : v.kg) + '" placeholder="自重" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
-        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? "" : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>');
+        '<label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? "" : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>');
     }
     h += "</div>";
   } else if (it.pre) {
     h += it.past ? '<p class="prev">この日は、まだ卒業前でした。</p>' : gradBox(it.lift, true);
     const rec = suggest(it.lift, it.rows[0].rpe, V.w, V.d, 0), first = preSug(it, 0);
-    if (first == null) h += '<p class="hint first pen">初めての日：バーだけから5回ずつ少しずつ重くして、RPE' + r2(P.gradRpe) + "で5回、フォームが崩れない重さを探しましょう。</p>";
-    else h += '<p class="hint pen">目安 <span class="num">' + kgText(first) + "</span>kg から</p>" +
+    if (first == null) h += '<p class="hint first">初めての日：バーだけから5回ずつ少しずつ重くして、RPE' + r2(P.gradRpe) + "で5回、フォームが崩れない重さを探しましょう。</p>";
+    else h += '<p class="hint go">目安 <span class="num">' + kgText(first) + "</span>kg から</p>" +
       (rec == null ? '<p class="prev">MAX ' + kgText(it.mk) + "kgの、いちばん軽い日（60%）の重さです。フォームが崩れたら下げてください。</p>" : "");
     h += '<div class="sets">';
     it.rows.forEach((row, i) => {
@@ -703,13 +790,13 @@ function exBlock(it, k, lg) {
       const kgVal = hasKg ? v.kg : (sug != null ? kgText(sug) : "");
       h += setRow(it, i, v,
         '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" class="' + (!hasKg && sug != null ? "sug" : "") + '" value="' + esc(kgVal) + '" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
-        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
-        '<label class="f rpe"><span>RPE</span><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : row.rpe, false) + "</select></label>");
+        '<label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
+        '<label class="f rpe"><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : row.rpe, false) + "</select></label>");
     });
     h += "</div>";
   } else {
     if (it.kg == null) h += maxForm(it.lift);
-    else h += '<p class="hint pen"><span class="nw">MAX <span class="num">' + kgText(it.max) + '</span>kg →</span> <span class="nw">基準 <span class="num">' + kgText(it.base) + "</span>kg × " + it.pct + "% ＝ <span class=\"num\">" + kgText(it.kg) + "</span>kg</span></p>";
+    else h += '<p class="hint calc"><span class="nw">MAX <span class="num">' + kgText(it.max) + '</span>kg →</span> <span class="nw">基準 <span class="num">' + kgText(it.base) + "</span>kg × " + it.pct + "% ＝ <span class=\"num res\">" + kgText(it.kg) + "</span>kg</span></p>";
     h += '<div class="sets">';
     for (let i = 0; i < it.sets; i++) {
       const v = lg.sets[it.lift + ":" + i] || {};
@@ -718,11 +805,11 @@ function exBlock(it, k, lg) {
       const heavy = it.pct0 === 85;
       h += setRow(it, i, v,
         '<label class="f kg"><input type="text" inputmode="decimal" data-f="kg" class="' + (!hasKg && it.kg != null ? "sug" : "") + '" value="' + esc(kgVal) + '" aria-label="' + (i + 1) + 'セット目の重さ"><span>kg</span></label>' +
-        '<span class="x">×</span><label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
-        '<label class="f rpe"><span>RPE</span><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : (heavy ? "" : 6), heavy) + "</select></label>");
+        '<label class="f reps"><input type="text" inputmode="numeric" data-f="reps" value="' + esc(v.reps == null ? 5 : v.reps) + '" aria-label="' + (i + 1) + 'セット目の回数"><span>回</span></label>' +
+        '<label class="f rpe"><select data-f="rpe" aria-label="' + (i + 1) + 'セット目のRPE">' + rpeOptions(v.rpe != null ? v.rpe : (heavy ? "" : 6), heavy) + "</select></label>");
     }
     h += "</div>";
-    if (it.pct0 === 85 && it.kg != null) h += '<p class="prev">3セットとも5回・RPE8.5以内なら、来週のMAXは+' + kgText(P.inc[it.lift]) + "kg。RPEを選んでください。</p>";
+    if (it.pct0 === 85 && it.kg != null) h += '<p class="prev up">3セットとも5回・RPE8.5以内なら、来週のMAXは+' + kgText(P.inc[it.lift]) + "kg。RPEを選んでください。</p>";
   }
   h += formTips(it.lift) + "</section>";
   return h;
@@ -732,7 +819,7 @@ function updateDayParts() {
   const a = document.getElementById("advice");
   if (a) a.innerHTML = adviceHtml(V.w, V.d);
   const ex = document.getElementById("exlist");
-  if (ex && needsEase(lg && lg.check) !== V.easeShown) ex.innerHTML = exListHtml(V.w, V.d);
+  if (ex && needsEase(lg && lg.check) !== V.easeShown) { ex.innerHTML = exListHtml(V.w, V.d); paintAll(); }
   const st = document.getElementById("strip");
   if (st) st.innerHTML = stripItems(V.w, V.d);
 }
@@ -758,12 +845,12 @@ function startCard() {
     '<p class="mh">MAX（わかる種目だけ）</p><div class="maxgrid">' +
     BIG3.map(l => '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, S.maxIn[l] ? S.maxIn[l].kg : null) + "</div>").join("") + "</div>" +
     '<p class="note">MAXは測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。久しぶりの人は、昔の記録ではなく今の力で。わからない種目は空欄のままで、卒業するときに5回の記録から自動で出します。</p>' +
-    '<p class="status" data-mmsg role="status"></p><button class="btn wide" type="button" id="setStart">この日から始める</button></section>';
+    '<p class="status" data-mmsg role="status"></p><button class="btn wide primary" type="button" id="setStart">この日から始める</button></section>';
 }
 function cta() {
-  return '<aside class="cta"><p class="pen">一人でやり切るか、伴走つきでやり切るか。</p>' +
-    "<p>同じメニューを、理学療法士が毎日の日報への返信と週1回のZoomで、あなたに合わせて直していくコーチング（有料）もあります。</p>" +
-    '<a class="btn-line" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで「面談希望」と送る</a></aside>';
+  return '<aside class="cta"><h2>重さやフォームで迷ったら</h2>' +
+    "<p>16週間を、ひとりで判断しながら続けるのは、むずかしいものです。迷っていることがあれば、15分の無料面談で話してみませんか。<b>フォームや重さの相談だけでも大丈夫です。</b></p>" +
+    '<a class="btn-line" href="' + esc(CONFIG.lineChatUrl + "?" + encodeURIComponent("面談希望")) + '">LINEで「面談希望」と送る</a></aside>';
 }
 function fine() {
   return '<div class="fine"><p>このプログラムは健康な方のための運動プログラムで、医療行為や治療ではありません。痛みや持病がある方は、先に医師に相談してください。</p>' +
@@ -776,7 +863,7 @@ function fine() {
 /* ---- 16週 ---- */
 function renderWeeks() {
   const tp = posOf(todayIndex()), cw = S.start ? tp.w : V.w;
-  let h = "<h1>16週間</h1><p class=\"lead\">最初は初心者のターン。卒業した種目から、毎週同じメニューを、MAXから出した重さで進めます。軽い週はありません。MAXは、85%の日の結果で週ごとに上がります。</p>";
+  let h = '<header class="pagehead bleed"><h1>16週間</h1><p class="lead">最初は初心者のターン。卒業した種目から、毎週同じメニューを、MAXから出した重さで進めます。軽い週はありません。MAXは、85%の日の結果で週ごとに上がります。</p></header>';
   const mk = {};
   BIG3.forEach(l => { mk[l] = knownMax(l, cw); });
   const known = BIG3.filter(l => mk[l] != null);
@@ -786,7 +873,7 @@ function renderWeeks() {
       : '<p class="lead">MAXを入れると、ここにその人の重さが出ます。<button class="linkbtn" type="button" data-goto="log">MAXを入れる</button></p>') +
     '<table class="wk"><thead><tr><th>日</th><th>BIG3（5回×3セット）</th></tr></thead><tbody>' +
     P.days.map(d => "<tr><td class=\"num\">" + d.n + "日目<br><span class=\"muted\" style=\"font-size:12px\">" + esc(d.name) + "</span></td><td>" +
-      (d.items.length ? d.items.filter(([, x]) => x !== "acc").map(([l, x]) => esc(P.lifts[l].name) + " " + x + "%" +
+      (d.items.length ? d.items.filter(([, x]) => x !== "acc").map(([l, x]) => esc(P.lifts[l].name) + ' <span class="chip ' + (x === 85 ? "hi" : x === 70 ? "mid" : "lo") + '">' + x + "%</span>" +
         (mk[l] != null ? '<b class="wkg num">' + kgText(kgAt(mk[l], x)) + "kg</b>" : "")).join("<br>") + '<br><span class="muted" style="font-size:12.5px">補助：' +
         esc(d.items.filter(([, x]) => x === "acc").map(([l]) => P.lifts[l].name).join("、")) + "</span>" : "休み") + "</td></tr>").join("") + "</tbody></table>" +
     (known.some(l => isPre(l)) ? '<p class="note">卒業前の種目は、卒業してからこの重さで進めます。</p>' : "") + "</section>";
@@ -799,7 +886,8 @@ function renderWeeks() {
       return SHORT[l] + (!isPre(l) && !anchorsOf(l).length ? " MAXなし" : " 卒業前");
     }).join(" / ");
     h += '<li class="' + (S.start && w === tp.w ? "is-cur" : "") + '"><button type="button" data-goweek="' + w + '">' +
-      '<span class="n num">' + w + "週</span><span class=\"m\">" + esc(bs) + "</span><span class=\"p num\">" + done + "/6日</span></button></li>";
+      '<span class="n num">' + w + "週</span><span class=\"m\">" + esc(bs) + '</span><span class="p num"><span class="bar6" aria-hidden="true">' +
+      [1, 2, 3, 4, 5, 6].map(n => '<i class="' + (n <= done ? "on" : "") + '"></i>').join("") + "</span>" + done + "/6日</span></button></li>";
   }
   h += "</ol></section>";
   app.innerHTML = h + fine();
@@ -807,7 +895,7 @@ function renderWeeks() {
 
 /* ---- ルール ---- */
 function renderRules() {
-  let h = "<h1>ルール</h1>";
+  let h = '<header class="pagehead bleed"><h1>ルール</h1><p class="lead">重さの決め方と、体調に合わせた調整の決まりです。</p></header>';
   h += '<section class="sec"><h2>3つの決まり</h2><ol class="rules">' +
     "<li><b>最大重量（MAX）は測らない</b>ケガを防ぐためです。MAXは、今の自分で1回挙げられる重さを入れます。わからなければ、5回の記録から推定MAXを出します。重さは、MAXの95%（基準）の%で自動で決まります。</li>" +
     "<li><b>BIG3は5回×3セット。どのセットもRPE8.5まで</b>超えそうなら、次のセットで重さを下げます。</li>" +
@@ -817,8 +905,8 @@ function renderRules() {
     P.maxFactors.map(([r, f]) => '<tr><td class="num">' + r2(r) + '</td><td class="num">' + f.toFixed(2) + "</td></tr>").join("") + "</tbody></table>" +
     '<p class="note">例：60kgで5回・RPE7 → 60×1.27＝76.2 → 推定MAX 76kg → 基準72kg → 85%の日は60kg、70%は50kg、60%は42.5kg。</p></section>';
   h += '<section class="sec"><h2>RPEのめやす</h2><p class="lead">5回やり終えたとき、あと何回できそうだったか。</p><table><thead><tr><th>RPE</th><th>感覚</th></tr></thead><tbody>' +
-    P.rpe.map(([r, t]) => '<tr><td class="num">' + r2(r) + "</td><td>" + esc(t) + "</td></tr>").join("") +
-    '<tr><td class="num">9以上</td><td>このプログラムでは使いません</td></tr></tbody></table></section>';
+    P.rpe.map(([r, t]) => { const tn = rpeTone(r); return '<tr><td><span class="rp" style="--c:' + tn[0] + ";--t:" + tn[1] + '">' + r2(r) + "</span></td><td>" + esc(t) + "</td></tr>"; }).join("") +
+    '<tr><td><span class="rp" style="--c:var(--p9)">9以上</span></td><td>このプログラムでは使いません</td></tr></tbody></table></section>';
   h += '<section class="sec"><h2>体調チェックのルール</h2><p class="lead">トレーニング前に、睡眠・疲れ・痛みをチェックします。</p><ul class="rules">' +
     P.checkRules.map(x => "<li><b>" + esc(x.when) + "</b>" + esc(x.do) + "</li>").join("") + "</ul></section>";
   h += '<section class="sec"><h2>ウォームアップと休憩</h2><ul class="rules">' +
@@ -830,7 +918,7 @@ function renderRules() {
 
 /* ---- フォーム ---- */
 function renderForm() {
-  let h = "<h1>フォームのポイント</h1><p class=\"lead\">BIG3は教材動画でポイントを覚えてから始めましょう。</p>";
+  let h = '<header class="pagehead bleed"><h1>フォームのポイント</h1><p class="lead">BIG3は教材動画でポイントを覚えてから始めましょう。</p></header>';
   h += '<section class="sec"><h2>BIG3 初心者卒業ライン</h2><p class="lead">できているかどうかは、初日から送ってもらう動画で、理学療法士が確かめます。</p><ol class="rules">' +
     P.gradRules.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol>";
   BIG3.forEach(l => {
@@ -841,7 +929,7 @@ function renderForm() {
       (d ? '<button class="btn small" type="button" data-ungrad="' + l + '">卒業を取り消す</button>'
          : '<button class="btn small" type="button" data-grad="' + l + '">卒業の返信が来たら押す</button>') + "</div>";
   });
-  h += '<p class="gl-line"><a class="btn-line" href="' + esc(CONFIG.lineUrl) + '" target="_blank" rel="noopener">LINEで動画を送る</a></p></section>';
+  h += '<p class="gl-line"><a class="btn-line" href="' + esc(CONFIG.lineChatUrl) + '">LINEで動画を送る</a></p></section>';
   h += '<section class="sec"><h2>8種目のポイント</h2><ul class="formlist">';
   Object.keys(P.lifts).forEach(l => {
     h += "<li><h3>" + esc(P.lifts[l].name) + "</h3><ul>" + (P.form[l] || []).map(t => "<li>" + esc(t) + "</li>").join("") + "</ul>" +
@@ -853,14 +941,14 @@ function renderForm() {
 /* ---- 記録 ---- */
 function renderLog() {
   const cw = S.start ? posOf(todayIndex()).w : V.w;
-  let h = "<h1>記録</h1><p class=\"lead\">MAXは、85%の日に3セットとも5回・RPE8.5以内でできた週の次の週に上がります。</p>";
+  let h = '<header class="pagehead bleed"><h1>記録</h1><p class="lead">MAXは、85%の日に3セットとも5回・RPE8.5以内でできた週の次の週に上がります。</p></header>';
   h += '<div class="best">' + BIG3.map(l => {
     const name = esc(SHORT[l]);
     if (isPre(l)) return '<div><div class="l">' + name + '</div><div class="d muted">卒業前' + (S.maxIn[l] ? '<br>MAX <span class="num">' + kgText(S.maxIn[l].kg) + "</span>kg" : "") + "</div></div>";
     const mi = maxInfo(l, cw);
     if (!mi) return '<div><div class="l">' + name + '</div><div class="d muted">MAXを入れてください</div></div>';
     const diff = mi.kg - mi.a.kg;
-    return '<div><div class="l">' + name + 'のMAX</div><div class="v num">' + kgText(mi.kg) + 'kg</div><div class="d num">' +
+    return '<div><div class="l">' + name + 'のMAX</div><div class="v num">' + kgText(mi.kg) + 'kg</div><div class="d num' + (diff > 0 ? " upk" : "") + '">' +
       (diff ? (diff > 0 ? "+" : "") + kgText(diff) + "kg（" + mi.a.w + "週目から）" : mi.a.w + "週目から") + "</div></div>";
   }).join("") + "</div>";
   const tot = BIG3.map(l => knownMax(l, cw));
@@ -872,25 +960,25 @@ function renderLog() {
       return '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, v) +
         '<span class="mnote muted">' + [v != null && src === "est" ? "推定" : "", isPre(l) ? "卒業前" : ""].filter(Boolean).join("・") + "</span></div>";
     }).join("") + "</div>" +
-    '<button class="btn" type="button" data-msaveall>MAXを保存</button><p class="status" data-mmsg role="status"></p>' + calcBox(null) + "</section>";
+    '<button class="btn primary" type="button" data-msaveall>MAXを保存</button><p class="status" data-mmsg role="status"></p>' + calcBox(null) + "</section>";
 
-  h += '<section class="sec"><h2>週ごとのMAXと結果</h2><p class="lead">↑ 次の週に上がる　→ そのまま　↓ 下がる</p><table><thead><tr><th>週</th>' +
+  h += '<section class="sec"><h2>週ごとのMAXと結果</h2><p class="lead"><span class="ar up">↑</span> 次の週に上がる　<span class="ar keep">→</span> そのまま　<span class="ar down">↓</span> 下がる</p><table><thead><tr><th>週</th>' +
     BIG3.map(l => "<th>" + esc(P.lifts[l].name) + "</th>").join("") + "</tr></thead><tbody>";
   for (let w = 1; w <= 16; w++) {
     h += '<tr><td class="num">' + w + "</td>" + BIG3.map(l => {
       const mi = isPre(l) ? null : maxInfo(l, w);
       if (!mi) return '<td class="muted">—</td>';
       const r = weekResult(l, w, mi.kg, mi.a);
-      return '<td class="num">' + kgText(mi.kg) + '<span class="muted" style="font-size:12px"> ' + (r === "up" ? "↑" : r === "down" ? "↓" : r === "keep" ? "→" : "") + "</span></td>";
+      return '<td class="num">' + kgText(mi.kg) + (r ? '<span class="ar ' + r + '">' + (r === "up" ? "↑" : r === "down" ? "↓" : "→") + "</span>" : "") + "</td>";
     }).join("") + "</tr>";
   }
   h += "</tbody></table></section>";
   h += '<section class="sec"><h2>開始日</h2><p class="lead">開始日を変えると、「今日」のメニューの位置が変わります。記録は消えません。</p>' +
-    '<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><input type="date" id="startDate" value="' + esc(S.start || ymd(new Date())) + '" style="border:1px solid var(--rule);border-radius:8px;padding:8px 10px;min-height:44px">' +
+    '<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px"><input type="date" id="startDate" value="' + esc(S.start || ymd(new Date())) + '">' +
     '<button class="btn" type="button" id="setStart">この日にする</button></div></section>';
-  if (CONFIG.pdfUrl) h += '<section class="sec"><h2>PDF版</h2><p class="lead">印刷して使いたいときは、PDF版をどうぞ。</p><a class="btn" href="' + esc(CONFIG.pdfUrl) + '" target="_blank" rel="noopener">PDFを開く</a></section>';
+  if (CONFIG.pdfUrl) h += '<section class="sec"><h2>PDF版</h2><p class="lead">印刷して使いたいときは、PDF版をどうぞ。</p><a class="btn" style="margin-top:10px" href="' + esc(CONFIG.pdfUrl) + '" target="_blank" rel="noopener">PDFを開く</a></section>';
   h += '<section class="sec"><h2>記録を消す</h2><p class="lead">このスマホに保存したトレーニングの記録をすべて消します。卒業とMAXは残ります。元に戻せません。</p>' +
-    '<button class="btn danger" type="button" id="reset" data-armed="0">記録をすべて消す</button></section>';
+    '<button class="btn danger" style="margin-top:10px" type="button" id="reset" data-armed="0">記録をすべて消す</button></section>';
   app.innerHTML = h + cta() + fine();
 }
 
@@ -929,12 +1017,7 @@ function toggleSet(setEl) {
   save();
   const mark = setEl.querySelector(".mark");
   mark.setAttribute("aria-pressed", String(!!v.done));
-  if (v.done) {
-    mark.classList.add("just");
-    const c = mark.querySelector(".pencircle");
-    c.style.strokeDashoffset = "140";
-    requestAnimationFrame(() => requestAnimationFrame(() => { c.style.strokeDashoffset = ""; }));
-  }
+  paintSet(setEl);
   refreshEx(setEl.closest(".ex"));
   updateDayParts();
 }
@@ -983,6 +1066,8 @@ document.getElementById("todayBtn").addEventListener("click", () => { V.tab = "t
 
 app.addEventListener("click", e => {
   const t = e.target;
+  const sr = t.closest("#sendReport");
+  if (sr) { sr.href = CONFIG.lineChatUrl + "?" + encodeURIComponent(reportText()); return; }
   const mark = t.closest(".mark");
   if (mark) { toggleSet(mark.closest(".set")); return; }
   const step = t.closest("[data-step]");
@@ -1104,13 +1189,13 @@ app.addEventListener("input", e => {
   if (t.id === "memo") { const lg = dayLog(V.w, V.d, true); lg.memo = t.value; save(); return; }
   if (t.id === "sleep") { const lg = dayLog(V.w, V.d, true); lg.check.sleep = t.value.replace(",", "."); save(); return; }
   const setEl = t.closest(".set");
-  if (setEl && t.dataset.f) { t.classList.remove("sug"); setField(setEl, t.dataset.f, t.value); }
+  if (setEl && t.dataset.f) { t.classList.remove("sug"); setField(setEl, t.dataset.f, t.value); if (t.dataset.f === "rpe") paintSet(setEl); }
 });
 app.addEventListener("change", e => {
   const t = e.target;
   if (t.id === "sleep") { updateDayParts(); return; }
   const setEl = t.closest(".set");
-  if (setEl && t.dataset.f) { setField(setEl, t.dataset.f, t.value); refreshEx(setEl.closest(".ex")); }
+  if (setEl && t.dataset.f) { setField(setEl, t.dataset.f, t.value); if (t.dataset.f === "rpe") paintSet(setEl); refreshEx(setEl.closest(".ex")); }
 });
 
 if (!P) { app.textContent = "プログラムを読み込めませんでした。"; } else { render(); }
