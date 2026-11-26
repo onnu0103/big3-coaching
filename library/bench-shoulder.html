@@ -78,6 +78,12 @@
   .vs .ok { background: var(--p6-tint); color: var(--p6-ink); }
   .vs .ar { text-align: center; color: var(--muted); font-weight: 400; }
 
+  /* 図とアニメーション（くり返し再生） */
+  .clip { margin: 14px 0 0; }
+  .clip video { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; border-radius: 16px; background: var(--night); }
+  .clip figcaption { margin-top: 8px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .fixes span a, .sec p a { color: var(--link); font-weight: 700; }
+
   /* 撮り方 */
   .map { margin: 14px 0 0; background: var(--floor); border-radius: 16px; padding: 12px 10px 6px; }
   .map svg { display: block; width: 100%; height: auto; }
@@ -220,6 +226,27 @@
   </section>
 
   <div class="wrap">
+    <section class="sec" aria-labelledby="s1b" id="rackup">
+      <h2 id="s1b">ラックアップ：真上ではなく、やや足側へ</h2>
+      <p>フックから外したバーは、真上に押し上げるのではなく、やや足側へ運びます。顔の上のまま始めると、肩の前に負担がかかりやすくなります。</p>
+      <figure class="clip"><video class="loop" controls muted loop playsinline preload="metadata" poster="video/bench-rack.jpg" width="720" height="720" aria-label="ベンチプレスのラックアップ、悪い例と良い例のアニメーション"><source src="video/bench-rack.mp4" type="video/mp4"></video><figcaption>✖ 真上に押し上げる → ◯ やや足側へ押して、肩の真上へ。くり返し再生します（約9秒・音なし）。</figcaption></figure>
+      <ul class="dots">
+        <li><b>外したら、やや足側へ</b><span>バーを、肩の真上まで運びます。</span></li>
+        <li><b>腕が床と垂直になったら、セット開始</b><span>顔の上のまま、下ろし始めないように。</span></li>
+      </ul>
+    </section>
+
+    <section class="sec" aria-labelledby="s1c" id="legs">
+      <h2 id="s1c">脚の使い方：床を踏みながら、膝を伸ばすように</h2>
+      <p>上半身の種目ですが、脚も使います。足で床を踏み、膝を伸ばすように力を入れると、その力がお尻から背中へ伝わって、体が安定します。</p>
+      <figure class="clip"><video class="loop" controls muted loop playsinline preload="metadata" poster="video/bench-legs.jpg" width="720" height="720" aria-label="ベンチプレスの脚の使い方のアニメーション"><source src="video/bench-legs.mp4" type="video/mp4"></video><figcaption>床を踏む → 膝を伸ばすように → 力が背中へ。押し上げるときに、矢印が光ります（くり返し再生・音なし）。</figcaption></figure>
+      <ul class="dots">
+        <li><b>足の裏で、床を踏む</b><span>下ろすときも、足は床を踏んだまま。</span></li>
+        <li><b>押すときに、膝を伸ばすように</b><span>脚の力を、お尻から背中へ伝えます。</span></li>
+        <li><b>お尻はベンチにつけたまま</b><span>膝を伸ばす力で、お尻が浮かないように。</span></li>
+      </ul>
+    </section>
+
     <section class="sec" aria-labelledby="s2" id="sheet">
       <h2 id="s2">動画でチェックする</h2>
       <p>真横から、降ろして挙げるまでが全部入る位置で撮ります。動画を止めながら、1つずつ押してください。</p>
@@ -321,8 +348,9 @@ function sheet(root, n, onChange) {
       var li = [];
       if (ng.b4) li.push('<li class="warn">痛みが出たら、その日のベンチプレスはそこまで。続くときは、医療機関に相談してください。</li>');
       if (ng.b2) li.push('<li>肩がすくむときは、<a href="#prep1">準備1（肩甲骨を寄せて、下げたまま）</a>からやり直します。</li>');
-      if (ng.b1 || ng.b3) li.push("<li>" + (ng.b1 ? "降ろす速さ" : "") + (ng.b1 && ng.b3 ? "と" : "") + (ng.b3 ? "お尻の浮き" : "") +
-        "は、ひとりで原因を見つけるのがむずかしいところです。動画をLINEで送ってください。いっしょに見ます。</li>");
+      if (ng.b3) li.push('<li>お尻が浮くときは、<a href="#legs">脚の使い方</a>を見直します。床を踏む力で、お尻を浮かせないように。</li>');
+      if (ng.b1) li.push("<li>降ろす速さは、ひとりで原因を見つけるのがむずかしいところです。動画をLINEで送ってください。いっしょに見ます。</li>");
+      else if (ng.b3) li.push("<li>それでも浮くときは、動画をLINEで送ってください。いっしょに見ます。</li>");
       box.className = "result fix";
       box.innerHTML = "<h3>できていない項目が" + n + "つあります</h3><ul>" + li.join("") + "</ul>" +
         (left ? '<p class="left">あと' + left + "つ</p>" : "") +
@@ -333,6 +361,24 @@ function sheet(root, n, onChange) {
     box.className = "result good";
     box.innerHTML = "<h3>卒業ラインの2つが、そろっていそうです</h3><p>降ろす速度が一定で、痛みも出ていません。最後は理学療法士が動画で確かめます。LINEで送ってください。</p>" +
       '<a class="btn-line" href="https://line.me/R/oaMessage/%40228naeny/">LINEで動画を送る</a>';
+  });
+})();
+
+/* 図とアニメーション：画面に見えている間だけ、音なしでくり返し再生 */
+(function () {
+  var vids = document.querySelectorAll("video.loop");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) return;   /* 動きを減らす設定のときは、押して再生 */
+  Array.prototype.forEach.call(vids, function (v) {
+    v.controls = false;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () { v.controls = true; });   /* 自動で再生できないときは、押して再生 */
+        } else v.pause();
+      });
+    }, { threshold: 0.35 }).observe(v);
   });
 })();
 </script>

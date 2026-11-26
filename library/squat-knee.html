@@ -78,6 +78,12 @@
   .vs .ok { background: var(--p6-tint); color: var(--p6-ink); }
   .vs .ar { text-align: center; color: var(--muted); font-weight: 400; }
 
+  /* 図とアニメーション（くり返し再生） */
+  .clip { margin: 14px 0 0; }
+  .clip video { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; border-radius: 16px; background: var(--night); }
+  .clip figcaption { margin-top: 8px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .fixes span a, .sec p a { color: var(--link); font-weight: 700; }
+
   /* 撮り方 */
   .map { margin: 14px 0 0; background: var(--floor); border-radius: 16px; padding: 12px 10px 6px; }
   .map svg { display: block; width: 100%; height: auto; }
@@ -268,7 +274,19 @@
         <li id="fix2"><div><em>チェックの結果から</em><b>足裏の3点で、床を押して立つ</b><span>親指の付け根・小指の付け根・かかとの3点に体重を乗せたまま、床を押します。</span></div></li>
         <li id="fix3"><div><em>チェックの結果から</em><b>重さを一度下げて、形を覚える</b><span>形が崩れない重さで、正しい動きを体に覚えさせてから戻します。</span></div></li>
         <li id="fix4"><div><em>チェックの結果から</em><b>深さは、骨盤が丸まらないところまで</b><span>無理に深くしゃがまず、崩れない範囲から広げていきます。</span></div></li>
+        <li id="fix5"><div><em>チェックの結果から</em><b>ラックアップは、やや後ろへ。背骨はまっすぐ</b><span>背中を丸めずに脚で立ち上がり、小さく2歩下がります。<a href="#rackup">動きを見る</a></span></div></li>
       </ol>
+    </section>
+
+    <section class="sec" aria-labelledby="s4" id="rackup">
+      <h2 id="s4">ラックアップ：やや後ろへ。背骨は曲げない</h2>
+      <p>バーを外すときに背中が丸まると、重さが腰にかかりやすくなります。背骨をまっすぐ保ったまま脚で立ち上がり、やや後ろへ下がります。</p>
+      <figure class="clip"><video class="loop" controls muted loop playsinline preload="metadata" poster="video/squat-rack.jpg" width="720" height="720" aria-label="スクワットのラックアップ、悪い例と良い例のアニメーション"><source src="video/squat-rack.mp4" type="video/mp4"></video><figcaption>✖ 背骨を曲げて外す → ◯ まっすぐ立って外し、やや後ろへ。くり返し再生します（約12秒・音なし）。</figcaption></figure>
+      <ul class="dots">
+        <li><b>バーの真下で、背骨をまっすぐにしてから</b><span>胸を張り、お腹に力を入れてから持ち上げます。</span></li>
+        <li><b>腰を曲げずに、脚で立ち上がって外す</b><span>背中を丸めて、バーを押し上げないように。</span></li>
+        <li><b>小さく2歩、やや後ろへ</b><span>下がりすぎず、バーが足の真ん中の真上にくるところで止まります。</span></li>
+      </ul>
       <div class="gradbox">
         <h3>スクワットの卒業ライン</h3>
         <ol><li>バットウインクが出ない</li><li>ニーインが出ない</li><li>ラックアップが真っ直ぐ後方にできる</li></ol>
@@ -318,12 +336,12 @@ function sheet(root, n, onChange) {
 }
 
 (function () {
-  var FIX = { c1: [1, 2], c2: [3], c3: [2], c4: [4], c5: [3] };   /* できていない項目 → 直し方の番号 */
+  var FIX = { c1: [1, 2], c2: [3], c3: [2], c4: [4], c5: [5] };   /* できていない項目 → 直し方の番号 */
   var box = document.getElementById("result");
   sheet(document.getElementById("sheet"), 5, function (st, list) {
     var ng = [], hit = {};
     st.forEach(function (v, i) { if (v === false) { ng.push(list[i]); FIX[list[i].id].forEach(function (f) { hit[f] = 1; }); } });
-    for (var f = 1; f <= 4; f++) document.getElementById("fix" + f).classList.toggle("hit", !!hit[f]);
+    for (var f = 1; f <= 5; f++) document.getElementById("fix" + f).classList.toggle("hit", !!hit[f]);
     var done = st.filter(function (v) { return v !== null; }).length, left = 5 - done;
     box.className = "result";
     if (!done) { box.className = "result empty"; box.innerHTML = "<h3>押すと、ここに結果が出ます。</h3>"; return; }
@@ -341,6 +359,24 @@ function sheet(root, n, onChange) {
     box.className = "result good";
     box.innerHTML = "<h3>5つとも、できています</h3><p>卒業ラインに届いているかは、理学療法士が動画で確かめます。正面と真横の2本を、LINEで送ってください。</p>" +
       '<a class="btn-line" href="https://line.me/R/oaMessage/%40228naeny/">LINEで動画を送る</a>';
+  });
+})();
+
+/* 図とアニメーション：画面に見えている間だけ、音なしでくり返し再生 */
+(function () {
+  var vids = document.querySelectorAll("video.loop");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) return;   /* 動きを減らす設定のときは、押して再生 */
+  Array.prototype.forEach.call(vids, function (v) {
+    v.controls = false;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () { v.controls = true; });   /* 自動で再生できないときは、押して再生 */
+        } else v.pause();
+      });
+    }, { threshold: 0.35 }).observe(v);
   });
 })();
 </script>
