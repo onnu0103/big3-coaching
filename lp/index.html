@@ -111,6 +111,7 @@
   .h-big { margin-top: 6px; text-align: center; font-weight: 900; font-size: 27px; line-height: 1.4; letter-spacing: -.01em; }
   .h-big .xl { font-size: 33px; }
   .hl-red { color: var(--red); background: linear-gradient(transparent 64%, var(--pink) 64%); padding: 0 2px; }
+  .bignum { font-family: var(--en); font-weight: 800; font-size: 1.9em; line-height: .8; vertical-align: -.06em; padding-right: 2px; background: linear-gradient(180deg, #FF6A4D, #C2185B); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .pill { display: block; width: fit-content; margin: 0 auto; padding: 4px 18px; border-radius: 999px; background: linear-gradient(90deg, #E0432F, #C2185B); color: #fff; font-weight: 900; font-size: 15px; box-shadow: 0 4px 0 #8E1240; }
 
   /* オールインワン：ステップの表 */
@@ -167,6 +168,8 @@
   .incl li.gift::before { background: var(--gold-deep); }
   .incl .note { margin-top: 8px; }
   .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; text-align: center; }
+  .nums-h { margin-top: 22px; text-align: center; font-weight: 900; font-size: 18px; color: var(--gold-hi); }
+  .nums-h + .nums { margin-top: 10px; }
   .nums div { padding: 10px 4px; border-radius: 10px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .18); }
   .nums b { display: block; font-family: var(--en); font-weight: 800; font-size: 40px; line-height: 1; }
   .nums b small { font-family: "Noto Sans JP"; font-size: 14px; font-weight: 900; }
@@ -254,21 +257,105 @@
   .res-close { margin-top: 22px; font-family: var(--serif); font-size: 26px; line-height: 1.55; }
   .res .note { margin-top: 14px; color: #A9A08A; text-align: left; }
 
-  /* 悩み */
-  .pain { padding: 34px 16px 30px; background: var(--mist); }
-  .pain .h-big { font-size: 25px; }
-  .pain-hint { margin-top: 4px; text-align: center; font-size: 13px; color: var(--ink-2); }
-  .pains { display: grid; gap: 8px; margin-top: 14px; }
-  .pains button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; border: 2px solid var(--rule); border-radius: 10px; background: #fff; color: var(--ink); text-align: left; font: inherit; font-weight: 700; font-size: 15px; line-height: 1.5; cursor: pointer; }
-  .pains .bx { flex: none; width: 24px; height: 24px; border: 2px solid var(--blue); border-radius: 4px; display: grid; place-content: center; color: #fff; }
-  .pains .bx svg { width: 18px; height: 18px; stroke-width: 3.4; opacity: 0; }
-  .pains button[aria-pressed="true"] { border-color: var(--red); background: #FFF5F5; }
-  .pains button[aria-pressed="true"] .bx { background: var(--red); border-color: var(--red); }
-  .pains button[aria-pressed="true"] .bx svg { opacity: 1; }
-  .pain-res { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: var(--night); color: #fff; font-weight: 700; font-size: 15px; line-height: 1.7; }
-  .pain-res b { color: var(--yellow); }
-  .pain-res[hidden] { display: none; }
-  .pain-res.idle { background: #fff; color: var(--ink); border: 2px dashed var(--rule); }
+  /* ヒーローのメダル */
+  .medals { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 6px 0; }
+  .medals li { display: grid; place-content: center; text-align: center; aspect-ratio: 1; border-radius: 50%; padding: 6px; line-height: 1.2; color: var(--night);
+    background: radial-gradient(circle at 35% 25%, #FFF8DD 0%, #F3D27A 38%, #C9962F 78%, #9C6B14 100%); box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--gold), 0 8px 16px rgba(156, 107, 20, .35); }
+  .medals small { display: block; font-size: 11px; font-weight: 900; }
+  .medals b { display: block; font-weight: 900; font-size: 19px; line-height: 1.15; }
+  .medals b.en { font-size: 34px; line-height: 1; }
+  .medals b .u { font-family: "Noto Sans JP"; font-size: 14px; }
+
+  /* 7つの強み */
+  .strengths { padding: 36px 14px 32px; background: linear-gradient(180deg, #fff 0%, #EEF2FF 100%); }
+  .rs-list { display: grid; gap: 14px; margin-top: 18px; }
+  .rs { position: relative; overflow: hidden; padding: 16px 14px 14px; border-radius: 14px; background: #fff; border: 2px solid #DCE2F7; box-shadow: 0 8px 20px rgba(13, 27, 62, .07); }
+  .rs::before { content: attr(data-n); position: absolute; right: -4px; top: -30px; font-family: var(--en); font-weight: 800; font-size: 128px; line-height: 1; color: rgba(43, 95, 217, .07); }
+  .rs-top { position: relative; display: flex; align-items: center; gap: 12px; }
+  .rs-n { flex: none; width: 60px; height: 60px; border-radius: 12px; display: grid; place-content: center; text-align: center; color: #fff; line-height: .95;
+    background: linear-gradient(135deg, var(--violet), var(--blue)); box-shadow: 0 4px 0 #1E2F7A; }
+  .rs-n small { font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+  .rs-n b { font-family: var(--en); font-weight: 800; font-size: 32px; }
+  .rs h3 { font-weight: 900; font-size: 20px; line-height: 1.4; }
+  .rs h3 em { font-style: normal; color: var(--red); background: linear-gradient(transparent 62%, var(--pink) 62%); }
+  .rs p { position: relative; margin-top: 10px; font-size: 15px; line-height: 1.8; }
+  .rs p b { background: linear-gradient(transparent 60%, #FFF0A6 60%); }
+  .chipz { position: relative; display: flex; flex-wrap: wrap; gap: 6px; }
+  .rs p.chipz { margin-top: 12px; line-height: 1.4; }
+  .chipz span { padding: 3px 10px; border-radius: 6px; background: var(--mist); border: 1px solid var(--rule); font-size: 13px; font-weight: 900; }
+  .chipz span.n { background: var(--night); border-color: var(--night); color: #fff; }
+  .chipz span.g { background: #FFF3CF; border-color: #EDD28A; }
+  .stage2 { position: relative; display: grid; grid-template-columns: 1fr 22px 1fr; align-items: stretch; margin-top: 12px; }
+  .stage2 div { padding: 8px 6px 9px; border-radius: 10px; text-align: center; line-height: 1.35; }
+  .stage2 div:first-child { background: #EAF6EF; border: 2px solid #2E9E5B; }
+  .stage2 div:last-child { background: #EAF0FF; border: 2px solid var(--blue); }
+  .stage2 small { display: block; font-size: 11px; font-weight: 700; color: var(--ink-2); }
+  .stage2 b { display: block; font-weight: 900; font-size: 15px; }
+  .stage2 i { display: block; margin-top: 3px; font-style: normal; font-size: 12px; font-weight: 700; }
+  .stage2 .ar { display: grid; place-content: center; color: var(--blue); }
+  .stage2 .ar svg { width: 20px; height: 20px; stroke-width: 3; }
+  .stairs { position: relative; margin-top: 10px; }
+  .stairs svg { width: 100%; height: auto; }
+  .tired { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 12px; text-align: center; }
+  .tired span { padding: 6px 0 5px; border-radius: 6px; background: var(--mist); border: 1px solid var(--rule); font-family: var(--en); font-weight: 800; font-size: 20px; line-height: 1; }
+  .tired span small { display: block; margin-top: 3px; font-family: "Noto Sans JP"; font-size: 10px; font-weight: 700; color: var(--ink-2); }
+  .tired span.hi { background: #FFE9E6; border-color: #F3B4AC; color: var(--red); }
+  .rs p.tired-res { margin-top: 6px; padding: 6px 10px; border-radius: 8px; background: var(--night); color: #fff; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.5; }
+  .rs p.tired-res b { background: none; color: var(--yellow); }
+
+  /* 比較表 */
+  .cmp { padding: 36px 10px 30px; background: #fff; }
+  .cmp table { width: 100%; margin-top: 22px; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+  .cmp th, .cmp td { padding: 9px 5px; text-align: center; vertical-align: middle; font-size: 13px; line-height: 1.45; border-bottom: 1px solid var(--rule); }
+  .cmp col.c0 { width: 21%; } .cmp col.c1 { width: 32%; } .cmp col.c2 { width: 47%; }
+  .cmp thead th { border-bottom: 0; font-weight: 900; font-size: 14px; }
+  .cmp thead th.self { color: var(--ink-2); background: #EEF0F5; border-radius: 10px 10px 0 0; }
+  .cmp thead th.me { position: relative; padding: 12px 6px 9px; background: linear-gradient(180deg, #F7E3A3, var(--gold)); color: var(--night); border-radius: 12px 12px 0 0; font-size: 16px; }
+  .cmp thead th.me::before { content: "おすすめ"; position: absolute; left: 50%; top: -12px; transform: translateX(-50%); padding: 1px 10px; border-radius: 999px; background: var(--red); color: #fff; font-size: 11px; line-height: 1.6; white-space: nowrap; }
+  .cmp tbody th { font-weight: 900; font-size: 13px; background: var(--mist); }
+  .cmp td.self { color: var(--ink-2); background: #F7F8FB; }
+  .cmp td.me { font-weight: 700; background: #FFFBEE; border-left: 3px solid var(--gold); border-right: 3px solid var(--gold); }
+  .cmp tbody tr:last-child td.me { border-bottom: 3px solid var(--gold); }
+  .cmp .mk { display: block; font-weight: 900; font-size: 22px; line-height: 1.1; margin-bottom: 2px; }
+  .cmp td.self .mk { color: #9AA3BB; }
+  .cmp td.me .mk { color: var(--red); }
+
+  /* こんな人におすすめ */
+  .rec { padding: 36px 14px 30px; background: var(--mist); }
+  .rec-hint { margin-top: 6px; text-align: center; font-size: 13px; color: var(--ink-2); }
+  .rec-grp { --gc: var(--blue); margin-top: 16px; border-radius: 14px; overflow: hidden; background: #fff; border: 2px solid var(--gc); }
+  .rec-grp.g2 { --gc: #D7312B; } .rec-grp.g3 { --gc: #2E9E5B; } .rec-grp.g4 { --gc: #B8860B; }
+  .rec-grp h3 { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--gc); color: #fff; font-weight: 900; font-size: 18px; line-height: 1.3; }
+  .rec-grp h3 .k { margin-left: auto; padding: 1px 8px; border-radius: 999px; background: rgba(255, 255, 255, .22); font-family: var(--en); font-weight: 800; font-size: 16px; }
+  .rec-grp h3 .gi { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-content: center; background: #fff; color: var(--gc); }
+  .rec-grp h3 .gi svg { width: 18px; height: 18px; }
+  .rec-items button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 12px; border: 0; border-top: 1px solid var(--rule); background: #fff; color: var(--ink); text-align: left; font: inherit; font-weight: 700; font-size: 15px; line-height: 1.5; cursor: pointer; }
+  .rec-items button:first-child { border-top: 0; }
+  .rec-items .bx { flex: none; width: 24px; height: 24px; border: 2px solid var(--gc); border-radius: 5px; display: grid; place-content: center; color: #fff; background: #fff; }
+  .rec-items .bx svg { width: 18px; height: 18px; stroke-width: 3.4; opacity: 0; }
+  .rec-items button[aria-pressed="true"] { background: #FFF8E6; }
+  .rec-items button[aria-pressed="true"] .bx { background: var(--gc); }
+  .rec-items button[aria-pressed="true"] .bx svg { opacity: 1; }
+  .rec-items em { font-style: normal; color: var(--red); }
+  .rec-sum { margin-top: 16px; padding: 14px; border-radius: 12px; background: var(--night); color: #fff; text-align: center; }
+  .rec-count { font-weight: 900; font-size: 16px; }
+  .rec-count b { font-family: var(--en); font-weight: 800; font-size: 46px; line-height: 1; color: var(--yellow); padding: 0 4px; }
+  .rec-count small { font-family: var(--en); font-weight: 700; font-size: 20px; color: #AEB9D6; }
+  .rec-msg { margin-top: 6px; font-weight: 700; font-size: 15px; line-height: 1.7; }
+  .rec .note { margin-top: 10px; }
+
+  /* 無料特典 */
+  .gifts { padding: 36px 14px 30px; background: linear-gradient(180deg, #FFF6E0 0%, #fff 100%); }
+  .gl { display: grid; gap: 12px; margin-top: 18px; }
+  .gf { position: relative; display: grid; grid-template-columns: 40% 1fr; gap: 12px; align-items: center; padding: 12px; border-radius: 14px; background: #fff; border: 2px solid #EDD28A; box-shadow: 0 6px 16px rgba(156, 107, 20, .12); }
+  .gf .th { position: relative; aspect-ratio: 39 / 64; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); background: var(--night); }
+  .gf .th img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .gf .th svg { width: 100%; height: 100%; }
+  .gn { position: absolute; z-index: 1; left: -6px; top: -10px; padding: 2px 14px 3px 8px; background: linear-gradient(90deg, #C9962F, var(--gold)); color: var(--night); font-weight: 900; font-size: 12px; line-height: 1.2; clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%); box-shadow: 0 2px 4px rgba(0, 0, 0, .2); }
+  .gn b { font-family: var(--en); font-size: 18px; }
+  .gf h3 { font-weight: 900; font-size: 17px; line-height: 1.4; }
+  .gf p { margin-top: 6px; font-size: 13.5px; line-height: 1.7; color: var(--ink-2); }
+  .gf .free-tag { display: inline-block; margin-top: 6px; padding: 1px 8px; border-radius: 4px; background: var(--red); color: #fff; font-size: 12px; font-weight: 900; }
 
   /* 申し込みについて */
   .gate { padding: 34px 16px 30px; background: #fff; }
@@ -358,6 +445,7 @@
     .incl ol { grid-template-columns: 1fr; } .rc-num .to { font-size: 48px; } .box li { font-size: 13px; }
     .bubbles { width: 68%; } .bubbles p { font-size: 13px; } .offer-grid b { font-size: 15px; }
     .btn { font-size: 15.5px; gap: 7px; padding: 12px; } .btn .tag { font-size: 13px; padding: 2px 7px; } .btn .arr { width: 18px; height: 18px; }
+    .rs h3 { font-size: 18px; } .rs-n { width: 54px; height: 54px; } .medals b { font-size: 17px; } .cmp th, .cmp td { font-size: 12px; } .gf { grid-template-columns: 38% 1fr; } .rec-items button { font-size: 14px; }
   }
   @media (prefers-reduced-motion: reduce) { .btn::after { animation: none; display: none; } html { scroll-behavior: auto; } .dock { transition: none; } }
 </style>
@@ -387,6 +475,11 @@
     <p class="hero-en">IDOMU BIG3 COACHING</p>
     <p class="slots"><span class="s1">第1期モニター</span><b>先着<span class="en">5</span>名</b><span class="s2">2027年1月開始</span></p>
   </div>
+  <ul class="medals" aria-label="このコーチングの特長">
+    <li><small>国家資格</small><b>理学<br>療法士</b><small>が担当</small></li>
+    <li><small>日報に</small><b>毎日</b><small>返信</small></li>
+    <li><small>Zoom</small><b class="en">60<span class="u">分</span></b><small>毎週</small></li>
+  </ul>
   <div class="proof">
     <p class="proof-h">指導実績</p>
     <div class="proof-row">
@@ -446,6 +539,64 @@
   <p>あなたの体と目標に合わせて、<br>理学療法士が<mark>16週間、毎日</mark>伴走します。</p>
 </section>
 
+<!-- 7つの強み -->
+<section class="strengths" aria-labelledby="why-h">
+  <p class="kick">伸び悩みを抜け出すための</p>
+  <h2 class="h-big" id="why-h">このコーチングの<br><span class="xl hl-red"><span class="bignum">7</span>つの強み</span></h2>
+  <div class="rs-list">
+    <article class="rs" data-n="01"><div class="rs-top"><span class="rs-n"><small>強み</small><b>01</b></span><h3>理学療法士が、<br><em>体の評価</em>から設計する</h3></div>
+      <p>初回のZoom（60分）で、目標・可動域・ケガ歴・フォームを確認。<b>あなたの体と目標から逆算して</b>、16週間を組みます。</p>
+      <p class="chipz"><span class="n">目標</span><span class="n">可動域</span><span class="n">ケガ歴</span><span class="n">フォーム</span></p></article>
+    <article class="rs" data-n="02"><div class="rs-top"><span class="rs-n"><small>強み</small><b>02</b></span><h3>フォームは、<br><em>卒業ライン</em>で固める</h3></div>
+      <p>BIG3は、動画で卒業ラインを満たすまで、フォームが崩れない重さで。<b>卒業した種目から、重さを上げていきます。</b></p>
+      <div class="stage2"><div><small>初日〜卒業まで</small><b>初心者のターン</b><i>動画で確認・RPE6まで</i></div><span class="ar"><svg class="ic"><use href="#i-arrow"/></svg></span><div><small>卒業〜16週目</small><b>%で積み上げる</b><i>MAXの85・70・60%</i></div></div></article>
+    <article class="rs" data-n="03"><div class="rs-top"><span class="rs-n"><small>強み</small><b>03</b></span><h3>重さは、<br><em>毎週のルール</em>で上がる</h3></div>
+      <p>MAXを入れると、毎日の重さが自動で決まります。85%の日に5回×3セットを余裕を残してできたら、<b>次の週はMAXを更新。</b>迷わずに積み上げられます。</p>
+      <div class="stairs"><svg viewBox="0 0 320 120" role="img" aria-label="例：85%の日をクリアした週ごとに、ベンチプレスのMAXを2.5kgずつ上げていく階段の図">
+        <defs><linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B3FD8"/><stop offset="1" stop-color="#2B5FD9"/></linearGradient></defs>
+        <g fill="url(#st)"><rect x="14" y="84" width="40" height="26" rx="3"/><rect x="64" y="72" width="40" height="38" rx="3"/><rect x="114" y="60" width="40" height="50" rx="3"/><rect x="164" y="48" width="40" height="62" rx="3"/><rect x="214" y="36" width="40" height="74" rx="3"/><rect x="264" y="24" width="40" height="86" rx="3"/></g>
+        <g font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="14" fill="#D7312B" text-anchor="middle"><text x="84" y="66">+2.5</text><text x="134" y="54">+2.5</text><text x="184" y="42">+2.5</text><text x="234" y="30">+2.5</text><text x="284" y="18">+2.5</text></g>
+        <text x="4" y="14" font-family="Noto Sans JP, sans-serif" font-weight="900" font-size="12" fill="#10162E">例：ベンチプレスのMAX（kg）</text>
+        <line x1="8" y1="111" x2="312" y2="111" stroke="#0D1B3E" stroke-width="2"/></svg></div>
+      <p class="chipz"><span class="g">ベンチ +2.5kg</span><span class="g">スクワット +5kg</span><span class="g">デッドリフト +5kg</span></p></article>
+    <article class="rs" data-n="04"><div class="rs-top"><span class="rs-n"><small>強み</small><b>04</b></span><h3>疲れと睡眠を見て、<br><em>その日の量</em>を変える</h3></div>
+      <p>毎日の日報に、疲れ（1〜5）と睡眠を書くだけ。<b>疲れが強い日や、睡眠が5時間未満の日は、量を下げます。</b>がんばりすぎて、つぶれないためのルールです。</p>
+      <div class="tired" aria-hidden="true"><span>1<small>元気</small></span><span>2<small>&nbsp;</small></span><span>3<small>&nbsp;</small></span><span class="hi">4<small>&nbsp;</small></span><span class="hi">5<small>へとへと</small></span></div>
+      <p class="tired-res">疲れ4以上 → BIG3は<b>セット−1・重さ−5%</b></p></article>
+    <article class="rs" data-n="05"><div class="rs-top"><span class="rs-n"><small>強み</small><b>05</b></span><h3>日報に<em>毎日</em>返信。<br>週1回60分のZoom</h3></div>
+      <p>112日分の日報に、休みの日も返信します。Zoomでは、<b>フォーム動画と翌週の計画を一緒に確認。</b>迷ったら、LINEでいつでも相談できます。</p>
+      <p class="chipz"><span class="n">日報への返信 112日分</span><span class="n">Zoom 60分×16回</span><span class="n">LINE相談 回数無制限</span></p></article>
+    <article class="rs" data-n="06"><div class="rs-top"><span class="rs-n"><small>強み</small><b>06</b></span><h3>体づくりの5種目で、<br><em>見た目</em>も変える</h3></div>
+      <p>BIG3に、肩・腕・背中・ふくらはぎ・お腹の5種目を組み合わせた、週6日・8種目。<b>重量と見た目を、同時に狙います。</b></p>
+      <p class="chipz"><span class="n">スクワット</span><span class="n">ベンチプレス</span><span class="n">デッドリフト</span><span class="g">懸垂</span><span class="g">サイドレイズ</span><span class="g">アームカール</span><span class="g">カーフレイズ</span><span class="g">腹筋</span></p></article>
+    <article class="rs" data-n="07"><div class="rs-top"><span class="rs-n"><small>強み</small><b>07</b></span><h3>修了したあとも、<br><em>迷わない</em></h3></div>
+      <p>最終週に測定して、<b>次の16週間の計画書</b>をお渡しします。公式LINEから申し込んだ方には、<b>修了後1ヶ月のLINE相談</b>もついています。</p>
+      <p class="chipz"><span class="g">最終週の測定</span><span class="g">次の16週間の計画書</span><span class="g">修了後1ヶ月のLINE相談</span></p></article>
+  </div>
+</section>
+
+<!-- 比較表 -->
+<section class="cmp" aria-labelledby="cmp-h">
+  <h2 class="h-big" id="cmp-h">自己流と、<br><span class="xl hl-red">ここまで違う</span></h2>
+  <table>
+    <colgroup><col class="c0"><col class="c1"><col class="c2"></colgroup>
+    <thead><tr><td></td><th class="self" scope="col">自己流</th><th class="me" scope="col">このコーチング</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">メニュー</th><td class="self"><span class="mk">×</span>動画やSNSで探す</td><td class="me"><span class="mk">◎</span>理学療法士が、<br>体と目標から逆算</td></tr>
+      <tr><th scope="row">重さ</th><td class="self"><span class="mk">×</span>その日の感覚</td><td class="me"><span class="mk">◎</span>MAXから自動で決まり、<br>毎週更新</td></tr>
+      <tr><th scope="row">フォーム</th><td class="self"><span class="mk">×</span>合っているか<br>分からない</td><td class="me"><span class="mk">◎</span>動画で添削。<br>卒業ラインで確認</td></tr>
+      <tr><th scope="row">疲れ・<br>違和感</th><td class="self"><span class="mk">×</span>無理をする・<br>休みすぎる</td><td class="me"><span class="mk">◎</span>日報を見て、その日に調整</td></tr>
+      <tr><th scope="row">見た目</th><td class="self"><span class="mk">△</span>重量か体型の、<br>片方だけ</td><td class="me"><span class="mk">◎</span>体づくりの5種目もセット</td></tr>
+      <tr><th scope="row">相談</th><td class="self"><span class="mk">×</span>ひとりで悩む</td><td class="me"><span class="mk">◎</span>LINEで回数無制限</td></tr>
+      <tr><th scope="row">続け方</th><td class="self"><span class="mk">×</span>やる気しだい</td><td class="me"><span class="mk">◎</span>毎日の日報で、<br>毎日つながる</td></tr>
+    </tbody>
+  </table>
+  <div class="cta">
+    <a class="btn" href="https://lin.ee/VrjsKUs"><span class="tag">LINE</span>4ヶ月プログラムを受け取る<svg class="ic arr"><use href="#i-arrow"/></svg></a>
+    <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
+  </div>
+</section>
+
 <!-- 中身 -->
 <section class="dark on-dark" aria-labelledby="dk-h">
   <p class="dk-lead">指導<span class="en grad-gold">300</span>名以上の<br>経験を、凝縮した</p>
@@ -466,10 +617,14 @@
     </ol>
     <p class="note">金色の番号（10〜13）は、LINEの友だち追加でどなたにもお渡ししている資料です。</p>
   </div>
+  <p class="nums-h">数字で見る、16週間のサポート</p>
   <div class="nums">
+    <div><b>96<small>日分</small></b><span>メニュー<br>週6日×16週</span></div>
     <div><b>112<small>日分</small></b><span>日報への返信<br>休みの日も</span></div>
     <div><b>16<small>回</small></b><span>Zoom面談<br>1回60分</span></div>
     <div><b class="jp">無制限</b><span>LINE相談<br>原則24時間以内</span></div>
+    <div><b>8<small>種目</small></b><span>実演動画<br>BIG3＋5種目</span></div>
+    <div><b>1<small>ヶ月</small></b><span>修了後の<br>LINE相談</span></div>
   </div>
   <div class="cta">
     <a class="btn" href="https://lin.ee/VrjsKUs"><span class="tag">LINE</span>4ヶ月プログラムを受け取る<svg class="ic arr"><use href="#i-arrow"/></svg></a>
@@ -578,24 +733,52 @@
   <div class="coach-rec"><span class="ttl">コーチ<br>本人</span><span>4ヶ月弱で、BIG3合計 <b>250</b>kg ▶ <b>400</b>kg（+150kg）</span></div>
   <p class="res-close"><span class="grad-gold">重量も、見た目も。</span><br><span class="grad-gold">両方の変化を狙う16週間。</span></p>
   <p class="note">※AさんとBさんは、いどむが指導した方の6ヶ月間の記録です。服のサイズは、ご本人の実感です。※4ヶ月弱でBIG3合計250kgから400kgは、コーチ本人の記録です。※成果には個人差があり、結果を保証するものではありません。</p>
-  <div class="cta">
-    <a class="btn" href="https://lin.ee/VrjsKUs"><span class="tag">LINE</span>4ヶ月プログラムを受け取る<svg class="ic arr"><use href="#i-arrow"/></svg></a>
-    <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
-  </div>
 </section>
 
-<!-- 悩み -->
-<section class="pain" aria-labelledby="pain-h">
-  <h2 class="h-big" id="pain-h">こんな状態が、<br><span class="hl-red">続いていませんか？</span></h2>
-  <p class="pain-hint">当てはまるものをタップしてください</p>
-  <div class="pains">
-    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span>重量を追うと体型が崩れ、体型を追うと重量が落ちる</button>
-    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span>何ヶ月も続けているのに、体も扱える重さも変わらない</button>
-    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span>高重量になるほど、関節に違和感が出る</button>
-    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span>動画を真似しているけれど、自分のフォームが合っているか分からない</button>
-    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span>メニューを変えても、何が効いたのか分からない</button>
-  </div>
-  <p class="pain-res idle" id="painRes" aria-live="polite">自己流のまま過ぎる4ヶ月は、変われたかもしれない4ヶ月です。</p>
+<!-- こんな人におすすめ -->
+<section class="rec" aria-labelledby="rec-h">
+  <p class="pill">1つでも当てはまったら</p>
+  <h2 class="h-big" id="rec-h" style="margin-top:14px">こんな人に、<br><span class="xl hl-red">とてもおすすめです</span></h2>
+  <p class="rec-hint">当てはまるものを、タップしてください</p>
+  <div class="rec-grp g1"><h3><span class="gi"><svg class="ic" viewBox="0 0 24 24"><path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12"/></svg></span>重量を、もっと伸ばしたい<span class="k"><span class="kn">0</span>/8</span></h3><div class="rec-items">
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>ベンチプレス<em>100kgの壁</em>を越えたい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>BIG3の合計を、<em>もう一段</em>上げたい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>何ヶ月も、<em>同じ重さ</em>で止まっている</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>重さを上げると、フォームが崩れる</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>何kgで何回やればいいか、毎回迷う</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>調子のいい日と悪い日の差が大きい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>MAXを測っても、記録が変わらない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>思いつきではなく、<em>計画的に</em>伸ばしたい</span></button>
+  </div></div>
+  <div class="rec-grp g2"><h3><span class="gi"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM5 21l2-8 5-2 5 2 2 8M8 13l-3-3M16 13l3-3"/></svg></span>体も、変えたい<span class="k"><span class="kn">0</span>/7</span></h3><div class="rec-items">
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>重量だけでなく、<em>見た目</em>も変えたい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span><em>服のサイズが上がる</em>体になりたい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>肩・腕・背中を、たくましくしたい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>体重は増えたのに、体つきが変わらない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>重量を追うと体型が崩れ、体型を追うと重量が落ちる</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>鏡を見ても、変化が分からない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>BIG3ばかりで、体づくりの種目が足りない</span></button>
+  </div></div>
+  <div class="rec-grp g3"><h3><span class="gi"><svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span>ケガが不安<span class="k"><span class="kn">0</span>/6</span></h3><div class="rec-items">
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>高重量で、<em>腰・膝・肩</em>に違和感が出る</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>昔ケガをして、重さを上げるのが怖い</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>スクワットで、膝が内に入ると言われた</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>ベンチプレスで、肩の前が詰まる感じがある</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>デッドリフトで、腰が丸まっていないか不安</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span><em>体の専門家</em>に、フォームを見てほしい</span></button>
+  </div></div>
+  <div class="rec-grp g4"><h3><span class="gi"><svg class="ic" viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4zM9 9h6M9 12h4"/></svg></span>自己流に、限界を感じている<span class="k"><span class="kn">0</span>/8</span></h3><div class="rec-items">
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>YouTubeやSNSの情報が多すぎて、<em>何を信じればいいか</em>分からない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>メニューを、その日の気分で決めている</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>動画を真似しても、<em>自分のフォーム</em>が合っているか分からない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>メニューを変えても、何が効いたのか分からない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>記録をつけていない、または振り返れていない</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>ひとりだと、つい楽なほうに流れてしまう</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>考える時間を減らして、トレーニングに集中したい</span></button>
+    <button type="button" aria-pressed="false"><span class="bx"><svg class="ic"><use href="#i-check"/></svg></span><span>誰かに<em>毎日</em>見てもらえたら、続けられる気がする</span></button>
+  </div></div>
+  <div class="rec-sum" aria-live="polite"><p class="rec-count">当てはまったのは<b id="recN">0</b><small>/ 29</small></p><p class="rec-msg" id="recMsg">タップすると、当てはまった数が出ます。</p></div>
+  <p class="note">痛みやしびれがある方は、先に医療機関を受診してください。このコーチングは治療ではありません。</p>
   <div class="cta">
     <a class="btn" href="https://lin.ee/VrjsKUs"><span class="tag">LINE</span>4ヶ月プログラムを受け取る<svg class="ic arr"><use href="#i-arrow"/></svg></a>
     <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
@@ -622,6 +805,37 @@
     <p class="chips"><span>理学療法士（国家資格）</span><span>指導300名以上</span><span class="g">本人：4ヶ月弱でBIG3 +150kg</span></p>
     <p>自分の筋トレでも、長く伸び悩んだ時期がありました。伸びるかどうかを決めるのは、種目そのものではなく、<mark>目標から逆算した設計と、毎日の小さな修正</mark>です。</p>
     <p>理学療法士の目で体を評価し、重量と体づくりの両方から、あなたの16週間を組み立てます。</p>
+  </div>
+</section>
+
+<!-- 無料特典 -->
+<section class="gifts" aria-labelledby="gift-h">
+  <p class="kick">LINEの友だち追加で受け取れる</p>
+  <h2 class="h-big" id="gift-h">ぜんぶ無料の<br><span class="xl hl-red"><span class="bignum">6</span>つの特典</span></h2>
+  <ol class="gl">
+    <li class="gf"><span class="gn">特典<b>01</b></span><div class="th"><img src="img/gift1.webp" width="390" height="640" alt="4ヶ月プログラムのページ。開始日とMAXを入れる画面"></div>
+      <div><h3>4ヶ月プログラム</h3><p>スマホ版とPDF版。MAXを入れると、毎日の重さが自動で出ます。週6日・8種目の16週間。</p><span class="free-tag">無料</span></div></li>
+    <li class="gf"><span class="gn">特典<b>02</b></span><div class="th"><img src="img/gift2.webp" width="390" height="640" alt="RPE早見表のページ"></div>
+      <div><h3>RPE早見表</h3><p>セットが終わったら「あと何回できたか」を選ぶだけ。RPEと、次にやることが出ます。</p><span class="free-tag">無料</span></div></li>
+    <li class="gf"><span class="gn">特典<b>03</b></span><div class="th"><img src="img/gift3.webp" width="390" height="640" alt="スクワット膝チェックシートのページ"></div>
+      <div><h3>スクワット<br>膝チェックシート</h3><p>正面と真横の動画で、膝と骨盤を5つチェック。悪い例と良い例の3D動画つき。</p><span class="free-tag">無料</span></div></li>
+    <li class="gf"><span class="gn">特典<b>04</b></span><div class="th"><img src="img/gift4.webp" width="390" height="640" alt="ベンチプレス肩を守る3つの準備のページ"></div>
+      <div><h3>ベンチプレス<br>肩を守る3つの準備</h3><p>バーを握る前の3つの準備。ラックアップと脚の使い方の3D動画つき。</p><span class="free-tag">無料</span></div></li>
+    <li class="gf"><span class="gn">特典<b>05</b></span><div class="th"><svg viewBox="0 0 156 256" aria-hidden="true"><rect width="156" height="256" fill="#0D1B3E"/><rect x="38" y="40" width="80" height="150" rx="12" fill="#fff"/><rect x="46" y="54" width="64" height="92" rx="6" fill="#1B3270"/>
+        <circle cx="78" cy="100" r="18" fill="#fff" opacity=".9"/><path d="M72 90l16 10-16 10z" fill="#2B5FD9"/><rect x="46" y="154" width="44" height="10" rx="5" fill="#06C755"/><rect x="58" y="170" width="52" height="10" rx="5" fill="#E2B54A"/>
+        <circle cx="112" cy="54" r="20" fill="#D7312B"/><path d="M103 54l6 6 12-13" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="78" y="226" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="900" font-size="15" fill="#F7E3A3">動画を送るだけ</text></svg></div>
+      <div><h3>卒業ラインの<br>動画チェック</h3><p>BIG3の動画をLINEで送ると、卒業ラインを満たしているかを見て、合否とひと言を返します。</p><span class="free-tag">無料</span></div></li>
+    <li class="gf"><span class="gn">特典<b>06</b></span><div class="th"><svg viewBox="0 0 156 256" aria-hidden="true"><rect width="156" height="256" fill="#0D1B3E"/><rect x="18" y="62" width="120" height="80" rx="8" fill="#E9EEFF"/><rect x="14" y="58" width="128" height="88" rx="10" fill="none" stroke="#2B5FD9" stroke-width="4"/>
+        <circle cx="54" cy="92" r="12" fill="#2B5FD9"/><path d="M36 128c3-13 33-13 36 0" fill="#2B5FD9"/><circle cx="102" cy="92" r="12" fill="#5B3FD8"/><path d="M84 128c3-13 33-13 36 0" fill="#5B3FD8"/>
+        <path d="M4 150h148l-10 10H14z" fill="#1E46A8"/><text x="78" y="200" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="40" fill="#fff">15<tspan font-family="Noto Sans JP, sans-serif" font-size="18">分</tspan></text>
+        <text x="78" y="228" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="900" font-size="15" fill="#F7E3A3">相談だけでもOK</text></svg></div>
+      <div><h3>15分の無料面談</h3><p>Zoomで15分。4ヶ月後に挑戦したいことや、いまの悩みを伺います。相談だけでも大丈夫です。</p><span class="free-tag">無料</span></div></li>
+  </ol>
+  <p class="note" style="margin-top:10px">特典02〜04は、友だち追加のあと、LINEで順にお届けします。</p>
+  <div class="cta">
+    <a class="btn" href="https://lin.ee/VrjsKUs"><span class="tag">LINE</span>6つの特典を受け取る<svg class="ic arr"><use href="#i-arrow"/></svg></a>
+    <p class="micro">友だち追加は30秒。いつでもブロックできます。</p>
   </div>
 </section>
 
@@ -659,6 +873,7 @@
     <details><summary>どんな人に向いていますか？</summary><div class="a"><p>体づくりと重量の両方を、本気で伸ばしたい方に向いています。週6日ジムに通えることが前提です。筋トレを始めたばかりの方は、無料面談でご相談ください。</p></div></details>
     <details><summary>週6日、通い続けられるか不安です</summary><div class="a"><p>最初の2週間は量を抑えて、体を慣らします。疲れが強い日は、日報を見て量を落とします。通える見込みがあるかは、無料面談で一緒に確かめましょう。</p></div></details>
     <details><summary>どんな設備が必要ですか？</summary><div class="a"><p>通っているジムや、ご自宅の器具に合わせてメニューを組みます。器具が少ない場合は、無料面談でご相談ください。</p></div></details>
+    <details><summary>オンラインでも大丈夫ですか？</summary><div class="a"><p>Zoom・LINE・動画で進めるので、全国どこからでも受けられます。フォームは、送ってもらった動画で確認します。</p></div></details>
     <details><summary>痛みや持病があっても受けられますか？</summary><div class="a"><p>このコーチングは治療ではありません。痛みや持病がある方は、先に医師に相談してください。医師から運動の許可が出ている場合は、無料面談でご相談ください。</p></div></details>
     <details><summary>料金はいくらですか？</summary><div class="a"><p>無料面談で、コーチングの内容と一緒にご説明します。<a href="../tokushoho.html">特定商取引法に基づく表記</a>にも記載しています。</p></div></details>
     <details><summary>支払い方法と、途中でやめる場合は？</summary><div class="a"><p>銀行振込（一括）です。契約書面を受け取った日から8日以内なら、クーリング・オフで無条件に解約できます。</p><p>そのあとも、開始前のキャンセルと、初回面談の日から7日以内のお申し出は全額をお返しします。8日目以降も途中でやめることができ、残りの週数分を週割りでお返しします。</p></div></details>
@@ -689,29 +904,38 @@
 </div>
 
 <script>
-/* 悩み：タップで印をつける */
+/* こんな人におすすめ：タップで印をつけて、数える */
 (function () {
-  var btns = document.querySelectorAll(".pains button"), out = document.getElementById("painRes");
-  var base = out.innerHTML;
+  var btns = document.querySelectorAll(".rec-items button"), n = document.getElementById("recN"), msg = document.getElementById("recMsg");
+  function text(k) {
+    if (!k) return "タップすると、当てはまった数が出ます。";
+    if (k <= 3) return "当てはまるのは" + k + "個。目標から逆算した設計と、毎日の小さな修正で、変えていけます。";
+    if (k <= 9) return k + "個 当てはまりました。自己流のままだと、同じところで止まりやすい状態です。まずは4ヶ月プログラムから。";
+    return k + "個も当てはまりました。このコーチングは、まさにあなたのような人のために作りました。まずはLINEで4ヶ月プログラムを受け取ってください。";
+  }
   Array.prototype.forEach.call(btns, function (b) {
     b.addEventListener("click", function () {
       b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
-      var n = document.querySelectorAll('.pains button[aria-pressed="true"]').length;
-      if (!n) { out.className = "pain-res idle"; out.innerHTML = base; return; }
-      out.className = "pain-res";
-      out.innerHTML = "当てはまるのは<b>" + n + "つ</b>。どれも、目標から逆算した設計と、毎日の小さな修正で変えられます。まずは4ヶ月プログラムから。";
+      Array.prototype.forEach.call(document.querySelectorAll(".rec-grp"), function (g) {
+        g.querySelector(".kn").textContent = g.querySelectorAll('button[aria-pressed="true"]').length;
+      });
+      var k = document.querySelectorAll('.rec-items button[aria-pressed="true"]').length;
+      n.textContent = k; msg.textContent = text(k);
     });
   });
 })();
 
-/* 下に固定のボタン：最初のボタンを過ぎたら出し、最後のボタンが見えたら隠す */
+/* 下に固定のボタン：最初のボタンを過ぎたら出し、最後のボタンが見えたら隠す（速くスクロールしても取りこぼさないよう、位置で判定） */
 (function () {
-  var dock = document.getElementById("dock"), first = document.querySelector(".hero .cta"), last = document.getElementById("lastCta");
-  if (!("IntersectionObserver" in window)) return;
-  var pastFirst = false, atLast = false;
-  function sync() { var on = pastFirst && !atLast; dock.classList.toggle("on", on); dock.setAttribute("aria-hidden", on ? "false" : "true"); dock.querySelector("a").tabIndex = on ? 0 : -1; }
-  new IntersectionObserver(function (es) { es.forEach(function (e) { pastFirst = !e.isIntersecting && e.boundingClientRect.top < 0; sync(); }); }).observe(first);
-  new IntersectionObserver(function (es) { es.forEach(function (e) { atLast = e.isIntersecting; sync(); }); }).observe(last);
+  var dock = document.getElementById("dock"), first = document.querySelector(".hero .cta"), last = document.getElementById("lastCta"), a = dock.querySelector("a"), ticking = false;
+  function sync() {
+    ticking = false;
+    var on = first.getBoundingClientRect().bottom < 0 && last.getBoundingClientRect().top > window.innerHeight;
+    dock.classList.toggle("on", on); dock.setAttribute("aria-hidden", on ? "false" : "true"); a.tabIndex = on ? 0 : -1;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }, { passive: true });
+  window.addEventListener("resize", sync);
+  sync();
 })();
 
 /* 3Dの動画：画面に見えている間だけ、音なしでくり返し再生 */
