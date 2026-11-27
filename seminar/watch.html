@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>動画セミナー 重量も体も変わる、16週間の設計図｜理学療法士 いどむ</title>
-<meta name="description" content="理学療法士いどむの無料の動画セミナー（全4章・字幕つき）。">
+<title>動画セミナー 激キツBIG3を、16週間やり切る方法｜理学療法士 いどむ</title>
+<meta name="description" content="理学療法士いどむの無料の動画セミナー（録画・約55分）。">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0D1B3E">
 <link rel="icon" href="data:,">
@@ -286,6 +286,17 @@
   .chap h2 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.45; }
   .chap video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; margin-top: 10px; border-radius: 16px; background: var(--night); }
   .chap p { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+  .player { position: relative; margin-top: 10px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: var(--night); }
+  .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .player .ph { margin: 0; height: 100%; display: grid; place-content: center; padding: 16px; text-align: center; color: #C9D2EA; font-size: 14px; font-weight: 700; }
+  .jump li { display: block; padding: 0; background: none; }
+  .jump button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: 14px; background: var(--floor); }
+  .jump button:hover { background: #E2E7F0; }
+  .jump button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .jump .no { font-family: var(--num); font-size: 15px; font-weight: 700; color: var(--gold-ink); line-height: 1.2; padding-top: 3px; }
+  .jump .no b { display: block; font-size: 26px; color: var(--ink); line-height: 1; }
+  .jump .t { display: block; font-size: 16px; font-weight: 900; line-height: 1.5; }
+  .jump .d { display: block; margin-top: 2px; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
   .toc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
   .toc a { display: block; text-align: center; padding: 8px 4px; border-radius: 12px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; line-height: 1.35; }
   .toc a b { display: block; font-family: var(--num); font-size: 20px; color: var(--gold-hi); }
@@ -319,25 +330,27 @@
 <header class="hero">
   <div class="wrap">
     <span class="badge">動画セミナー　公開中</span>
-    <h1>重量も体も変わる、<br>16週間の設計図</h1>
-    <p class="sub">自己流で止まったBIG3を、ケガなく伸ばす方法</p>
-    <ul class="meta"><li>全4章・約5分</li><li>字幕つき（音は出ません）</li><li id="until">公開は3日間</li></ul>
+    <h1>激キツBIG3を、<br>16週間やり切る方法</h1>
+    <p class="sub">何度も筋トレが続かなかった人へ。<br>限界まで追い込まずに、やり切る方法</p>
+    <ul class="meta"><li>録画・約55分</li><li>章ごとに見られます</li><li id="until">公開は3日間</li></ul>
     <p class="clock" id="clock" hidden>公開終了まで あと <span id="left"></span></p>
-    <ol class="toc"><li><a href="#ch1"><b>1</b>止まる理由</a></li><li><a href="#ch2"><b>2</b>組み立て方</a></li><li><a href="#ch3"><b>3</b>フォーム</a></li><li><a href="#ch4"><b>4</b>16週間後へ</a></li></ol>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div id="open">
-    <section class="chap" id="ch1" aria-labelledby="h1"><div class="no">第1章</div><h2 id="h1">自己流のBIG3が止まる、3つの理由</h2>
-      <video controls playsinline muted preload="metadata" poster="video/s1.jpg" width="720" height="900"><source src="video/s1.mp4" type="video/mp4"></video>
-      <p>重さの決め方・フォームのクセ・疲れの調整。止まる理由は、才能ではなく「やり方」です。</p></section><section class="chap" id="ch2" aria-labelledby="h2"><div class="no">第2章</div><h2 id="h2">重量も体も変わる、16週間の組み立て方</h2>
-      <video controls playsinline muted preload="none" poster="video/s2.jpg" width="720" height="900"><source src="video/s2.mp4" type="video/mp4"></video>
-      <p>初心者のターン、卒業ライン、%で積み上げ、毎週のMAX更新。BIG3と補助の5種目（任意）の全体像。</p></section><section class="chap" id="ch3" aria-labelledby="h3"><div class="no">第3章</div><h2 id="h3">ケガをしないフォームの守り方</h2>
-      <video controls playsinline muted preload="none" poster="video/s3.jpg" width="720" height="900"><source src="video/s3.mp4" type="video/mp4"></video>
-      <p>理学療法士が見る膝・肩・腰のポイントを、悪い例と良い例の3Dで見比べます。</p></section><section class="chap" id="ch4" aria-labelledby="h4"><div class="no">第4章</div><h2 id="h4">16週間後のあなたへ</h2>
-      <video controls playsinline muted preload="none" poster="video/s4.jpg" width="720" height="900"><source src="video/s4.mp4" type="video/mp4"></video>
-      <p>指導した方の記録と、参加特典の30分の個別相談のご案内。</p></section>
+    <section class="chap" id="video" aria-labelledby="hv"><h2 id="hv">セミナー動画</h2>
+      <div class="player" id="player"><p class="ph">セミナー動画は、撮影後にここに入ります</p></div>
+      <p>目次を押すと、その章から再生します。時間がないときは、第4章「成果につながる3ステップ」だけでも。</p>
+      <ol class="chaps jump">
+        <li><button type="button" data-s="0"><span class="no"><b>1</b>0:00</span><span><b class="t">自己紹介と、このセミナーで手に入るもの</b><span class="d">理学療法士として300人以上を指導してきた私が、なぜ「キツい筋トレ」をすすめるのか。</span></span></button></li>
+        <li><button type="button" data-s="300"><span class="no"><b>2</b>5:00</span><span><b class="t">なぜ、あなたの現状は変わらないのか</b><span class="d">何度も続かなかったのは、意志が弱いからではありません。変わらない理由を、ひとつずつ見ていきます。</span></span></button></li>
+        <li><button type="button" data-s="900"><span class="no"><b>3</b>15:00</span><span><b class="t">筋トレの「間違った常識」</b><span class="d">「限界まで追い込むほど効く」など、続かない人ほど信じている思い込み。</span></span></button></li>
+        <li><button type="button" data-s="1500"><span class="no"><b>4</b>25:00</span><span><b class="t">成果につながる3ステップ</b><span class="d">迷わない、崩れない、止まらない。16週間やり切るための手順です。</span></span></button></li>
+        <li><button type="button" data-s="2400"><span class="no"><b>5</b>40:00</span><span><b class="t">16週間やり切るためのサポート</b><span class="d">理学療法士のコーチング（第1期モニター）の中身をご紹介します。</span></span></button></li>
+        <li><button type="button" data-s="3000"><span class="no"><b>6</b>50:00</span><span><b class="t">参加特典：30分の個別相談のご案内</b><span class="d">見てくれた方だけの特典です。</span></span></button></li>
+      </ol>
+    </section>
     <aside class="cta" id="perk" aria-labelledby="c1"><h2 id="c1">参加特典：30分の個別相談（Zoom・無料）</h2>
       <p>現状・理想・課題を一緒に整理して、<b>あなたの16週間の組み立て</b>をお伝えします。必要な方にだけ、第1期モニター（2027年1月開始・先着5名）のご案内をします。無理にすすめることはありません。</p>
       <ol class="steps3"><li><div><b>下のボタンを押して、そのまま送信</b><span>「個別相談希望」と入った状態でLINEが開きます</span></div></li>
@@ -352,12 +365,29 @@
       <a class="btn-line" href="https://line.me/R/oaMessage/%40228naeny/?%E5%80%8B%E5%88%A5%E7%9B%B8%E8%AB%87%E5%B8%8C%E6%9C%9B">LINEで「個別相談希望」と送る</a>
     </section>
     <footer>
-      <p>理学療法士 いどむ｜16週間で、重量も体も変えるオンライン筋トレコーチング</p>
+      <p>理学療法士 いどむ｜キツい筋トレで、自分との約束を守れる自分になる16週間</p>
       <p>※痛みやしびれがあるときは中止して、医療機関に相談してください。このコーチングは治療ではありません。効果には個人差があります。</p>
     </footer>
   </div>
 </main>
 <script>
+/* セミナー動画：YouTubeの限定公開の動画IDを入れると、ここに表示されます。目次を押すと、その時間から再生します */
+(function () {
+  var VIDEO_ID = ""; // 例：dQw4w9WgXcQ（撮影後に入れる）
+  var player = document.getElementById("player");
+  function load(start, autoplay) {
+    if (!VIDEO_ID) return;
+    player.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?rel=0&playsinline=1&start=' + start + (autoplay ? '&autoplay=1' : '') + '" title="動画セミナー" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  }
+  load(0, false);
+  Array.prototype.forEach.call(document.querySelectorAll(".jump button"), function (b) {
+    b.addEventListener("click", function () {
+      if (!VIDEO_ID) return;
+      load(parseInt(b.getAttribute("data-s"), 10) || 0, true);
+      player.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+})();
 (function () {
   // 公開は3日間：最初に開いた日から数えて、10日目の23:59まで（8日目の案内なら3日間、9日目なら2日間、10日目ならその日のうち）
   var KEY = "big3_seminar_deadline_v1";
