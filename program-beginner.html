@@ -484,6 +484,7 @@
   .start .alt { margin: 12px 0 0; font-size: 14px; text-align: center; }
   .start .alt a { color: var(--link); font-weight: 700; }
 
+  .note-card.try { background: #E8EEFB; }
   /* ===== 使い方（チュートリアル） ===== */
   .top .help-btn { border: 1.5px solid rgba(255,255,255,.35); background: transparent; color: #fff; border-radius: 999px; padding: 0 14px; font-size: 13px; font-weight: 700; min-height: 38px; }
   .top .help-btn[hidden] { display: none; }
@@ -550,9 +551,11 @@ const CONFIG = {
 
 const P = {"lifts":{"squat":{"name":"スクワット","big3":true},"bench":{"name":"ベンチプレス","big3":true},"deadlift":{"name":"デッドリフト","big3":true},"pullup":{"name":"懸垂","big3":false},"lateral":{"name":"サイドレイズ","big3":false},"curl":{"name":"アームカール","big3":false},"calf":{"name":"カーフレイズ","big3":false},"abs":{"name":"腹筋（クランチ）","big3":false}},"days":[{"n":1,"name":"ベンチ重め","items":[["bench",85],["squat",70],["abs","acc"]]},{"n":2,"name":"デッド重め","items":[["deadlift",85],["lateral","acc"],["calf","acc"]]},{"n":3,"name":"中くらい","items":[["bench",70],["squat",70],["pullup","acc"],["curl","acc"]]},{"n":4,"name":"ベンチ重め","items":[["bench",85],["deadlift",60],["lateral","acc"],["abs","acc"]]},{"n":5,"name":"軽め","items":[["bench",60],["pullup","acc"],["lateral","acc"],["curl","acc"],["calf","acc"]]},{"n":6,"name":"スクワット重め","items":[["squat",85],["bench",70],["pullup","acc"],["curl","acc"]]},{"n":7,"name":"休み","items":[]}],"sets":3,"reps":5,"baseRatio":0.95,"inc":{"bench":2.5,"squat":5,"deadlift":5},"easePct":5,"accSets":3,"stages":[{"n":1,"name":"初心者のターン","when":"初日〜卒業まで","text":"初日から動画を送り、理学療法士が卒業ラインを確かめる。フォームが崩れない重さで、RPE6まで。卒業は種目ごと。"},{"n":2,"name":"%で積み上げる","when":"卒業〜16週目","text":"毎週同じメニュー。MAXから出した重さ（基準の85・70・60%）で5回×3セット。85%の日の結果で、MAXを週ごとに上げる。軽い週はなし。"}],"maxRules":["MAXを入れると、毎日の重さが決まる。基準＝MAXの95%、その日の重さ＝基準の85・70・60%（2.5kg刻みに丸める）。","MAXは測らない。今の自分で1回挙げられる重さを入れる。わからない種目は空欄でよく、卒業した日に、いちばん新しい5回の記録から推定MAXを出す。","85%の日に3セットとも5回できて、どのセットもRPE8.5以内なら、次の週はMAXを上げる（ベンチ+2.5kg、スクワット・デッドリフト+5kg）。ベンチは週2回の85%の日が両方そろったとき。","5回に届かなかった、または重さを下げたときは、MAXはそのまま。","RPE9以上になったときは、次の週はMAXを下げる（ベンチ−2.5kg、スクワット・デッドリフト−5kg）。","久しぶりの人は、昔のMAXではなく今の力で。迷ったら軽いほうにする。"],"p5":{"5":73.9,"5.5":75.1,"6":76.2,"6.5":77.4,"7":78.6,"7.5":79.9,"8":81.1,"8.5":82.4,"9":83.7,"9.5":85.0,"10":86.3},"maxf":{"5":1.35,"5.5":1.33,"6":1.31,"6.5":1.29,"7":1.27,"7.5":1.25,"8":1.23,"8.5":1.21,"9":1.19,"9.5":1.18,"10":1.16},"maxFactors":[[6,1.31],[6.5,1.29],[7,1.27],[7.5,1.25],[8,1.23],[8.5,1.21]],"acc":{"pullup":{"reps":"5〜10","rpe":8,"load":"自重から","tip":"1回もできない人は、跳んで上がり3〜5秒かけて下りる×5回。全セット10回に届いたら、体に2.5kg足す。"},"lateral":{"reps":"12〜20","rpe":8,"load":"軽いダンベル","tip":"全セット20回に届いたら、1〜2kg重いダンベルへ。"},"curl":{"reps":"8〜12","rpe":8,"load":"ダンベルかバーベル","tip":"全セット12回に届いたら、1〜2kg重く。"},"calf":{"reps":"10〜15","rpe":8,"load":"自重かマシン","tip":"下で1秒止める。全セット15回に届いたら2.5〜5kg重く。"},"abs":{"reps":"10〜20","rpe":8,"load":"自重から","tip":"全セット20回に届いたら、胸の前にプレートを抱えて重さを足す。"}},"rpe":[[6,"あと4回できた"],[6.5,"あと3〜4回できた"],[7,"あと3回できた"],[7.5,"あと2〜3回できた"],[8,"あと2回できた"],[8.5,"あと1〜2回できた"]],"form":{"squat":["つま先と膝を同じ向きに（膝が内に入らない）","骨盤が丸まらない深さまで下りる","足裏全体で床を押して立つ"],"bench":["肩甲骨を寄せて下げたまま","肘を真横に開かない","バーは手首の真上。胸の下あたりに下ろす"],"deadlift":["バーをすねの近くに置く","背中と腰を丸めない","腰で引かず、床を押して立ち上がる"],"pullup":["反動を使わない","肩をすくめず、胸を張って上がる","下までしっかり伸ばす"],"lateral":["肩をすくめない","反動を使わず、肘から上げる","肩の高さまで"],"curl":["体を振らない","肘の位置を動かさない","下までしっかり伸ばす"],"calf":["かかとを下まで下ろし、上まで上げきる","下で1秒止める","ひざは伸ばしたまま"],"abs":["首で引っ張らない","おへそをのぞき込むように背中を丸める","息を吐きながら上がる"]},"checkRules":[{"when":"痛み・しびれがある","do":"その日の筋トレは中止。医療機関に相談する。"},{"when":"疲れが4以上、または睡眠5時間未満（このプログラムの目安）","do":"BIG3はセットを1つ減らし、%を5下げる（85%→80%）。補助種目は1セット減らす。"},{"when":"疲れ4以上が2日続いた","do":"その日は休み。翌日にずらさず、飛ばして次へ進む。"},{"when":"セットの途中でRPE8.5を超えそう","do":"次のセットから2.5〜5kg下げる。その週はMAXを上げない。"},{"when":"フォームが崩れた","do":"5回に届かなくても、そのセットはそこで終える。"}],"grad":{"squat":{"lines":["バットウインクが出ない（しゃがみきったとき、骨盤が丸まらない）","ニーインが出ない（膝が内側に入らない）","ラックアップが真っ直ぐ後方にできる（背骨が曲がらない）"],"film":"正面と真横の2本。ラックから外して後ろに下がるところから撮る"},"bench":{"lines":["降ろす速度が一定","痛みが出ない"],"film":"真横から。降ろして挙げるまでが全部入る位置で撮る"},"deadlift":{"lines":["挙がる瞬間、お尻が先に浮かない","挙がる瞬間、腰の曲がりがそれ以上曲がらない"],"film":"真横から。バーが床から離れる瞬間が見える高さで撮る"}},"gradRules":["初日から、BIG3をやった日は動画をLINEに送る（スクワットは正面と真横の2本）。","理学療法士が、卒業ラインを満たしているかを見て返信する。","卒業するまで、その種目はフォームが崩れない重さで、RPE6まで。","卒業は種目ごと。卒業した種目から、MAXから出した重さで進める。"],"gradRpe":6};
 const MODE = "pre";   /* "pre"＝初心者のターン（卒業前）のページ、"post"＝4ヶ月プログラム（卒業後）のページ */
-const PAGE = { pre: "program-beginner.html", post: "program.html" };
+const TRY = /[?&]try=1(&|$)/.test(location.search);
+const PAGE = TRY ? { pre: "program-beginner.html?try=1", post: "program.html?try=1" } : { pre: "program-beginner.html", post: "program.html" };
 
-const KEY = "big3-16w-v1";
+const KEY = TRY ? "big3-16w-try" : "big3-16w-v1";
+if (TRY) { try { if (!sessionStorage.getItem("big3-try-on")) { localStorage.removeItem("big3-16w-try"); localStorage.removeItem("big3-16w-try-ui"); sessionStorage.setItem("big3-try-on", "1"); } } catch (e) {} }
 const P5 = {}, MAXF = {};
 if (P) { for (const k in P.p5) P5[Number(k)] = P.p5[k]; for (const k in P.maxf) MAXF[Number(k)] = P.maxf[k]; }
 const RPE_CHOICES = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
@@ -893,7 +896,7 @@ function renderToday() {
   const dt = dateOf(w, d);
   let h = "";
   if (!saveOk) h += '<p class="savewarn">このブラウザでは記録を保存できません。プライベートブラウズを切ると保存できます。</p>';
-  h += lineCard();
+  h += tryCard() + lineCard();
   if (!S.start && MODE === "post") { app.innerHTML = h + '<div class="nightwrap bleed">' + chooseCard() + startCard(true) + "</div>" + fine(); return; }
   if (!S.start) h += '<div class="nightwrap bleed">' + startCard() + "</div>";
   h += gradNote();
@@ -1348,7 +1351,7 @@ if (rtEl) rtEl.addEventListener("click", e => {
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && RT) { tickRest(); wakeOn(); } });
 
 /* ---- ホーム画面に追加・LINEの中のブラウザ ---- */
-const UI_KEY = "big3-16w-ui";
+const UI_KEY = TRY ? "big3-16w-try-ui" : "big3-16w-ui";
 let UI = {};
 try { UI = JSON.parse(localStorage.getItem(UI_KEY)) || {}; } catch (e) { UI = {}; }
 function saveUI() { try { localStorage.setItem(UI_KEY, JSON.stringify(UI)); } catch (e) {} }
@@ -1364,18 +1367,18 @@ window.addEventListener("beforeinstallprompt", e => {
 function lineCard() {
   if (!IN_LINE || UI.lineNote) return "";
   return '<div class="note-card" id="lineNote"><p><b>LINEの中で開いています。</b>ここでつけた記録は、LINEの中にだけ保存されます。ブラウザで開いて「ホーム画面に追加」すると、アプリのように使えます。</p>' +
-    '<div class="btns"><a class="btn small primary" href="' + esc(location.origin + location.pathname + "?openExternalBrowser=1") + '">ブラウザで開く</a>' +
+    '<div class="btns"><a class="btn small primary" href="' + esc(location.origin + location.pathname + "?openExternalBrowser=1" + (TRY ? "&try=1" : "")) + '">ブラウザで開く</a>' +
     '<button class="btn small" type="button" id="lineNo">このまま使う</button></div></div>';
 }
 function startTip() {
-  if (IN_LINE) return "";
+  if (IN_LINE || TRY) return "";
   if (STANDALONE) return '<p class="tipline">SafariやLINEの中で記録をつけていた人は、そちらの「記録」でバックアップをコピーして、ここの「記録」の「復元する」に貼り付けてください。</p>';
   if (UI.a2hs) return "";
   return '<p class="tipline"><b>おすすめ：</b>先にホーム画面に追加して、そこから開いて始めましょう。記録は、開いた場所に保存されます。' +
     (IS_IOS ? "（Safariの「共有」→「ホーム画面に追加」）" : "（Chromeの「︙」→「ホーム画面に追加」）") + "</p>";
 }
 function a2hsCard() {
-  if (IN_LINE || STANDALONE || UI.a2hs || !S.start) return "";
+  if (TRY || IN_LINE || STANDALONE || UI.a2hs || !S.start) return "";
   return '<div class="note-card" id="a2hs"><p><b>ホーム画面に追加すると、アプリのように開けます。</b>一度開いておけば、電波が悪いジムでも開けます。</p>' +
     (installEvt ? "" : IS_IOS ? '<p class="sm">Safariの「共有」ボタン（四角に上向きの矢印）→「ホーム画面に追加」</p>'
       : '<p class="sm">Chromeの右上の「︙」→「ホーム画面に追加」または「アプリをインストール」</p>') +
@@ -1484,6 +1487,19 @@ function pageSetup() {
   if (wb) wb.textContent = "1週間";
 }
 
+
+/* ===== お試し ===== */
+function tryCard() {
+  if (!TRY) return "";
+  const real = (MODE === "pre" ? "program-beginner.html" : "program.html");
+  return '<div class="note-card try"><p><b>お試し中です。</b>ここでつけた記録は、本番の記録とは別に保存されます。</p>' +
+    '<div class="btns"><button class="btn small" type="button" id="tryReset">最初からやり直す</button><a class="btn small" href="' + real + '">お試しをやめる</a></div></div>';
+}
+document.addEventListener("click", e => {
+  if (!e.target.closest || !e.target.closest("#tryReset")) return;
+  try { localStorage.removeItem("big3-16w-try"); localStorage.removeItem("big3-16w-try-ui"); } catch (err) {}
+  location.href = (MODE === "pre" ? PAGE.pre : PAGE.post);
+});
 
 /* ===== 使い方（チュートリアル） ===== */
 const TUT = {
@@ -1821,7 +1837,7 @@ app.addEventListener("change", e => {
 });
 
 if (!P) { app.textContent = "プログラムを読み込めませんでした。"; }
-else if (MODE === "post" && S.start && !BIG3.some(l => !isPre(l))) { location.replace(PAGE.pre + location.search + location.hash); }
+else if (MODE === "post" && S.start && !BIG3.some(l => !isPre(l))) { location.replace(PAGE.pre + (TRY ? "" : location.search) + location.hash); }
 else {
   pageSetup(); render();
   if (S.start && !UI["tut_" + MODE]) setTimeout(() => { if (V.tab === "today" && !document.querySelector(".tut")) tutStart(); }, 700);
