@@ -1,0 +1,17 @@
+{
+  "name": "4ヶ月プログラム｜挑戦できる自分をつくる16週間",
+  "short_name": "4ヶ月プログラム",
+  "description": "MAXを入れると、毎日の重さが自動で出ます。記録もスマホで。",
+  "lang": "ja",
+  "start_url": "./program.html?source=home",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D1B3E",
+  "theme_color": "#0D1B3E",
+  "icons": [
+    { "src": "app/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "app/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

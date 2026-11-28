@@ -6,7 +6,13 @@
 <title>4ヶ月プログラム｜挑戦できる自分をつくる16週間</title>
 <meta name="description" content="理学療法士がつくった、週6日・8種目の16週間プログラム。MAXを入れると、毎日の重さが自動で出ます。記録もスマホで。">
 <meta name="theme-color" content="#0D1B3E">
-<link rel="icon" href="data:,">
+<link rel="icon" href="app/icon-192.png">
+<link rel="apple-touch-icon" href="app/icon-180.png">
+<link rel="manifest" href="program-manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="4ヶ月プログラム">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
@@ -328,6 +334,126 @@
     .mark { transition: background-color .18s ease-out, border-color .18s ease-out; }
     details > summary::before { transition: transform .15s; }
   }
+
+  /* ===== ジムで使いやすく（2026-11-28） ===== */
+  .top { padding: calc(8px + env(safe-area-inset-top)) 16px 8px; }
+  .top .title small { display: none; }
+  .dayhead { padding-bottom: 12px; }
+  .dayline { margin-top: 2px; }
+  .dayline h1 { font-size: 21px; }
+  .dayline h1 .wk { font-size: 14.5px; margin-bottom: 1px; }
+  .arrow { flex-basis: 40px; width: 40px; height: 40px; font-size: 22px; }
+  .strip { margin-top: 10px; gap: 5px; }
+  .strip button { min-height: 40px; font-size: 18px; border-radius: 10px; }
+  .check, .ex, .memo, .rest, .sec, .start, .plan { margin-top: 10px; }
+  .ex { scroll-margin-top: 64px; padding: 14px 14px 8px; }
+
+  /* 体調チェック（入れ終わったら1行に） */
+  details.check { padding: 4px 14px; }
+  details.check[open] { padding-bottom: 14px; }
+  .check > summary { min-height: 52px; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; row-gap: 0; align-items: center; padding: 6px 0; }
+  .check > summary::before { display: none; }
+  .check > summary::after { grid-column: 2; grid-row: 1 / span 2; content: ""; flex: none; width: 7px; height: 7px; margin: 0 4px 0 2px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .15s; }
+  .check[open] > summary::after { transform: rotate(-135deg); }
+  .check > summary h2 { margin: 0; font-size: 16px; }
+  .check .cksum { grid-column: 1; min-width: 0; margin: 2px 0 0 14px; font-size: 13px; color: var(--muted); font-weight: 700; line-height: 1.4; }
+  .check > summary h2 { grid-column: 1; }
+  .check .row { grid-template-columns: 4.2em 1fr; margin-top: 8px; }
+  .check .seg button { min-height: 42px; }
+  .check .field input { height: 42px; }
+  #advice .advice { margin-top: 10px; }
+
+  /* 今日のメニュー（一覧） */
+  .plan { background: var(--paper); border-radius: 18px; padding: 12px 14px 6px; }
+  .plan h2 { margin: 0; font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 9px; }
+  .plan h2::before { content: ""; flex: none; width: 5px; height: 20px; border-radius: 3px; background: var(--gold); }
+  .plan h2 .pg { margin-left: auto; font-family: var(--num); font-size: 17px; font-weight: 700; color: var(--muted); letter-spacing: .02em; }
+  .plan .pbar { height: 6px; border-radius: 3px; background: var(--floor); margin: 8px 0 2px; overflow: hidden; }
+  .plan .pbar i { display: block; height: 100%; background: var(--p6); border-radius: 3px; transition: width .3s ease-out; }
+  .plan ol { list-style: none; margin: 0; padding: 0; }
+  .plan li a { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; min-height: 52px; padding: 8px 0; border-top: 1px solid var(--hair); color: var(--ink); text-decoration: none; }
+  .plan li:first-child a { border-top: 0; }
+  .plan .nm { font-size: 15px; font-weight: 700; line-height: 1.35; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .plan .nm .chip { font-size: 13px; padding: 3px 7px 2px; }
+  .plan .nm .chip.pre, .plan .nm .chip.acc { font-size: 11.5px; padding: 3px 7px; }
+  .plan .rx { grid-column: 1; font-size: 13px; color: var(--muted); line-height: 1.4; }
+  .plan .rx b { font-family: var(--num); font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: .01em; }
+  .plan .ct { grid-column: 2; grid-row: 1 / span 2; min-width: 44px; height: 32px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px;
+    background: var(--floor); color: var(--muted); font-family: var(--num); font-size: 17px; font-weight: 700; }
+  .plan .ct .ck { display: block; width: 18px; height: 18px; }
+  .plan li.done .ct { background: var(--p6); color: #fff; }
+  .plan li.done .rx b { color: var(--muted); }
+  .plan .fin { margin: 4px 0 8px; padding: 10px 12px; border-radius: 10px; background: var(--p6-tint); color: var(--p6-ink); font-size: 14px; font-weight: 700; }
+
+  /* 種目のカード：何セット終わったか・プレート・アップ */
+  .ex h2 .cnt { margin-left: auto; min-width: 44px; height: 30px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px;
+    background: var(--floor); color: var(--muted); font-family: var(--num); font-size: 16px; font-weight: 700; }
+  .ex h2 .cnt.ok { background: var(--p6); color: #fff; }
+  .hint.calc { font-size: 13.5px; }
+  .hint.calc .res { font-size: 1.75em; }
+  .plates, .warm { margin: 6px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .plates .lab, .warm .lab { flex: none; min-width: 2.8em; font-weight: 700; color: var(--ink); }
+  .pl { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 26px; padding: 0 6px; border-radius: 6px;
+    font-family: var(--num); font-size: 16px; font-weight: 700; color: #fff; letter-spacing: .01em; }
+  .pl.p25 { background: var(--p9); }
+  .pl.p20 { background: var(--p8); }
+  .pl.p15 { background: var(--p7); color: #1B1406; }
+  .pl.p10 { background: var(--p6); }
+  .pl.p5 { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--hair); }
+  .pl.p2_5 { background: #C9433E; }
+  .pl.p1_25 { background: #8E97AA; }
+  .plates .barw { margin-left: 2px; }
+  .warm b { font-family: var(--num); font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: .01em; }
+  .warm .ws { white-space: nowrap; }
+  .warm .ar { color: #A9B1C2; font-size: 15px; padding: 0 1px; }
+
+  /* 1セット＝1行 */
+  .sets { margin-top: 10px; gap: 8px; }
+  .set { display: grid; grid-template-columns: 44px minmax(0, 1.25fr) minmax(0, .85fr) minmax(0, 1.4fr); align-items: center; gap: 6px; }
+  .set .f { position: relative; display: block; min-width: 0; margin: 0; }
+  .set .f input { display: block; width: 100%; box-sizing: border-box; height: 48px; padding: 0 26px 0 6px; font-size: 22px; }
+  .set .f.reps input { padding-right: 22px; }
+  .set .f > span { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--muted); pointer-events: none; }
+  .set .f.rpe { margin-left: 0; }
+  .set .f.rpe select { display: block; width: 100%; min-width: 0; height: 48px; font-size: 16px; padding: 0 20px 0 10px; background-position: right 8px center; }
+  .set .mark { width: 44px; height: 44px; }
+  .set .f input::placeholder { font-size: 12px; }
+
+  /* 休憩タイマー（下のタブの上） */
+  .rest-timer { position: fixed; left: 0; right: 0; bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom)); z-index: 11; background: var(--night); color: #fff; box-shadow: 0 -6px 18px rgba(13,27,62,.22); }
+  .rest-timer[hidden] { display: none; }
+  .rt-in { max-width: 560px; margin: 0 auto; padding: 8px 10px 8px 16px; display: flex; align-items: center; gap: 8px; }
+  .rt-main { flex: 1; min-width: 0; margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; row-gap: 0; }
+  .rt-lab { font-size: 13px; font-weight: 900; color: var(--gold-hi); }
+  .rt-time { font-family: var(--num); font-size: 36px; font-weight: 700; line-height: 1.05; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .rt-goal { font-size: 12px; color: var(--on-night); }
+  .rt-btns { display: flex; gap: 6px; flex: none; }
+  .rt-btns button { min-height: 44px; min-width: 44px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.4); background: transparent; color: #fff; font-weight: 700; font-size: 14px; padding: 0 12px; }
+  .rt-btns #rtClose { font-size: 20px; padding: 0; }
+  .rt-bar { height: 4px; background: rgba(255,255,255,.14); }
+  .rt-bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .25s linear; }
+  .rest-timer.ok { background: var(--p6-ink); }
+  .rest-timer.ok .rt-lab { color: #fff; }
+  .rest-timer.ok .rt-bar i { background: #9BE3B9; }
+  .rest-timer.over { background: #5C4710; }
+  body.has-timer { padding-bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom) + 92px); }
+
+  /* お知らせ（ホーム画面に追加・LINEの中のブラウザ） */
+  .note-card { margin-top: 10px; background: var(--gold-tint); border-radius: 14px; padding: 10px 14px 12px; font-size: 13.5px; line-height: 1.6; }
+  .note-card b { font-weight: 900; }
+  .tipline { margin: 10px 0 0; padding: 8px 12px; border-radius: 10px; background: var(--gold-tint); font-size: 13px; line-height: 1.6; color: var(--ink); }
+  .tipline b { font-weight: 900; }
+  .note-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 900; }
+  .note-card p { margin: 4px 0 0; }
+  .note-card ol { margin: 4px 0 0; padding-left: 1.3em; }
+  .note-card .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .note-card .sm { font-size: 12.5px; }
+
+  /* バックアップ */
+  #backup textarea { width: 100%; box-sizing: border-box; margin-top: 8px; border: 1.5px solid var(--hair); border-radius: 12px; padding: 10px 12px; font-size: 14px; background: var(--paper); line-height: 1.5; word-break: break-all; }
+  #backup .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+  @media (prefers-reduced-motion: reduce) { .plan .pbar i, .rt-bar i, .check > summary::after { transition: none; } }
 </style>
 </head>
 <body>
@@ -340,6 +466,13 @@
 <main>
   <div class="page" id="app" aria-live="off"></div>
 </main>
+<div class="rest-timer" id="restTimer" hidden>
+  <div class="rt-in">
+    <p class="rt-main" role="timer"><span class="rt-lab" id="rtLab">休憩</span><span class="rt-time" id="rtTime">2:00</span><span class="rt-goal" id="rtGoal"></span></p>
+    <div class="rt-btns"><button type="button" id="rtPlus">+30秒</button><button type="button" id="rtClose" aria-label="タイマーを閉じる">×</button></div>
+  </div>
+  <div class="rt-bar" aria-hidden="true"><i id="rtBar"></i></div>
+</div>
 <nav class="tabs" aria-label="ページの切り替え">
   <ul>
     <li><button type="button" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5v5M6.5 6.5v11M17.5 6.5v11M21 9.5v5M6.5 12h11"/></svg><span>今日</span></button></li>
@@ -708,6 +841,7 @@ function renderToday() {
   const dt = dateOf(w, d);
   let h = "";
   if (!saveOk) h += '<p class="savewarn">このブラウザでは記録を保存できません。プライベートブラウズを切ると保存できます。</p>';
+  h += lineCard();
   if (!S.start) h += '<div class="nightwrap bleed">' + startCard() + "</div>";
   h += '<section class="dayhead bleed"><p class="phase">' + esc(stageLine()) + "</p>";
   h += '<div class="dayline"><button class="arrow" type="button" data-step="-1" aria-label="前の日"' + (w === 1 && d === 1 ? " disabled" : "") + '>‹</button>' +
@@ -737,15 +871,19 @@ function renderToday() {
 
   const lg = dayLog(w, d, false) || { sets: {}, check: {}, memo: "" };
   const ck = lg.check || {};
-  h += '<section class="check" aria-labelledby="ckh"><h2 id="ckh">今日の体調</h2>' +
+  const ckDone = ck.fatigue != null && ck.fatigue !== "" && (ck.pain === true || ck.pain === false);
+  h += '<details class="check" id="check"' + (ckDone ? "" : " open") + '><summary><h2 id="ckh">体調チェック</h2><span class="cksum" id="cksum">' + esc(checkSummary(ck)) + "</span></summary>" +
     '<div class="row"><span class="lab">睡眠</span><label class="field"><input id="sleep" type="text" inputmode="decimal" value="' + esc(ck.sleep == null ? "" : ck.sleep) + '" aria-label="睡眠時間"><span>時間</span></label></div>' +
     '<div class="row"><span class="lab" id="fatl">疲れ</span><span class="seg" role="group" aria-labelledby="fatl">' +
     [1, 2, 3, 4, 5].map(n => '<button type="button" data-fatigue="' + n + '"' + (n >= 4 ? ' class="warn"' : "") + ' aria-pressed="' + (Number(ck.fatigue) === n) + '">' + n + "</button>").join("") + "</span>" +
     '<span class="cap">1 元気 〜 5 へとへと（自分の感覚で）</span></div>' +
     '<div class="row"><span class="lab" id="painl">痛み・しびれ</span><span class="seg txt" role="group" aria-labelledby="painl">' +
     '<button type="button" data-pain="0" aria-pressed="' + (ck.pain === false) + '">なし</button><button type="button" data-pain="1" class="warn" aria-pressed="' + (ck.pain === true) + '">あり</button></span></div>';
-  h += '<div id="advice">' + adviceHtml(w, d) + "</div></section>";
+  h += "</details>";
+  h += '<div id="advice">' + adviceHtml(w, d) + "</div>";
+  h += '<section class="plan" id="plan" aria-labelledby="planh">' + planHtml(w, d) + "</section>";
   h += '<div id="exlist">' + exListHtml(w, d) + "</div>";
+  h += a2hsCard();
   h += '<section class="memo"><h2>ひとこと・日報</h2><label for="memo">気になったこと（フォーム、痛み、うれしかったこと）</label>' +
     '<textarea id="memo" rows="3">' + esc(lg.memo || "") + "</textarea>" +
     '<a class="btn-line wide" id="sendReport" href="' + esc(CONFIG.lineChatUrl) + '">今日の日報をLINEで送る</a>' +
@@ -763,7 +901,9 @@ function exBlock(it, k, lg) {
   const name = P.lifts[it.lift].name;
   const label = it.acc ? "補助" : it.pre ? "卒業前" : it.pct + "%";
   const tone = it.acc ? "acc" : it.pre ? "pre" : it.pct0 === 85 ? "hi" : it.pct0 === 70 ? "mid" : "lo";
-  let h = '<section class="ex" data-k="' + k + '"><h2>' + esc(name) + '<small class="chip ' + tone + '">' + label + "</small></h2>";
+  const nDone = setsDone(lg, it);
+  let h = '<section class="ex" id="ex-' + k + '" data-k="' + k + '"><h2>' + esc(name) + '<small class="chip ' + tone + '">' + label + "</small>" +
+    '<span class="cnt' + (nDone >= it.sets ? " ok" : "") + '" data-cnt aria-label="' + it.sets + "セット中" + nDone + 'セット終わり">' + nDone + "/" + it.sets + "</span></h2>";
   h += '<p class="presc">' + esc(prescText(it)) + "</p>";
   if (it.acc) {
     const a = P.acc[it.lift], prev = lastAcc(it.lift, V.w, V.d);
@@ -780,7 +920,7 @@ function exBlock(it, k, lg) {
     h += it.past ? '<p class="prev">この日は、まだ卒業前でした。</p>' : gradBox(it.lift, true);
     const rec = suggest(it.lift, it.rows[0].rpe, V.w, V.d, 0), first = preSug(it, 0);
     if (first == null) h += '<p class="hint first">初めての日：バーだけから5回ずつ少しずつ重くして、RPE' + r2(P.gradRpe) + "で5回、フォームが崩れない重さを探しましょう。</p>";
-    else h += '<p class="hint go">目安 <span class="num">' + kgText(first) + "</span>kg から</p>" +
+    else h += '<p class="hint go">目安 <span class="num">' + kgText(first) + "</span>kg から</p>" + platesHtml(first) +
       (rec == null ? '<p class="prev">MAX ' + kgText(it.mk) + "kgの、いちばん軽い日（60%）の重さです。フォームが崩れたら下げてください。</p>" : "");
     h += '<div class="sets">';
     it.rows.forEach((row, i) => {
@@ -796,7 +936,7 @@ function exBlock(it, k, lg) {
     h += "</div>";
   } else {
     if (it.kg == null) h += maxForm(it.lift);
-    else h += '<p class="hint calc"><span class="nw">MAX <span class="num">' + kgText(it.max) + '</span>kg →</span> <span class="nw">基準 <span class="num">' + kgText(it.base) + "</span>kg × " + it.pct + "% ＝ <span class=\"num res\">" + kgText(it.kg) + "</span>kg</span></p>";
+    else h += '<p class="hint calc"><span class="nw">MAX <span class="num">' + kgText(it.max) + '</span>kg →</span> <span class="nw">基準 <span class="num">' + kgText(it.base) + "</span>kg × " + it.pct + "% ＝ <span class=\"num res\">" + kgText(it.kg) + "</span>kg</span></p>" + platesHtml(it.kg) + warmHtml(it.kg);
     h += '<div class="sets">';
     for (let i = 0; i < it.sets; i++) {
       const v = lg.sets[it.lift + ":" + i] || {};
@@ -822,6 +962,9 @@ function updateDayParts() {
   if (ex && needsEase(lg && lg.check) !== V.easeShown) { ex.innerHTML = exListHtml(V.w, V.d); paintAll(); }
   const st = document.getElementById("strip");
   if (st) st.innerHTML = stripItems(V.w, V.d);
+  updatePlanParts();
+  const cs = document.getElementById("cksum");
+  if (cs) cs.textContent = checkSummary(lg && lg.check);
 }
 function refreshEx(exEl) {
   if (!exEl) return;
@@ -840,7 +983,7 @@ function refreshEx(exEl) {
 }
 function startCard() {
   return '<section class="start"><h2>開始日とMAXを決めましょう</h2>' +
-    "<p>開始日から数えて、今日のメニューを出します。MAXを入れると、毎日の重さが自動で決まります。最初は「初心者のターン」です。始める前に「フォーム」の教材動画と卒業ラインを見ておきましょう。</p>" +
+    "<p>開始日から数えて、今日のメニューを出します。MAXを入れると、毎日の重さが自動で決まります。最初は「初心者のターン」です。始める前に「フォーム」の教材動画と卒業ラインを見ておきましょう。</p>" + startTip() +
     '<div class="row"><label for="startDate" class="ml">開始日</label><input type="date" id="startDate" value="' + ymd(new Date()) + '"></div>' +
     '<p class="mh">MAX（わかる種目だけ）</p><div class="maxgrid">' +
     BIG3.map(l => '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, S.maxIn[l] ? S.maxIn[l].kg : null) + "</div>").join("") + "</div>" +
@@ -855,7 +998,7 @@ function cta() {
 function fine() {
   return '<div class="fine"><p>このプログラムは健康な方のための運動プログラムで、医療行為や治療ではありません。痛みや持病がある方は、先に医師に相談してください。</p>' +
     "<p>成果には個人差があり、結果を保証するものではありません。最大重量（MAX）は測りません。MAXは、今の自分で挙げられる重さか、5回の記録から出す推定です。どのセットもRPE8.5までにしてください。</p>" +
-    "<p>記録はこのスマホのブラウザだけに保存されます。</p>" +
+    "<p>記録はこのスマホのブラウザだけに保存されます。スマホやブラウザを変えるときは「記録」のバックアップを使ってください。</p>" +
     (CONFIG.termsUrl || CONFIG.privacyUrl ? '<p class="legal">' + [CONFIG.termsUrl ? '<a href="' + esc(CONFIG.termsUrl) + '">利用規約</a>' : "", CONFIG.privacyUrl ? '<a href="' + esc(CONFIG.privacyUrl) + '">プライバシーポリシー</a>' : ""].filter(Boolean).join("") + "</p>" : "") +
     "<p>© " + esc(CONFIG.coachName) + "</p></div>";
 }
@@ -977,9 +1120,223 @@ function renderLog() {
     '<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px"><input type="date" id="startDate" value="' + esc(S.start || ymd(new Date())) + '">' +
     '<button class="btn" type="button" id="setStart">この日にする</button></div></section>';
   if (CONFIG.pdfUrl) h += '<section class="sec"><h2>PDF版</h2><p class="lead">印刷して使いたいときは、PDF版をどうぞ。</p><a class="btn" style="margin-top:10px" href="' + esc(CONFIG.pdfUrl) + '" target="_blank" rel="noopener">PDFを開く</a></section>';
+  h += '<section class="sec" id="backup"><h2>バックアップ</h2><p class="lead">スマホを変えるときや、別のブラウザで開くときに。コードをコピーして、LINEのKeepメモなど、なくさない所に保存してください。新しいほうで「復元する」に貼り付けると、記録・卒業・MAXが戻ります。</p>' +
+    '<div class="btns"><button class="btn" type="button" id="bkCopy">バックアップをコピー</button></div><p class="status" id="bkMsg" role="status"></p>' +
+    '<textarea id="bkOut" rows="3" readonly hidden aria-label="バックアップのコード"></textarea>' +
+    '<details class="tips"><summary>復元する</summary><textarea id="bkIn" rows="3" placeholder="BIG3-16W1: から始まるコードを貼り付け" aria-label="バックアップのコード"></textarea>' +
+    '<div class="btns"><button class="btn" type="button" id="bkRestore" data-armed="0">復元する</button></div><p class="status" id="bkMsg2" role="status"></p></details></section>';
   h += '<section class="sec"><h2>記録を消す</h2><p class="lead">このスマホに保存したトレーニングの記録をすべて消します。卒業とMAXは残ります。元に戻せません。</p>' +
     '<button class="btn danger" style="margin-top:10px" type="button" id="reset" data-armed="0">記録をすべて消す</button></section>';
   app.innerHTML = h + cta() + fine();
+}
+
+
+/* ===== ジムで使いやすく：プレート・アップ・今日の一覧・休憩タイマー・ホーム画面・バックアップ ===== */
+const BAR = 20, PLATES = [20, 15, 10, 5, 2.5, 1.25];
+/* 片側に付けるプレート（バー20kg） */
+function platesOf(kg) {
+  let side = Math.round((kg - BAR) / 2 * 100) / 100;
+  if (!(side > 0)) return [];
+  const out = [];
+  PLATES.forEach(p => { while (side + 1e-9 >= p) { out.push(p); side = Math.round((side - p) * 100) / 100; } });
+  return side > 0.001 ? null : out;
+}
+function platesHtml(kg) {
+  if (kg == null || !(kg > 0)) return "";
+  if (Math.abs(kg - BAR) < 0.01) return '<p class="plates"><span class="lab">プレート</span>なし（バーだけ20kg）</p>';
+  if (kg < BAR) return '<p class="plates"><span class="lab">プレート</span>バー（20kg）より軽い重さです。軽いバーかダンベルで。</p>';
+  const ps = platesOf(kg);
+  if (!ps || !ps.length) return "";
+  return '<p class="plates"><span class="lab">片側</span>' + ps.map(p => '<span class="pl p' + String(p).replace(".", "_") + '">' + kgText(p) + "</span>").join("") +
+    '<span class="barw">＋バー20kg</span></p>';
+}
+/* ルールのウォームアップ：バーだけ10回 → 半分の重さで5回 → 7割で3回 → 9割で1回 */
+function warmHtml(kg) {
+  if (kg == null || !(kg > BAR)) return "";
+  const out = ['<span class="ws"><b>バー</b>×10</span>'];
+  let last = BAR;
+  [[0.5, 5], [0.7, 3], [0.9, 1]].forEach(([r, n]) => { const x = round25(kg * r); if (x > last && x < kg) { out.push('<span class="ws"><b>' + kgText(x) + "</b>×" + n + "</span>"); last = x; } });
+  return '<p class="warm"><span class="lab">アップ</span>' + out.join('<span class="ar">›</span>') + "</p>";
+}
+function setsDone(lg, it) {
+  let n = 0;
+  for (let i = 0; i < it.sets; i++) { const v = lg && lg.sets && lg.sets[it.lift + ":" + i]; if (v && v.done) n++; }
+  return n;
+}
+/* 今日のメニュー（一覧）。押すと、その種目へ */
+function planHtml(w, d) {
+  const lg = dayLog(w, d, false);
+  let tot = 0, done = 0;
+  const rows = planDay(w, d).map((it, k) => {
+    const n = setsDone(lg, it);
+    tot += it.sets; done += n;
+    const chip = it.acc ? '<small class="chip acc">補助</small>' : it.pre ? '<small class="chip pre">卒業前</small>' :
+      '<small class="chip ' + (it.pct0 === 85 ? "hi" : it.pct0 === 70 ? "mid" : "lo") + '">' + it.pct + "%</small>";
+    let rx;
+    if (it.acc) rx = esc(it.reps) + "回 × " + it.sets + "セット";
+    else if (it.pre) { const sg = preSug(it, 0); rx = (sg != null ? "<b>" + kgText(sg) + "</b>kg〜・" : "") + "5回 × " + it.sets + "セット・RPE" + r2(P.gradRpe) + "まで"; }
+    else rx = it.kg != null ? "<b>" + kgText(it.kg) + "</b>kg × 5回 × " + it.sets + "セット" : "MAXを入れると、重さが出ます";
+    const fin = n >= it.sets;
+    return '<li class="' + (fin ? "done" : "") + '"><a href="#ex-' + k + '" data-jump="' + k + '"><span class="nm">' + esc(P.lifts[it.lift].name) + chip + "</span>" +
+      '<span class="rx">' + rx + '</span><span class="ct" aria-label="' + (fin ? "終わり" : it.sets + "セット中" + n + "セット") + '">' + (fin ? CHECK_SVG : n + "/" + it.sets) + "</span></a></li>";
+  }).join("");
+  const all = tot > 0 && done >= tot;
+  return '<h2 id="planh">' + (all ? "今日のメニュー、完了！" : "今日のメニュー") + '<span class="pg">' + done + "/" + tot + "セット</span></h2>" +
+    '<div class="pbar" aria-hidden="true"><i style="width:' + (tot ? Math.round(done / tot * 100) : 0) + '%"></i></div><ol>' + rows + "</ol>" +
+    (all ? '<p class="fin">おつかれさまでした。下の「日報」をLINEで送りましょう。</p>' : "");
+}
+function updatePlanParts() {
+  const pl = document.getElementById("plan");
+  if (!pl) return;
+  pl.innerHTML = planHtml(V.w, V.d);
+  const lg = dayLog(V.w, V.d, false), plan = planDay(V.w, V.d);
+  app.querySelectorAll(".ex[data-k]").forEach(ex => {
+    const it = plan[Number(ex.dataset.k)], c = ex.querySelector("[data-cnt]");
+    if (!it || !c) return;
+    const n = setsDone(lg, it);
+    c.textContent = n + "/" + it.sets;
+    c.classList.toggle("ok", n >= it.sets);
+  });
+}
+function checkSummary(ck) {
+  ck = ck || {};
+  const p = [];
+  if (ck.sleep != null && ck.sleep !== "") p.push("睡眠" + ck.sleep + "時間");
+  if (ck.fatigue != null && ck.fatigue !== "") p.push("疲れ" + ck.fatigue);
+  if (ck.pain === true) p.push("痛みあり"); else if (ck.pain === false) p.push("痛みなし");
+  return p.length ? p.join("・") : "トレーニングの前に";
+}
+
+/* ---- 休憩タイマー（ルール：BIG3は2〜3分、補助種目は1〜1分半） ---- */
+const RT_KEY = "big3-16w-timer";
+const rtEl = document.getElementById("restTimer");
+let RT = null, rtIv = null, wake = null, actx = null;
+const fmtT = x => { x = Math.max(0, Math.floor(x)); return Math.floor(x / 60) + ":" + String(x % 60).padStart(2, "0"); };
+function ensureAudio() {
+  try { const C = window.AudioContext || window.webkitAudioContext; if (!C) return; if (!actx) actx = new C(); if (actx.state === "suspended") actx.resume(); } catch (e) {}
+}
+function beep() {
+  try {
+    if (actx && actx.state === "running") {
+      const t = actx.currentTime;
+      [0, 0.24].forEach(dt => {
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.type = "sine"; o.frequency.value = 880;
+        g.gain.setValueAtTime(0.0001, t + dt); g.gain.exponentialRampToValueAtTime(0.3, t + dt + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dt + 0.18);
+        o.connect(g); g.connect(actx.destination); o.start(t + dt); o.stop(t + dt + 0.2);
+      });
+    }
+  } catch (e) {}
+  try { if (navigator.vibrate) navigator.vibrate([180, 90, 180]); } catch (e) {}
+}
+function wakeOn() {
+  try {
+    if (!("wakeLock" in navigator) || wake || document.visibilityState !== "visible") return;
+    navigator.wakeLock.request("screen").then(l => { wake = l; l.addEventListener("release", () => { wake = null; }); }, () => { wake = null; });
+  } catch (e) {}
+}
+function wakeOff() { try { if (wake) wake.release(); } catch (e) {} wake = null; }
+function saveRT() { try { if (RT) sessionStorage.setItem(RT_KEY, JSON.stringify(RT)); else sessionStorage.removeItem(RT_KEY); } catch (e) {} }
+function startRest(lift) {
+  const big = !!(P.lifts[lift] && P.lifts[lift].big3);
+  RT = { t0: Date.now(), min: big ? 120 : 60, max: big ? 180 : 90, add: 0, beeped: false, big };
+  saveRT(); showRest();
+}
+function showRest() {
+  if (!rtEl || !RT) return;
+  rtEl.hidden = false;
+  document.body.classList.add("has-timer");
+  if (!rtIv) rtIv = setInterval(tickRest, 250);
+  tickRest(); wakeOn();
+}
+function stopRest() {
+  RT = null; saveRT();
+  if (rtIv) { clearInterval(rtIv); rtIv = null; }
+  if (rtEl) { rtEl.hidden = true; rtEl.classList.remove("ok", "over"); }
+  document.body.classList.remove("has-timer");
+  wakeOff();
+}
+function tickRest() {
+  if (!RT || !rtEl) return;
+  const el = (Date.now() - RT.t0) / 1000, mn = RT.min + RT.add, mx = RT.max + RT.add;
+  const lab = document.getElementById("rtLab"), tm = document.getElementById("rtTime"), gl = document.getElementById("rtGoal"), bar = document.getElementById("rtBar");
+  const rng = RT.big ? "2〜3分" : "1〜1分半";
+  if (el < mn) {
+    rtEl.classList.remove("ok", "over");
+    lab.textContent = "休憩 あと"; tm.textContent = fmtT(mn - el + 0.999); gl.textContent = "（" + rng + "）";
+    bar.style.width = Math.min(100, el / mn * 100) + "%";
+  } else if (el < mx) {
+    if (!RT.beeped) { RT.beeped = true; saveRT(); beep(); }
+    rtEl.classList.add("ok"); rtEl.classList.remove("over");
+    lab.textContent = "次のセットOK"; tm.textContent = fmtT(el); gl.textContent = "（" + fmtT(mx) + "まで休めます）";
+    bar.style.width = "100%";
+  } else {
+    rtEl.classList.remove("ok"); rtEl.classList.add("over");
+    lab.textContent = "休憩おわり"; tm.textContent = fmtT(el); gl.textContent = "（" + rng + "たちました）";
+    bar.style.width = "100%";
+    if (el > mx + 300) stopRest();
+  }
+}
+if (rtEl) rtEl.addEventListener("click", e => {
+  if (e.target.closest("#rtClose")) { stopRest(); return; }
+  if (e.target.closest("#rtPlus") && RT) {
+    const el = (Date.now() - RT.t0) / 1000;
+    RT.add += 30;
+    if (el < RT.min + RT.add) RT.beeped = false;
+    ensureAudio(); saveRT(); tickRest();
+  }
+});
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && RT) { tickRest(); wakeOn(); } });
+
+/* ---- ホーム画面に追加・LINEの中のブラウザ ---- */
+const UI_KEY = "big3-16w-ui";
+let UI = {};
+try { UI = JSON.parse(localStorage.getItem(UI_KEY)) || {}; } catch (e) { UI = {}; }
+function saveUI() { try { localStorage.setItem(UI_KEY, JSON.stringify(UI)); } catch (e) {} }
+const IN_LINE = /\bLine\//i.test(navigator.userAgent);
+const STANDALONE = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+const IS_IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); installEvt = e;
+  const c = document.getElementById("a2hs");
+  if (c) c.outerHTML = a2hsCard();
+});
+function lineCard() {
+  if (!IN_LINE || UI.lineNote) return "";
+  return '<div class="note-card" id="lineNote"><p><b>LINEの中で開いています。</b>ここでつけた記録は、LINEの中にだけ保存されます。ブラウザで開いて「ホーム画面に追加」すると、アプリのように使えます。</p>' +
+    '<div class="btns"><a class="btn small primary" href="' + esc(location.origin + location.pathname + "?openExternalBrowser=1") + '">ブラウザで開く</a>' +
+    '<button class="btn small" type="button" id="lineNo">このまま使う</button></div></div>';
+}
+function startTip() {
+  if (IN_LINE) return "";
+  if (STANDALONE) return '<p class="tipline">SafariやLINEの中で記録をつけていた人は、そちらの「記録」でバックアップをコピーして、ここの「記録」の「復元する」に貼り付けてください。</p>';
+  if (UI.a2hs) return "";
+  return '<p class="tipline"><b>おすすめ：</b>先にホーム画面に追加して、そこから開いて始めましょう。記録は、開いた場所に保存されます。' +
+    (IS_IOS ? "（Safariの「共有」→「ホーム画面に追加」）" : "（Chromeの「︙」→「ホーム画面に追加」）") + "</p>";
+}
+function a2hsCard() {
+  if (IN_LINE || STANDALONE || UI.a2hs || !S.start) return "";
+  return '<div class="note-card" id="a2hs"><p><b>ホーム画面に追加すると、アプリのように開けます。</b>一度開いておけば、電波が悪いジムでも開けます。</p>' +
+    (installEvt ? "" : IS_IOS ? '<p class="sm">Safariの「共有」ボタン（四角に上向きの矢印）→「ホーム画面に追加」</p>'
+      : '<p class="sm">Chromeの右上の「︙」→「ホーム画面に追加」または「アプリをインストール」</p>') +
+    (IS_IOS ? '<p class="sm">iPhoneでは、ホーム画面から開くと、記録が別に保存されることがあります。いまの記録は「記録」のバックアップで移せます。</p>' : "") +
+    '<div class="btns">' + (installEvt ? '<button class="btn small primary" type="button" id="a2hsGo">ホーム画面に追加</button>' : "") +
+    '<button class="btn small" type="button" id="a2hsNo">閉じる</button></div></div>';
+}
+
+/* ---- バックアップと復元 ---- */
+const BK = "BIG3-16W1:";
+function backupCode() { return BK + btoa(unescape(encodeURIComponent(JSON.stringify(S)))); }
+function restoreFrom(txt) {
+  const m = String(txt || "").replace(/\s+/g, "").match(/^BIG3-16W1:([A-Za-z0-9+/=]+)$/);
+  if (!m) return "コードが正しくありません。BIG3-16W1: から最後まで、全部を貼り付けてください。";
+  let obj = null;
+  try { obj = JSON.parse(decodeURIComponent(escape(atob(m[1])))); } catch (e) { obj = null; }
+  if (!obj || typeof obj !== "object" || !obj.logs || typeof obj.logs !== "object") return "コードを読めませんでした。もう一度コピーし直してください。";
+  try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch (e) { return "このブラウザでは保存できませんでした。"; }
+  location.reload();
+  return "";
 }
 
 /* ---- 描画と操作 ---- */
@@ -1020,6 +1377,7 @@ function toggleSet(setEl) {
   paintSet(setEl);
   refreshEx(setEl.closest(".ex"));
   updateDayParts();
+  if (v.done) { ensureAudio(); if (dayDone(V.w, V.d)) stopRest(); else startRest(key.split(":")[0]); }
 }
 function copyText(t) {
   if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
@@ -1066,6 +1424,23 @@ document.getElementById("todayBtn").addEventListener("click", () => { V.tab = "t
 
 app.addEventListener("click", e => {
   const t = e.target;
+  const jp = t.closest("[data-jump]");
+  if (jp) { e.preventDefault(); const ex = document.getElementById("ex-" + jp.dataset.jump); if (ex) ex.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+  if (t.id === "a2hsGo" && installEvt) { const ev = installEvt; ev.prompt(); ev.userChoice.then(() => {}, () => {}).then(() => { installEvt = null; UI.a2hs = 1; saveUI(); render(); }); return; }
+  if (t.id === "a2hsNo" || t.id === "lineNo") { if (t.id === "lineNo") UI.lineNote = 1; else UI.a2hs = 1; saveUI(); const c = t.closest(".note-card"); if (c) c.remove(); return; }
+  if (t.id === "bkCopy") {
+    const msg = document.getElementById("bkMsg"), code = backupCode();
+    copyText(code).then(() => { msg.textContent = "コピーしました。LINEのKeepメモなど、なくさない所に貼って保存してください。"; },
+      () => { const out = document.getElementById("bkOut"); out.hidden = false; out.value = code; out.select(); msg.textContent = "自動でコピーできませんでした。下のコードを長押しで全部選んでコピーしてください。"; });
+    return;
+  }
+  if (t.id === "bkRestore") {
+    const msg = document.getElementById("bkMsg2");
+    if (t.dataset.armed !== "1") { t.dataset.armed = "1"; t.textContent = "いまの記録は置き換わります。もう一度押すと復元"; return; }
+    const err = restoreFrom(document.getElementById("bkIn").value);
+    if (err) { msg.textContent = err; t.dataset.armed = "0"; t.textContent = "復元する"; }
+    return;
+  }
   const sr = t.closest("#sendReport");
   if (sr) { sr.href = CONFIG.lineChatUrl + "?" + encodeURIComponent(reportText()); return; }
   const mark = t.closest(".mark");
@@ -1187,7 +1562,7 @@ app.addEventListener("click", e => {
 app.addEventListener("input", e => {
   const t = e.target;
   if (t.id === "memo") { const lg = dayLog(V.w, V.d, true); lg.memo = t.value; save(); return; }
-  if (t.id === "sleep") { const lg = dayLog(V.w, V.d, true); lg.check.sleep = t.value.replace(",", "."); save(); return; }
+  if (t.id === "sleep") { const lg = dayLog(V.w, V.d, true); lg.check.sleep = t.value.replace(",", "."); save(); const cs = document.getElementById("cksum"); if (cs) cs.textContent = checkSummary(lg.check); return; }
   const setEl = t.closest(".set");
   if (setEl && t.dataset.f) { t.classList.remove("sug"); setField(setEl, t.dataset.f, t.value); if (t.dataset.f === "rpe") paintSet(setEl); }
 });
@@ -1199,6 +1574,12 @@ app.addEventListener("change", e => {
 });
 
 if (!P) { app.textContent = "プログラムを読み込めませんでした。"; } else { render(); }
+/* 休憩タイマー：開き直しても続きから */
+try { const r = JSON.parse(sessionStorage.getItem(RT_KEY)); if (r && Date.now() - r.t0 < (r.max + r.add + 300) * 1000) { RT = r; showRest(); } } catch (e) {}
+/* 電波が悪くても開けるように（https のときだけ。このページとPDFの範囲だけ） */
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register("program-sw.js", { scope: "./program" }).catch(() => {}); });
+}
 </script>
 </body>
 </html>
