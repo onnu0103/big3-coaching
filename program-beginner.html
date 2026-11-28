@@ -483,12 +483,32 @@
   .btn.go-pre { margin-top: 10px; background: var(--p6); border-color: var(--p6); color: #fff; }
   .start .alt { margin: 12px 0 0; font-size: 14px; text-align: center; }
   .start .alt a { color: var(--link); font-weight: 700; }
+
+  /* ===== 使い方（チュートリアル） ===== */
+  .top .help-btn { border: 1.5px solid rgba(255,255,255,.35); background: transparent; color: #fff; border-radius: 999px; padding: 0 14px; font-size: 13px; font-weight: 700; min-height: 38px; }
+  .top .help-btn[hidden] { display: none; }
+  .tut { position: fixed; inset: 0; z-index: 60; }
+  .tut-hole { position: fixed; border-radius: 14px; box-shadow: 0 0 0 200vmax rgba(8,16,40,.74); outline: 2.5px solid var(--gold); outline-offset: 0; pointer-events: none;
+    transition: top .22s ease-out, left .22s ease-out, width .22s ease-out, height .22s ease-out; }
+  .tut-box { position: fixed; left: 12px; right: 12px; max-width: 440px; margin: 0 auto; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 14px 16px 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  .tut-box .tut-n { margin: 0; font-family: var(--num); font-size: 15px; font-weight: 700; color: var(--gold-ink); letter-spacing: .04em; }
+  .tut-box h2 { margin: 2px 0 0; font-size: 17px; font-weight: 900; line-height: 1.45; }
+  .tut-box p { margin: 4px 0 0; font-size: 14.5px; line-height: 1.7; }
+  .tut-btns { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .tut-btns .sp { flex: 1; }
+  .tut-btns .btn { min-height: 44px; }
+  .tut-btns .btn[hidden], .tut-skip[hidden] { display: none; }
+  .tut-skip { border: 0; background: transparent; color: var(--muted); font-size: 13.5px; font-weight: 700; min-height: 44px; padding: 0 4px; text-decoration: underline; }
+  body.tut-on { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .tut-hole { transition: none; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="top-in">
     <p class="title" id="topTitle">初心者のターン<small>卒業前のメニュー</small></p>
+    <button class="help-btn" id="tutBtn" type="button" hidden>使い方</button>
     <button class="today-btn" id="todayBtn" type="button" hidden>今日へ</button>
   </div>
 </header>
@@ -1421,7 +1441,7 @@ function modeSwitch() {
     if (!cur && !ls.length) return '<span class="dis ' + m + '">' + inner + "</span>";
     return '<a class="' + m + '" href="' + PAGE[m] + '"' + (cur ? ' aria-current="page"' : "") + ">" + inner + "</a>";
   };
-  return '<nav class="modesw" aria-label="卒業前と卒業後のページ">' + item("pre", "卒業前", pre) + item("post", "卒業後", post) + "</nav>";
+  return '<nav class="modesw" id="modesw" aria-label="卒業前と卒業後のページ">' + item("pre", "卒業前", pre) + item("post", "卒業後", post) + "</nav>";
 }
 function gradNote() {
   let h = "";
@@ -1464,11 +1484,106 @@ function pageSetup() {
   if (wb) wb.textContent = "1週間";
 }
 
+
+/* ===== 使い方（チュートリアル） ===== */
+const TUT = {
+  post: [
+    ["#modesw", "卒業前と卒業後で、ページが分かれています", "卒業した種目は、この「卒業後」のページに出ます。まだの種目は「卒業前」のページで進めます。"],
+    ["#strip", "今日の日が開きます", "開始日から数えて、今日の日が選ばれています。1〜6や「‹ ›」で、ほかの日も見られます。"],
+    ["#check", "まず、体調チェック", "トレーニングの前に、睡眠・疲れ・痛みを入れます。疲れが4以上か、睡眠が5時間未満の日は、自動で軽いメニューになります。"],
+    ["#plan", "今日やることの一覧", "重さは、MAXから自動で出ます。押すと、その種目へ飛びます。"],
+    [".ex .plates", "プレートとウォームアップ", "バーの片側に付けるプレートと、本番の前のウォームアップの重さです。"],
+    [".ex .set", "1セット終わったら、丸をタップ", "重さや回数が違ったら、数字を直してから。RPE（あと何回できたか）も選びます。タップすると、休憩タイマーが動きます。"],
+    [".memo", "最後に、日報", "気になったことを書いて「今日の日報をLINEで送る」。記録はこのスマホに保存されます。"],
+    [".tabs", "ほかの画面", "「16週」で週ごとのMAX、「ルール」で決まりごと、「フォーム」で動画とポイント、「記録」でMAXの変更とバックアップ。"],
+    ["#tutBtn", "いつでも見返せます", "この説明は、上の「使い方」から、もう一度見られます。"]
+  ],
+  pre: [
+    ["#modesw", "いまは「卒業前」のページです", "最初は、どの種目も「初心者のターン」から。卒業した種目から、「卒業後」のページへ移ります。"],
+    ["#strip", "今日の日が開きます", "開始日から数えて、今日の日が選ばれています。1〜6や「‹ ›」で、ほかの日も見られます。"],
+    ["#check", "まず、体調チェック", "トレーニングの前に、睡眠・疲れ・痛みを入れます。痛みやしびれがある日は、筋トレを中止して医療機関に相談してください。"],
+    ["#plan", "今日やることの一覧", "卒業前は、どの種目もフォームが崩れない重さで、RPE6まで。5回×3セットです。"],
+    [".ex .grad", "動画を送って、卒業を確かめます", "BIG3をやった日は、動画をLINEで送ってください。理学療法士から卒業の返信が来たら、「卒業の返信が来たら押す」を2回押します。"],
+    [".ex .set", "1セット終わったら、丸をタップ", "重さと回数を入れて、丸をタップ。RPE（あと何回できたか）も選びます。タップすると、休憩タイマーが動きます。"],
+    [".memo", "最後に、日報", "気になったことを書いて「今日の日報をLINEで送る」。記録はこのスマホに保存されます。"],
+    [".tabs", "ほかの画面", "「1週間」で日ごとの種目、「ルール」で決まりごと、「フォーム」で卒業ラインと撮り方、「記録」でMAXとバックアップ。"],
+    ["#tutBtn", "いつでも見返せます", "この説明は、上の「使い方」から、もう一度見られます。"]
+  ]
+};
+let tutI = -1, tutSteps = [], tutEl = null, tutLast = null;
+function tutStart() {
+  if (V.tab !== "today") { V.tab = "today"; render(); }
+  tutSteps = TUT[MODE].filter(([sel]) => { const el = document.querySelector(sel); return el && el.getClientRects().length; });
+  if (!tutSteps.length) return;
+  tutEnd(false);
+  tutLast = document.activeElement;
+  tutEl = document.createElement("div");
+  tutEl.className = "tut";
+  tutEl.innerHTML = '<div class="tut-hole" aria-hidden="true"></div>' +
+    '<div class="tut-box" role="dialog" aria-modal="true" aria-labelledby="tutT" aria-describedby="tutD">' +
+    '<p class="tut-n" id="tutN"></p><h2 id="tutT"></h2><p id="tutD"></p>' +
+    '<div class="tut-btns"><button type="button" class="tut-skip" id="tutSkip">スキップ</button><span class="sp"></span>' +
+    '<button type="button" class="btn small" id="tutBack">戻る</button><button type="button" class="btn small primary" id="tutNext">次へ</button></div></div>';
+  document.body.appendChild(tutEl);
+  document.body.classList.add("tut-on");
+  tutEl.addEventListener("click", e => {
+    if (e.target.closest("#tutNext")) { if (tutI < tutSteps.length - 1) tutGo(tutI + 1); else tutEnd(true); }
+    else if (e.target.closest("#tutBack")) { if (tutI > 0) tutGo(tutI - 1); }
+    else if (e.target.closest("#tutSkip")) tutEnd(true);
+  });
+  tutGo(0);
+}
+function tutGo(i) {
+  tutI = i;
+  const [sel, t, d] = tutSteps[i];
+  const el = document.querySelector(sel);
+  if (!el) { tutEnd(true); return; }
+  if (!el.closest(".tabs, .top")) el.scrollIntoView({ block: "center" });
+  tutEl.querySelector("#tutN").textContent = (i + 1) + " / " + tutSteps.length;
+  tutEl.querySelector("#tutT").textContent = t;
+  tutEl.querySelector("#tutD").textContent = d;
+  tutEl.querySelector("#tutBack").hidden = i === 0;
+  tutEl.querySelector("#tutSkip").hidden = i === tutSteps.length - 1;
+  tutEl.querySelector("#tutNext").textContent = i === tutSteps.length - 1 ? "はじめる" : "次へ";
+  requestAnimationFrame(() => { tutPlace(); tutEl.querySelector("#tutNext").focus({ preventScroll: true }); });
+}
+function tutPlace() {
+  if (!tutEl || tutI < 0) return;
+  const el = document.querySelector(tutSteps[tutI][0]);
+  if (!el) return;
+  const r = el.getBoundingClientRect(), vh = window.innerHeight, vw = document.documentElement.clientWidth, pad = 6;
+  const top = Math.max(4, r.top - pad), bottom = Math.min(vh - 4, r.bottom + pad);
+  const hole = tutEl.querySelector(".tut-hole"), box = tutEl.querySelector(".tut-box");
+  hole.style.left = Math.max(4, r.left - pad) + "px";
+  hole.style.top = top + "px";
+  hole.style.width = Math.min(vw - 8, r.width + pad * 2) + "px";
+  hole.style.height = Math.max(0, bottom - top) + "px";
+  const bh = box.offsetHeight;
+  if (vh - bottom >= bh + 14) { box.style.top = (bottom + 10) + "px"; box.style.bottom = "auto"; }
+  else if (top >= bh + 14) { box.style.top = (top - bh - 10) + "px"; box.style.bottom = "auto"; }
+  else { box.style.top = "auto"; box.style.bottom = "12px"; }
+}
+function tutEnd(done) {
+  if (tutEl) { tutEl.remove(); tutEl = null; }
+  document.body.classList.remove("tut-on");
+  tutI = -1;
+  if (done) { UI["tut_" + MODE] = 1; saveUI(); if (tutLast && tutLast.focus) try { tutLast.focus({ preventScroll: true }); } catch (e) {} }
+}
+window.addEventListener("resize", () => tutPlace());
+window.addEventListener("scroll", () => tutPlace(), { passive: true });
+document.addEventListener("keydown", e => {
+  if (!tutEl) return;
+  if (e.key === "Escape") tutEnd(true);
+  else if (e.key === "ArrowRight") { if (tutI < tutSteps.length - 1) tutGo(tutI + 1); }
+  else if (e.key === "ArrowLeft") { if (tutI > 0) tutGo(tutI - 1); }
+});
+
 /* ---- 描画と操作 ---- */
 function render() {
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-current", b.dataset.tab === V.tab ? "page" : "false"));
   const tp = posOf(todayIndex());
   document.getElementById("todayBtn").hidden = !(S.start && (V.tab !== "today" || V.w !== tp.w || V.d !== tp.d));
+  document.getElementById("tutBtn").hidden = !S.start;
   if (V.tab === "today") renderToday();
   else if (V.tab === "weeks") { if (MODE === "pre") renderWeeksPre(); else renderWeeks(); }
   else if (V.tab === "rules") renderRules();
@@ -1546,6 +1661,7 @@ document.querySelector(".tabs").addEventListener("click", e => {
   window.scrollTo(0, 0);
 });
 document.getElementById("todayBtn").addEventListener("click", () => { V.tab = "today"; goToday(); render(); window.scrollTo(0, 0); });
+document.getElementById("tutBtn").addEventListener("click", () => tutStart());
 
 app.addEventListener("click", e => {
   const t = e.target;
@@ -1676,6 +1792,7 @@ app.addEventListener("click", e => {
       BIG3.forEach(l => { const m = S.maxIn[l]; S.grad[l] = ymd(new Date()); S.gpos[l] = { w: np.w, d: np.d }; S.mx[l] = m ? [{ w: np.w, d: np.d, kg: m.kg, src: m.src || "in" }] : []; });
     }
     save(); V.tab = "today"; goToday(); render(); window.scrollTo(0, 0);
+    if (!UI["tut_" + MODE]) setTimeout(() => tutStart(), 450);
     return;
   }
   if (t.id === "copyReport") {
@@ -1705,7 +1822,10 @@ app.addEventListener("change", e => {
 
 if (!P) { app.textContent = "プログラムを読み込めませんでした。"; }
 else if (MODE === "post" && S.start && !BIG3.some(l => !isPre(l))) { location.replace(PAGE.pre + location.search + location.hash); }
-else { pageSetup(); render(); }
+else {
+  pageSetup(); render();
+  if (S.start && !UI["tut_" + MODE]) setTimeout(() => { if (V.tab === "today" && !document.querySelector(".tut")) tutStart(); }, 700);
+}
 /* 休憩タイマー：開き直しても続きから */
 try { const r = JSON.parse(sessionStorage.getItem(RT_KEY)); if (r && Date.now() - r.t0 < (r.max + r.add + 300) * 1000) { RT = r; showRest(); } } catch (e) {}
 /* 電波が悪くても開けるように（https のときだけ。このページとPDFの範囲だけ） */
