@@ -479,6 +479,10 @@
   .gradlist b.ok { background: var(--p6-tint); color: var(--p6-ink); }
   .sec .btn-line { margin-top: 12px; }
   body.mode-pre .top .title { color: #BFEBD0; }
+  .start.choose { margin-bottom: 4px; }
+  .btn.go-pre { margin-top: 10px; background: var(--p6); border-color: var(--p6); color: #fff; }
+  .start .alt { margin: 12px 0 0; font-size: 14px; text-align: center; }
+  .start .alt a { color: var(--link); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -870,6 +874,7 @@ function renderToday() {
   let h = "";
   if (!saveOk) h += '<p class="savewarn">このブラウザでは記録を保存できません。プライベートブラウズを切ると保存できます。</p>';
   h += lineCard();
+  if (!S.start && MODE === "post") { app.innerHTML = h + '<div class="nightwrap bleed">' + chooseCard() + startCard(true) + "</div>" + fine(); return; }
   if (!S.start) h += '<div class="nightwrap bleed">' + startCard() + "</div>";
   h += gradNote();
   h += '<section class="dayhead bleed">' + modeSwitch() + '<p class="phase">' + esc(phaseLine()) + "</p>";
@@ -1010,14 +1015,17 @@ function refreshEx(exEl) {
     inp.classList.toggle("sug", sug != null);
   });
 }
-function startCard() {
-  return '<section class="start"><h2>開始日とMAXを決めましょう</h2>' +
-    "<p>開始日から数えて、今日のメニューを出します。MAXを入れると、毎日の重さが自動で決まります。最初は「初心者のターン」です。始める前に「フォーム」の教材動画と卒業ラインを見ておきましょう。</p>" + startTip() +
+function startCard(exp) {
+  return '<section class="start"><h2>' + (exp ? "もうできるよ！という人はこちら" : "開始日とMAXを決めましょう") + "</h2>" +
+    (exp ? "<p>BIG3のフォームが身についている人向けです。開始日とMAXを入れると、今日から、MAXから出した重さで進めます（初心者のターンはとばします）。</p>"
+      : "<p>開始日から数えて、今日のメニューを出します。MAXを入れると、毎日の重さが自動で決まります。最初は「初心者のターン」です。始める前に「フォーム」の教材動画と卒業ラインを見ておきましょう。</p>") + startTip() +
     '<div class="row"><label for="startDate" class="ml">開始日</label><input type="date" id="startDate" value="' + ymd(new Date()) + '"></div>' +
     '<p class="mh">MAX（わかる種目だけ）</p><div class="maxgrid">' +
     BIG3.map(l => '<div class="mrow"><span class="ml">' + esc(P.lifts[l].name) + "</span>" + maxInput(l, S.maxIn[l] ? S.maxIn[l].kg : null) + "</div>").join("") + "</div>" +
-    '<p class="note">MAXは測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。久しぶりの人は、昔の記録ではなく今の力で。わからない種目は空欄のままで、卒業するときに5回の記録から自動で出します。</p>' +
-    '<p class="status" data-mmsg role="status"></p><button class="btn wide primary" type="button" id="setStart">この日から始める</button></section>';
+    '<p class="note">MAXは測らなくて大丈夫です。今の自分で1回挙げられる重さを入れてください。久しぶりの人は、昔の記録ではなく今の力で。' +
+    (exp ? "わからない種目は空欄のままで大丈夫です。あとから、5回できた重さとRPEで出せます。" : "わからない種目は空欄のままで、卒業するときに5回の記録から自動で出します。") + "</p>" +
+    '<p class="status" data-mmsg role="status"></p><button class="btn wide primary" type="button" id="setStart">この日から始める</button>' +
+    (exp || MODE !== "pre" ? "" : '<p class="alt">もうできるよ！という人は、<a href="' + PAGE.post + '">こちら（4ヶ月プログラム）</a></p>') + "</section>";
 }
 function cta() {
   return '<aside class="cta"><h2>重さやフォームで迷ったら</h2>' +
@@ -1427,6 +1435,11 @@ function gradNote() {
       '<div class="btns"><a class="btn small primary" href="' + PAGE.post + '">4ヶ月プログラムを開く</a></div></div>';
   return h;
 }
+/* まだ始めていない人に（program.html） */
+function chooseCard() {
+  return '<section class="start choose"><h2>まず、こちらをどうぞ</h2><p>はじめての人・久しぶりの人は、「初心者のターン」から始めます。フォームが崩れない重さで、RPE6まで。動画を送ってもらい、理学療法士が卒業を確かめます。</p>' +
+    '<a class="btn wide go-pre" href="' + PAGE.pre + '">初心者のターンを開く</a></section>';
+}
 /* 卒業前のページの「1週間」 */
 function renderWeeksPre() {
   let h = '<header class="pagehead bleed"><h1>1週間</h1><p class="lead">卒業するまでは、どの日もフォームが崩れない重さで、RPE6まで。5回×3セット。BIG3をやった日は、動画をLINEで送ります。卒業した種目から、「4ヶ月プログラム（卒業後）」のページで、MAXから出した重さで進めます。</p></header>';
@@ -1658,6 +1671,10 @@ app.addEventListener("click", e => {
     }
     S.start = v;
     if (card) card.querySelectorAll("[data-mkg]").forEach(inp => { const kg = numIn(inp.value); if (kg) setMax(inp.dataset.mkg, round05(kg), "in"); });
+    if (card && MODE === "post" && !BIG3.some(l => !isPre(l))) {
+      const np = nowPos();
+      BIG3.forEach(l => { const m = S.maxIn[l]; S.grad[l] = ymd(new Date()); S.gpos[l] = { w: np.w, d: np.d }; S.mx[l] = m ? [{ w: np.w, d: np.d, kg: m.kg, src: m.src || "in" }] : []; });
+    }
     save(); V.tab = "today"; goToday(); render(); window.scrollTo(0, 0);
     return;
   }
@@ -1687,7 +1704,7 @@ app.addEventListener("change", e => {
 });
 
 if (!P) { app.textContent = "プログラムを読み込めませんでした。"; }
-else if (MODE === "post" && !BIG3.some(l => !isPre(l))) { location.replace(PAGE.pre + location.search + location.hash); }
+else if (MODE === "post" && S.start && !BIG3.some(l => !isPre(l))) { location.replace(PAGE.pre + location.search + location.hash); }
 else { pageSetup(); render(); }
 /* 休憩タイマー：開き直しても続きから */
 try { const r = JSON.parse(sessionStorage.getItem(RT_KEY)); if (r && Date.now() - r.t0 < (r.max + r.add + 300) * 1000) { RT = r; showRest(); } } catch (e) {}
