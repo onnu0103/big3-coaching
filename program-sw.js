@@ -1,6 +1,6 @@
 /* 4ヶ月プログラム：電波が悪くても開けるように（このページだけを保存。開くたびに新しいものを取りにいく） */
-const CACHE = "big3-program-v1";
-const CORE = ["./program.html", "./program-manifest.json", "./app/icon-180.png", "./app/icon-192.png", "./app/icon-512.png"];
+const CACHE = "big3-program-v2";
+const CORE = ["./program.html", "./program-beginner.html", "./program-manifest.json", "./app/icon-180.png", "./app/icon-192.png", "./app/icon-512.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
 });
@@ -13,12 +13,13 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  /* プログラムのページ：ネットを先に。つながらないときは保存したもの */
-  if (url.origin === location.origin && url.pathname.endsWith("/program.html")) {
+  /* プログラムのページ（卒業後・卒業前）：ネットを先に。つながらないときは保存したもの */
+  const pg = url.origin === location.origin ? (url.pathname.endsWith("/program.html") ? "./program.html" : url.pathname.endsWith("/program-beginner.html") ? "./program-beginner.html" : null) : null;
+  if (pg) {
     e.respondWith(fetch(req).then(res => {
-      if (res && res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put("./program.html", cp)); }
+      if (res && res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(pg, cp)); }
       return res;
-    }).catch(() => caches.match("./program.html")));
+    }).catch(() => caches.match(pg)));
     return;
   }
   /* アイコン・マニフェスト・文字（Google Fonts）：保存したものを先に、うしろで新しくする */
